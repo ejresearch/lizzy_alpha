@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lizzy Alpha</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Arial', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header exactly like your sketch -->
+    <div class="text-center py-16">
+        <!-- LIZZY title in a box -->
+        <div class="inline-block border-2 border-black p-8 mb-12 bg-white">
+            <h1 class="text-5xl font-black tracking-wide">LIZZY</h1>
+        </div>
+        
+        <!-- Project picker -->
+        <div class="mb-12">
+            <label class="text-xl font-medium mr-4">Pick:</label>
+            <select id="projectPicker" class="border-2 border-black px-6 py-3 text-lg font-medium bg-white min-w-80">
+                <option value="">Select a project...</option>
+                <option value="Elle">Elle's Story</option>
+                <option value="EsteandTheo">Este and Theo</option>
+                <option value="TestRomance">Test Romance Project</option>
+                <option value="TNK_A4">TNK A4 Story</option>
+                <option value="WebDashboardTest">Web Dashboard Test</option>
+            </select>
+        </div>
+        
+        <!-- Workflow numbers -->
+        <div class="text-4xl font-black mb-16 tracking-widest">
+            ① → ② → ③ → ④
+        </div>
+    </div>
+
+    <!-- Four workflow steps (hidden until project selected) -->
+    <div id="workflowSteps" class="hidden max-w-5xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Step 1: Start -->
+            <div class="border-2 border-black p-6 bg-white">
+                <div class="text-2xl font-black mb-4">① Start</div>
+                <div class="text-lg font-bold mb-3">Project Created</div>
+                <div class="text-sm font-medium">✅ Database initialized</div>
+            </div>
+            
+            <!-- Step 2: Intake -->
+            <div class="border-2 border-black p-6 bg-white">
+                <div class="text-2xl font-black mb-4">② Intake</div>
+                <div class="text-lg font-bold mb-3">Characters & Scenes</div>
+                <div class="text-sm font-medium" id="characterCount">Loading...</div>
+                <div class="text-sm font-medium" id="sceneCount">Loading...</div>
+            </div>
+            
+            <!-- Step 3: Brainstorm -->
+            <div class="border-2 border-black p-6 bg-white">
+                <div class="text-2xl font-black mb-4">③ Brainstorm</div>
+                <div class="text-lg font-bold mb-3">AI Ideas</div>
+                <div class="text-sm font-medium" id="brainstormCount">Loading...</div>
+                <div class="text-sm font-medium">LightRAG: 3 buckets</div>
+            </div>
+            
+            <!-- Step 4: Write -->
+            <div class="border-2 border-black p-6 bg-white">
+                <div class="text-2xl font-black mb-4">④ Write</div>
+                <div class="text-lg font-bold mb-3">Scene Drafts</div>
+                <div class="text-sm font-medium" id="draftCount">Loading...</div>
+                <div class="text-sm font-medium" id="latestVersion">Loading...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project data underneath -->
+    <div id="projectData" class="hidden mt-12 max-w-5xl mx-auto px-8">
+        <div class="border-2 border-black p-8 bg-white">
+            <h3 class="text-2xl font-black mb-6">Project Data</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-3">Characters:</h4>
+                    <div id="recentCharacters" class="text-sm font-medium">Loading...</div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3">Scenes:</h4>
+                    <div id="recentScenes" class="text-sm font-medium">Loading...</div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-3">Brainstorms:</h4>
+                    <div id="recentBrainstorms" class="text-sm font-medium">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Project data (simulated - in real app this would come from API)
+        const projectData = {
+            Elle: {
+                title: "Elle's Story",
+                genre: "Romance",
+                tone: "Romantic Comedy",
+                created_date: "2024-08-21",
+                characters: [
+                    { name: "Elle", role: "Protagonist" },
+                    { name: "Marcus", role: "Love Interest" }
+                ],
+                scenes: [
+                    { title: "The Coffee Shop", act: 1, scene: 1 },
+                    { title: "First Date", act: 1, scene: 2 }
+                ],
+                brainstorms: [
+                    { type: "Character Development", date: "2024-08-21" },
+                    { type: "Plot Twist Ideas", date: "2024-08-20" }
+                ],
+                drafts: 3,
+                latest_version: "v3"
+            },
+            EsteandTheo: {
+                title: "Este and Theo",
+                genre: "Romance", 
+                tone: "Romantic Comedy",
+                created_date: "2024-08-20",
+                characters: [
+                    { name: "Este", role: "Protagonist" },
+                    { name: "Theo", role: "Love Interest" }
+                ],
+                scenes: [
+                    { title: "Wedding Reception", act: 1, scene: 1 },
+                    { title: "The Dance", act: 1, scene: 2 }
+                ],
+                brainstorms: [
+                    { type: "Wedding Comedy", date: "2024-08-20" }
+                ],
+                drafts: 5,
+                latest_version: "v5"
+            },
+            TestRomance: {
+                title: "Test Romance Project",
+                genre: "Romance",
+                tone: "Romantic Dramedy", 
+                created_date: "2024-08-21",
+                characters: [
+                    { name: "Sarah", role: "Protagonist" }
+                ],
+                scenes: [
+                    { title: "Opening Scene", act: 1, scene: 1 }
+                ],
+                brainstorms: [
+                    { type: "Test Ideas", date: "2024-08-21" }
+                ],
+                drafts: 1,
+                latest_version: "v1"
+            },
+            TNK_A4: {
+                title: "TNK A4 Story",
+                genre: "Drama",
+                tone: "Dramatic Romance",
+                created_date: "2024-08-19", 
+                characters: [
+                    { name: "Emily", role: "Protagonist" },
+                    { name: "Patrick", role: "Love Interest" },
+                    { name: "Archie", role: "Supporting" }
+                ],
+                scenes: [
+                    { title: "The Wedding", act: 1, scene: 1 },
+                    { title: "Late Night Talk", act: 1, scene: 2 },
+                    { title: "Morning After", act: 2, scene: 1 }
+                ],
+                brainstorms: [
+                    { type: "Complex Relationships", date: "2024-08-19" },
+                    { type: "Drama Elements", date: "2024-08-18" }
+                ],
+                drafts: 7,
+                latest_version: "v7"
+            },
+            WebDashboardTest: {
+                title: "Web Dashboard Test Project",
+                genre: "Romance",
+                tone: "Romantic Comedy",
+                created_date: "2024-08-22",
+                characters: [],
+                scenes: [],
+                brainstorms: [],
+                drafts: 0,
+                latest_version: "None"
+            }
+        };
+
+        // DOM Elements
+        const projectPicker = document.getElementById('projectPicker');
+
+        // Project selection handler
+        projectPicker.addEventListener('change', function() {
+            const selectedProject = this.value;
+            
+            if (selectedProject) {
+                showProjectWorkflow(selectedProject);
+            } else {
+                hideProjectWorkflow();
+            }
+        });
+
+        function showProjectWorkflow(projectName) {
+            const project = projectData[projectName];
+            if (!project) return;
+
+            // Show workflow steps and project data
+            document.getElementById('workflowSteps').classList.remove('hidden');
+            document.getElementById('projectData').classList.remove('hidden');
+
+            // Update workflow stats
+            document.getElementById('characterCount').textContent = `${project.characters.length} characters`;
+            document.getElementById('sceneCount').textContent = `${project.scenes.length} scenes`;
+            document.getElementById('brainstormCount').textContent = `${project.brainstorms.length} sessions`;
+            document.getElementById('draftCount').textContent = `${project.drafts} drafts`;
+            document.getElementById('latestVersion').textContent = project.latest_version;
+
+            // Update recent items
+            updateRecentCharacters(project.characters);
+            updateRecentScenes(project.scenes);
+            updateRecentBrainstorms(project.brainstorms);
+        }
+
+        function hideProjectWorkflow() {
+            document.getElementById('workflowSteps').classList.add('hidden');
+            document.getElementById('projectData').classList.add('hidden');
+        }
+
+        function updateRecentCharacters(characters) {
+            const container = document.getElementById('recentCharacters');
+            if (characters.length === 0) {
+                container.innerHTML = '<p class="text-sm text-gray-600">No characters yet</p>';
+            } else {
+                container.innerHTML = characters.slice(0, 3).map(char => `
+                    <div class="text-sm mb-2">
+                        <span class="font-bold text-black">${char.name}</span>
+                        <span class="text-gray-600"> - ${char.role}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateRecentScenes(scenes) {
+            const container = document.getElementById('recentScenes');
+            if (scenes.length === 0) {
+                container.innerHTML = '<p class="text-sm text-gray-600">No scenes yet</p>';
+            } else {
+                container.innerHTML = scenes.slice(0, 3).map(scene => `
+                    <div class="text-sm mb-2">
+                        <span class="font-bold text-black">${scene.title}</span>
+                        <span class="text-gray-600"> - Act ${scene.act}, Scene ${scene.scene}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateRecentBrainstorms(brainstorms) {
+            const container = document.getElementById('recentBrainstorms');
+            if (brainstorms.length === 0) {
+                container.innerHTML = '<p class="text-sm text-gray-600">No brainstorms yet</p>';
+            } else {
+                container.innerHTML = brainstorms.slice(0, 3).map(session => `
+                    <div class="text-sm mb-2">
+                        <span class="font-bold text-black">${session.type}</span>
+                        <span class="text-gray-600"> - ${session.date}</span>
+                    </div>
+                `).join('');
+            }
+        }
+
+    </script>
+</body>
+</html>

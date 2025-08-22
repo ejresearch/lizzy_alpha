@@ -388,6 +388,70 @@ class LizzyStart:
         }
 
 
+def create_new_project(project_name, title=None, genre="Romance", tone="Romantic Comedy"):
+    """
+    Programmatic function to create a new project for API use.
+    
+    Args:
+        project_name (str): The project directory name
+        title (str): Human-readable project title
+        genre (str): Project genre
+        tone (str): Project tone/style
+    
+    Returns:
+        bool: True if successful, False otherwise
+    """
+    try:
+        # Sanitize project name
+        sanitized_name = "".join(c for c in project_name if c.isalnum() or c in "._- ").strip()
+        sanitized_name = sanitized_name.replace(" ", "_")
+        
+        if not sanitized_name:
+            raise ValueError("Invalid project name")
+        
+        # Create start module instance
+        start_module = LizzyStart()
+        start_module.project_name = sanitized_name
+        
+        # Create project directory
+        project_dir = start_module.base_dir / sanitized_name
+        project_dir.mkdir(exist_ok=True)
+        
+        # Set database path
+        start_module.db_path = project_dir / f"{sanitized_name}.db"
+        
+        # Initialize database
+        start_module.setup_database()
+        
+        # Add additional metadata
+        if start_module.conn:
+            cursor = start_module.conn.cursor()
+            
+            cursor.execute('''
+                INSERT OR REPLACE INTO project_metadata (key, value, updated_at)
+                VALUES ('title', ?, CURRENT_TIMESTAMP)
+            ''', (title or project_name,))
+            
+            cursor.execute('''
+                INSERT OR REPLACE INTO project_metadata (key, value, updated_at)
+                VALUES ('genre', ?, CURRENT_TIMESTAMP)
+            ''', (genre,))
+            
+            cursor.execute('''
+                INSERT OR REPLACE INTO project_metadata (key, value, updated_at)
+                VALUES ('tone', ?, CURRENT_TIMESTAMP)
+            ''', (tone,))
+            
+            start_module.conn.commit()
+            start_module.conn.close()
+        
+        return True
+        
+    except Exception as e:
+        print(f"Error creating project: {e}")
+        return False
+
+
 def main():
     """Entry point when running as a script."""
     start_module = LizzyStart()

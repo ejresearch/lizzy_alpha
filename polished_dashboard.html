@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lizzy Alpha - Creative Writing Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e'
+                        },
+                        gray: {
+                            25: '#fafafa',
+                            850: '#1f2937'
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="h-full bg-gray-25 dark:bg-gray-900 font-sans antialiased">
+    <!-- Navigation -->
+    <nav class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent">
+                            Lizzy Alpha
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-1">
+                        <button class="nav-tab active" data-section="home">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z"/>
+                            </svg>
+                            Home
+                        </button>
+                        <button class="nav-tab" data-section="start">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            Start
+                        </button>
+                        <button class="nav-tab" data-section="intake">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                            Intake
+                        </button>
+                        <button class="nav-tab" data-section="brainstorm">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                            Brainstorm
+                        </button>
+                        <button class="nav-tab" data-section="write">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                            Write
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right side -->
+                <div class="flex items-center space-x-4">
+                    <!-- Project Selector -->
+                    <div class="relative">
+                        <select id="projectSelector" class="appearance-none bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 pr-8 text-sm font-medium text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                            <option value="">Select Project...</option>
+                            <option value="new">+ Create New Project</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Theme Toggle -->
+                    <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-5 h-5 theme-icon text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Home Section -->
+        <div id="homeSection" class="section active">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Welcome to Lizzy Alpha</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Your AI-powered creative writing companion</p>
+            </div>
+
+            <!-- Workflow Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Start Card -->
+                <div class="workflow-card group" data-section="start">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/50 dark:to-blue-800/50 rounded-xl">
+                            <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">Step 1</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Start</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Initialize new creative projects with genre and tone settings</p>
+                    <button class="btn-primary w-full group-hover:shadow-lg transition-shadow">Create Project</button>
+                </div>
+
+                <!-- Intake Card -->
+                <div class="workflow-card group" data-section="intake">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/50 dark:to-green-800/50 rounded-xl">
+                            <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">Step 2</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Intake</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Define characters, scenes, and story elements</p>
+                    <button class="btn-secondary w-full group-hover:shadow-lg transition-shadow">Add Content</button>
+                </div>
+
+                <!-- Brainstorm Card -->
+                <div class="workflow-card group" data-section="brainstorm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/50 dark:to-purple-800/50 rounded-xl">
+                            <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">Step 3</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Brainstorm</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Generate AI-powered creative ideas with LightRAG</p>
+                    <button class="btn-secondary w-full group-hover:shadow-lg transition-shadow">Generate Ideas</button>
+                </div>
+
+                <!-- Write Card -->
+                <div class="workflow-card group" data-section="write">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/50 dark:to-orange-800/50 rounded-xl">
+                            <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full">Step 4</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Write</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">Create and refine scene drafts and content</p>
+                    <button class="btn-secondary w-full group-hover:shadow-lg transition-shadow">Start Writing</button>
+                </div>
+            </div>
+
+            <!-- Recent Projects Table -->
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-750">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Recent Projects</h2>
+                        <button class="btn-primary text-sm" onclick="showSection('start')">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                            New Project
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50 dark:bg-gray-750">
+                            <tr>
+                                <th class="table-header text-left">Project Name</th>
+                                <th class="table-header text-left">Genre</th>
+                                <th class="table-header text-center">Status</th>
+                                <th class="table-header text-left">Progress</th>
+                                <th class="table-header text-left">Last Modified</th>
+                                <th class="table-header text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projectTableBody" class="divide-y divide-gray-200 dark:divide-gray-600">
+                            <!-- Projects will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Section -->
+        <div id="startSection" class="section">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Create New Project</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">Start your creative writing journey</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+                    <form id="newProjectForm" class="space-y-6">
+                        <div>
+                            <label class="form-label">Project Name</label>
+                            <input type="text" id="projectName" class="form-input" placeholder="Enter project name..." required>
+                        </div>
+                        <div>
+                            <label class="form-label">Title</label>
+                            <input type="text" id="projectTitle" class="form-input" placeholder="Story title...">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="form-label">Genre</label>
+                                <select id="projectGenre" class="form-select">
+                                    <option value="Romance">Romance</option>
+                                    <option value="Drama">Drama</option>
+                                    <option value="Comedy">Comedy</option>
+                                    <option value="Thriller">Thriller</option>
+                                    <option value="Fantasy">Fantasy</option>
+                                    <option value="Sci-Fi">Sci-Fi</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label">Tone</label>
+                                <select id="projectTone" class="form-select">
+                                    <option value="Romantic Comedy">Romantic Comedy</option>
+                                    <option value="Dramatic Romance">Dramatic Romance</option>
+                                    <option value="Light Comedy">Light Comedy</option>
+                                    <option value="Dark Drama">Dark Drama</option>
+                                    <option value="Adventure">Adventure</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex space-x-4 pt-4">
+                            <button type="submit" class="btn-primary flex-1">Create Project</button>
+                            <button type="button" class="btn-secondary" onclick="showSection('home')">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Intake Section -->
+        <div id="intakeSection" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Content Intake</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400">Build your story with characters and scenes</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Characters -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Characters</h3>
+                            <button class="btn-primary text-sm" onclick="openModal('characterModal')">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                Add Character
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div id="charactersList" class="space-y-3">
+                            <!-- Characters will be populated here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenes -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+                    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Scenes</h3>
+                            <button class="btn-primary text-sm" onclick="openModal('sceneModal')">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                </svg>
+                                Add Scene
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div id="scenesList" class="space-y-3">
+                            <!-- Scenes will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Brainstorm Section -->
+        <div id="brainstormSection" class="section">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">AI Brainstorming</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">Generate creative ideas powered by LightRAG</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+                    <form id="brainstormForm" class="space-y-6">
+                        <div>
+                            <label class="form-label">What would you like to brainstorm?</label>
+                            <textarea id="brainstormQuery" class="form-input" rows="3" placeholder="Describe what you'd like creative ideas about..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                            Generate Ideas
+                        </button>
+                    </form>
+                    <div id="brainstormResults" class="mt-8">
+                        <!-- Results will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Write Section -->
+        <div id="writeSection" class="section">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Scene Writing</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400">Create compelling scenes with AI assistance</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+                    <form id="writeForm" class="space-y-6">
+                        <div>
+                            <label class="form-label">Select Scene</label>
+                            <select id="sceneSelector" class="form-select">
+                                <option value="">Choose a scene to write...</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-primary w-full">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                            Generate Scene
+                        </button>
+                    </form>
+                    <div id="writeResults" class="mt-8">
+                        <!-- Generated content will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <!-- Character Modal -->
+    <div id="characterModal" class="modal">
+        <div class="modal-backdrop" onclick="closeModal('characterModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Add Character</h3>
+                <button class="modal-close" onclick="closeModal('characterModal')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="characterForm" class="space-y-4">
+                <div>
+                    <label class="form-label">Character Name</label>
+                    <input type="text" id="characterName" class="form-input" required>
+                </div>
+                <div>
+                    <label class="form-label">Role</label>
+                    <select id="characterRole" class="form-select">
+                        <option value="Protagonist">Protagonist</option>
+                        <option value="Love Interest">Love Interest</option>
+                        <option value="Supporting">Supporting</option>
+                        <option value="Antagonist">Antagonist</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">Description</label>
+                    <textarea id="characterDescription" class="form-input" rows="3"></textarea>
+                </div>
+                <div class="flex space-x-4 pt-4">
+                    <button type="submit" class="btn-primary flex-1">Add Character</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal('characterModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scene Modal -->
+    <div id="sceneModal" class="modal">
+        <div class="modal-backdrop" onclick="closeModal('sceneModal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Add Scene</h3>
+                <button class="modal-close" onclick="closeModal('sceneModal')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="sceneForm" class="space-y-4">
+                <div>
+                    <label class="form-label">Scene Title</label>
+                    <input type="text" id="sceneTitle" class="form-input" required>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="form-label">Act</label>
+                        <input type="number" id="sceneAct" class="form-input" min="1" value="1">
+                    </div>
+                    <div>
+                        <label class="form-label">Scene</label>
+                        <input type="number" id="sceneNumber" class="form-input" min="1" value="1">
+                    </div>
+                </div>
+                <div>
+                    <label class="form-label">Description</label>
+                    <textarea id="sceneDescription" class="form-input" rows="3"></textarea>
+                </div>
+                <div class="flex space-x-4 pt-4">
+                    <button type="submit" class="btn-primary flex-1">Add Scene</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal('sceneModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        /* Enhanced Custom Styles */
+        .nav-tab {
+            @apply px-4 py-2 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200 flex items-center;
+        }
+        
+        .nav-tab.active {
+            @apply text-primary-700 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20 shadow-sm;
+        }
+        
+        .workflow-card {
+            @apply bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:border-primary-200 dark:hover:border-primary-700 transition-all duration-300 cursor-pointer;
+        }
+        
+        .workflow-card:hover {
+            @apply transform -translate-y-1;
+        }
+        
+        .btn-primary {
+            @apply bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center;
+        }
+        
+        .btn-secondary {
+            @apply bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2.5 px-4 rounded-lg border border-gray-300 dark:border-gray-600 transition-all duration-200 flex items-center justify-center;
+        }
+        
+        .form-input {
+            @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors;
+        }
+        
+        .form-select {
+            @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors;
+        }
+        
+        .form-label {
+            @apply block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2;
+        }
+        
+        .table-header {
+            @apply px-6 py-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider;
+        }
+        
+        .section {
+            @apply hidden;
+        }
+        
+        .section.active {
+            @apply block;
+        }
+        
+        .modal {
+            @apply fixed inset-0 z-50 hidden items-center justify-center p-4;
+        }
+        
+        .modal.active {
+            @apply flex;
+        }
+        
+        .modal-backdrop {
+            @apply absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm;
+        }
+        
+        .modal-content {
+            @apply relative bg-white dark:bg-gray-800 rounded-xl p-6 max-w-md w-full max-h-96 overflow-y-auto shadow-2xl border border-gray-200 dark:border-gray-700;
+        }
+        
+        .modal-header {
+            @apply flex justify-between items-center mb-6;
+        }
+        
+        .modal-close {
+            @apply text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700;
+        }
+    </style>
+
+    <script>
+        // Application State
+        let currentProject = null;
+        let projects = [];
+        let characters = [];
+        let scenes = [];
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTheme();
+            loadProjects();
+            setupEventListeners();
+            populateProjectTable();
+            loadTonePresets();
+            loadWritingStyles();
+        });
+
+        // Theme Management
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+            updateThemeIcon();
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            const icon = document.querySelector('.theme-icon');
+            const isDark = document.documentElement.classList.contains('dark');
+            if (isDark) {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>';
+            } else {
+                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>';
+            }
+        }
+
+        // Navigation
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            document.getElementById(sectionName + 'Section').classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            const activeTab = document.querySelector(`[data-section="${sectionName}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+            }
+        }
+
+        // Modal Management
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Project Management
+        async function loadProjects() {
+            try {
+                const response = await fetch('/api/projects');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    projects = data.projects;
+                } else {
+                    console.error('Error loading projects:', data.message);
+                    projects = [];
+                }
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                projects = [];
+            }
+            
+            updateProjectSelector();
+        }
+
+        function updateProjectSelector() {
+            const selector = document.getElementById('projectSelector');
+            selector.innerHTML = '<option value="">Select Project...</option><option value="new">+ Create New Project</option>';
+            
+            projects.forEach(project => {
+                const option = document.createElement('option');
+                option.value = project.name;
+                option.textContent = project.title || project.name;
+                selector.appendChild(option);
+            });
+        }
+
+        function populateProjectTable() {
+            const tbody = document.getElementById('projectTableBody');
+            tbody.innerHTML = '';
+            
+            if (projects.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
+                            <div class="flex flex-col items-center">
+                                <svg class="w-12 h-12 mb-4 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                <p class="text-lg font-medium mb-2">No projects yet</p>
+                                <p class="text-sm">Create your first project to get started</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            projects.forEach(project => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors';
+                
+                const statusColor = {
+                    'New': 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
+                    'Planning': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+                    'Brainstorming': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
+                    'Writing': 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300'
+                };
+                
+                const progressItems = [
+                    { count: project.character_count, label: 'characters' },
+                    { count: project.scene_count, label: 'scenes' },
+                    { count: project.brainstorm_count, label: 'ideas' },
+                    { count: project.draft_count, label: 'drafts' }
+                ];
+                
+                const progressText = progressItems
+                    .filter(item => item.count > 0)
+                    .map(item => `${item.count} ${item.label}`)
+                    .join(', ') || 'No content yet';
+                
+                row.innerHTML = `
+                    <td class="px-6 py-4">
+                        <div class="font-medium text-gray-900 dark:text-white">${project.title || project.name}</div>
+                        <div class="text-sm text-gray-500 dark:text-gray-400">${project.name}</div>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-900 dark:text-white">${project.genre}</td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="px-2 py-1 text-xs font-medium rounded-full ${statusColor[project.status] || statusColor['New']}">
+                            ${project.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-sm text-gray-600 dark:text-gray-400">${progressText}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-400">${project.last_modified}</td>
+                    <td class="px-6 py-4 text-center">
+                        <button onclick="selectProject('${project.name}')" class="text-primary-600 hover:text-primary-900 dark:text-primary-400 dark:hover:text-primary-300 font-medium text-sm">
+                            Open
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        async function selectProject(projectName) {
+            currentProject = projects.find(p => p.name === projectName);
+            document.getElementById('projectSelector').value = projectName;
+            
+            if (currentProject) {
+                try {
+                    const response = await fetch(`/api/projects/${projectName}`);
+                    const data = await response.json();
+                    
+                    if (data.status === 'success') {
+                        characters = data.characters || [];
+                        scenes = data.scenes || [];
+                    } else {
+                        characters = [];
+                        scenes = [];
+                    }
+                } catch (error) {
+                    console.error('Error loading project details:', error);
+                    characters = [];
+                    scenes = [];
+                }
+                
+                updateCharactersList();
+                updateScenesList();
+                updateSceneSelector();
+            }
+        }
+
+        // Event Listeners
+        function setupEventListeners() {
+            // Theme toggle
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            
+            // Navigation
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showSection(this.dataset.section);
+                });
+            });
+            
+            // Workflow cards
+            document.querySelectorAll('.workflow-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    showSection(this.dataset.section);
+                });
+            });
+            
+            // Project selector
+            document.getElementById('projectSelector').addEventListener('change', function() {
+                if (this.value === 'new') {
+                    showSection('start');
+                } else if (this.value) {
+                    selectProject(this.value);
+                }
+            });
+            
+            // Forms
+            document.getElementById('newProjectForm').addEventListener('submit', handleNewProject);
+            document.getElementById('characterForm').addEventListener('submit', handleAddCharacter);
+            document.getElementById('sceneForm').addEventListener('submit', handleAddScene);
+            document.getElementById('brainstormForm').addEventListener('submit', handleBrainstorm);
+            document.getElementById('writeForm').addEventListener('submit', handleWrite);
+        }
+
+        // Form Handlers (using the same handlers from the original dashboard)
+        async function handleNewProject(e) {
+            e.preventDefault();
+            
+            const formData = {
+                projectName: document.getElementById('projectName').value,
+                title: document.getElementById('projectTitle').value,
+                genre: document.getElementById('projectGenre').value,
+                tone: document.getElementById('projectTone').value
+            };
+            
+            try {
+                const response = await fetch('/api/projects', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    await loadProjects();
+                    populateProjectTable();
+                    selectProject(formData.projectName);
+                    showSection('home');
+                    document.getElementById('newProjectForm').reset();
+                    
+                    alert(`Project "${formData.title || formData.projectName}" created successfully!`);
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error creating project:', error);
+                alert('Error creating project. Please check your connection and try again.');
+            }
+        }
+
+        async function handleAddCharacter(e) {
+            e.preventDefault();
+            
+            if (!currentProject) {
+                alert('Please select a project first.');
+                return;
+            }
+            
+            const character = {
+                name: document.getElementById('characterName').value,
+                role: document.getElementById('characterRole').value,
+                description: document.getElementById('characterDescription').value
+            };
+            
+            try {
+                const response = await fetch(`/api/projects/${currentProject.name}/characters`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(character)
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    characters.push(character);
+                    updateCharactersList();
+                    closeModal('characterModal');
+                    document.getElementById('characterForm').reset();
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding character:', error);
+                alert('Error adding character. Please try again.');
+            }
+        }
+
+        async function handleAddScene(e) {
+            e.preventDefault();
+            
+            if (!currentProject) {
+                alert('Please select a project first.');
+                return;
+            }
+            
+            const scene = {
+                title: document.getElementById('sceneTitle').value,
+                act: parseInt(document.getElementById('sceneAct').value),
+                scene: parseInt(document.getElementById('sceneNumber').value),
+                description: document.getElementById('sceneDescription').value
+            };
+            
+            try {
+                const response = await fetch(`/api/projects/${currentProject.name}/scenes`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(scene)
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    scenes.push(scene);
+                    updateScenesList();
+                    updateSceneSelector();
+                    closeModal('sceneModal');
+                    document.getElementById('sceneForm').reset();
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Error adding scene:', error);
+                alert('Error adding scene. Please try again.');
+            }
+        }
+
+        async function handleBrainstorm(e) {
+            e.preventDefault();
+            
+            const query = document.getElementById('brainstormQuery').value;
+            
+            if (!currentProject) {
+                alert('Please select a project first.');
+                return;
+            }
+            
+            if (!query.trim()) {
+                alert('Please enter a brainstorming query.');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('brainstormResults');
+            resultsDiv.innerHTML = '<div class="text-center py-8"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto"></div><p class="mt-4 text-gray-600 dark:text-gray-400">Generating creative ideas...</p></div>';
+            
+            try {
+                const response = await fetch(`/api/projects/${currentProject.name}/brainstorm`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        query: query,
+                        tone: currentProject.tone 
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    resultsDiv.innerHTML = `
+                        <div class="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-6 border border-purple-200 dark:border-purple-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Generated Ideas</h4>
+                                <span class="text-xs text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900 px-2 py-1 rounded-full">${result.session_name}</span>
+                            </div>
+                            <div class="space-y-3">
+                                ${result.ideas.map(idea => `
+                                    <div class="flex items-start space-x-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-purple-100 dark:border-purple-800">
+                                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                                        <p class="text-gray-700 dark:text-gray-300">${idea}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-purple-200 dark:border-purple-700">
+                                <p class="text-xs text-purple-600 dark:text-purple-400">💾 Session saved to project brainstorming history</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('brainstormQuery').value = '';
+                } else {
+                    resultsDiv.innerHTML = `<div class="text-red-600 bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">Error: ${result.message}</div>`;
+                }
+            } catch (error) {
+                console.error('Error brainstorming:', error);
+                resultsDiv.innerHTML = '<div class="text-red-600 bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">Network error. Please check your connection and try again.</div>';
+            }
+        }
+
+        async function handleWrite(e) {
+            e.preventDefault();
+            
+            const sceneId = document.getElementById('sceneSelector').value;
+            
+            if (!sceneId) {
+                alert('Please select a scene to write.');
+                return;
+            }
+            
+            if (!currentProject) {
+                alert('Please select a project first.');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('writeResults');
+            resultsDiv.innerHTML = '<div class="text-center py-8"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mx-auto"></div><p class="mt-4 text-gray-600 dark:text-gray-400">Generating scene content...</p></div>';
+            
+            try {
+                const selectedScene = scenes[parseInt(sceneId)];
+                
+                if (!selectedScene) {
+                    throw new Error('Selected scene not found');
+                }
+                
+                const response = await fetch(`/api/projects/${currentProject.name}/write`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        scene_data: {
+                            title: selectedScene.title,
+                            act: selectedScene.act,
+                            scene: selectedScene.scene,
+                            purpose: selectedScene.purpose || 'scene development',
+                            characters_present: selectedScene.characters_present || 'main characters',
+                            key_events: selectedScene.key_events || 'scene progression'
+                        },
+                        writing_style: {
+                            name: 'Detailed Narrative',
+                            approach: 'comprehensive storytelling with character development'
+                        }
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    resultsDiv.innerHTML = `
+                        <div class="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl p-6 border border-green-200 dark:border-green-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Generated Scene Content</h4>
+                                <div class="text-xs text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900 px-2 py-1 rounded-full">
+                                    ${result.word_count} words • ${result.writing_style}
+                                </div>
+                            </div>
+                            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 border border-green-100 dark:border-green-800">
+                                <pre class="whitespace-pre-wrap font-sans text-gray-700 dark:text-gray-300 leading-relaxed">${result.content}</pre>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-green-200 dark:border-green-700 flex justify-between items-center">
+                                <p class="text-xs text-green-600 dark:text-green-400">💾 Draft saved (ID: ${result.draft_id})</p>
+                                <button onclick="exportDraft(${result.draft_id})" class="btn-primary text-xs">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    Download Draft
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    resultsDiv.innerHTML = `<div class="text-red-600 bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">Error: ${result.message}</div>`;
+                }
+            } catch (error) {
+                console.error('Error generating scene:', error);
+                resultsDiv.innerHTML = '<div class="text-red-600 bg-red-50 dark:bg-red-900/20 p-4 rounded-lg border border-red-200 dark:border-red-800">Error generating scene. Please try again.</div>';
+            }
+        }
+
+        // Update UI Functions
+        function updateCharactersList() {
+            const container = document.getElementById('charactersList');
+            container.innerHTML = '';
+            
+            if (characters.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+                        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                        <p>No characters yet</p>
+                        <p class="text-sm">Add characters to bring your story to life</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            characters.forEach((character, index) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-primary-200 dark:hover:border-primary-700 transition-colors';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="font-medium text-gray-900 dark:text-white">${character.name}</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">${character.role}</div>
+                            ${character.description ? `<div class="text-sm text-gray-500 dark:text-gray-400 mt-1">${character.description}</div>` : ''}
+                        </div>
+                        <button onclick="removeCharacter(${index})" class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium ml-4">
+                            Remove
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateScenesList() {
+            const container = document.getElementById('scenesList');
+            container.innerHTML = '';
+            
+            if (scenes.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-gray-500 dark:text-gray-400">
+                        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2h4a1 1 0 011 1v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a1 1 0 011-1h4z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/>
+                        </svg>
+                        <p>No scenes yet</p>
+                        <p class="text-sm">Add scenes to structure your story</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            scenes.forEach((scene, index) => {
+                const div = document.createElement('div');
+                div.className = 'p-4 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 hover:border-primary-200 dark:hover:border-primary-700 transition-colors';
+                div.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1">
+                            <div class="font-medium text-gray-900 dark:text-white">${scene.title}</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Act ${scene.act}, Scene ${scene.scene}</div>
+                            ${scene.description ? `<div class="text-sm text-gray-500 dark:text-gray-400 mt-1">${scene.description}</div>` : ''}
+                        </div>
+                        <button onclick="removeScene(${index})" class="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 text-sm font-medium ml-4">
+                            Remove
+                        </button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function updateSceneSelector() {
+            const selector = document.getElementById('sceneSelector');
+            selector.innerHTML = '<option value="">Choose a scene to write...</option>';
+            
+            scenes.forEach((scene, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${scene.title} (Act ${scene.act}, Scene ${scene.scene})`;
+                selector.appendChild(option);
+            });
+        }
+
+        function removeCharacter(index) {
+            characters.splice(index, 1);
+            updateCharactersList();
+        }
+
+        function removeScene(index) {
+            scenes.splice(index, 1);
+            updateScenesList();
+            updateSceneSelector();
+        }
+
+        // Export draft function
+        async function exportDraft(draftId) {
+            if (!currentProject) {
+                alert('No project selected');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`/api/projects/${currentProject.name}/drafts/${draftId}/export`);
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    
+                    const contentDisposition = response.headers.get('Content-Disposition');
+                    let filename = `draft_${draftId}.txt`;
+                    if (contentDisposition) {
+                        const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                        if (filenameMatch) {
+                            filename = filenameMatch[1];
+                        }
+                    }
+                    
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                } else {
+                    alert('Error downloading draft');
+                }
+            } catch (error) {
+                console.error('Error exporting draft:', error);
+                alert('Error downloading draft');
+            }
+        }
+
+        // Load configuration data
+        async function loadTonePresets() {
+            try {
+                const response = await fetch('/api/tone-presets');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    window.tonePresets = data.tone_presets;
+                }
+            } catch (error) {
+                console.error('Error loading tone presets:', error);
+            }
+        }
+
+        async function loadWritingStyles() {
+            try {
+                const response = await fetch('/api/writing-styles');
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    window.writingStyles = data.writing_styles;
+                }
+            } catch (error) {
+                console.error('Error loading writing styles:', error);
+            }
+        }
+    </script>
+</body>
+</html>
