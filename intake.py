@@ -93,57 +93,45 @@ class LizzyIntake:
     def main_menu(self):
         """Display main intake menu and handle user choices."""
         while True:
-            print("\n📋 Intake Menu:")
+            print("\n📋 Intake Menu (Alpha):")
             print("  1. Manage Characters")
-            print("  2. Build Story Outline")
-            print("  3. World Building & Setting")
-            print("  4. Research & References")
-            print("  5. Project Goals & Themes")
-            print("  6. View Project Summary")
-            print("  7. Exit")
-            
-            choice = input("\nSelect option (1-7): ").strip()
-            
-            if choice == "1":
-                self.manage_characters()
-            elif choice == "2":
-                self.build_story_outline()
-            elif choice == "3":
-                self.manage_world_building()
-            elif choice == "4":
-                self.manage_research()
-            elif choice == "5":
-                self.set_project_goals()
-            elif choice == "6":
-                self.show_project_summary()
-            elif choice == "7":
-                print("✅ Intake session complete!")
-                break
-            else:
-                print("❌ Invalid choice. Please select 1-7.")
-    
-    def manage_characters(self):
-        """Character management submenu."""
-        while True:
-            print("\n🧑‍🤝‍🧑 Character Management:")
-            self.show_character_summary()
-            print("\n  1. Add New Character")
-            print("  2. Edit Existing Character")
-            print("  3. Delete Character")
-            print("  4. Back to Main Menu")
+            print("  2. Manage Outline")
+            print("  3. Project Summary")
+            print("  4. Back")
             
             choice = input("\nSelect option (1-4): ").strip()
             
             if choice == "1":
-                self.add_character()
+                self.manage_characters()
             elif choice == "2":
-                self.edit_character()
+                self.manage_outline()
             elif choice == "3":
-                self.delete_character()
+                self.show_project_summary_tables()
             elif choice == "4":
+                print("✅ Intake session complete!")
                 break
             else:
                 print("❌ Invalid choice. Please select 1-4.")
+    
+    def manage_characters(self):
+        """Character management - guided form for all fields."""
+        while True:
+            print("\n🧑‍🤝‍🧑 Character Management:")
+            self.show_character_summary()
+            print("\n  1. Add/Edit Character (Full Form)")
+            print("  2. Delete Character")
+            print("  3. Back to Main Menu")
+            
+            choice = input("\nSelect option (1-3): ").strip()
+            
+            if choice == "1":
+                self.character_full_form()
+            elif choice == "2":
+                self.delete_character()
+            elif choice == "3":
+                break
+            else:
+                print("❌ Invalid choice. Please select 1-3.")
     
     def show_character_summary(self):
         """Display current characters in the project."""
@@ -160,6 +148,119 @@ class LizzyIntake:
                 print(f"  • {char['name']} ({role}{age}){desc}")
         else:
             print("\nNo characters added yet.")
+    
+    def character_full_form(self):
+        """Comprehensive character form with all schema fields."""
+        print("\n✨ Character Form (Complete All Fields)")
+        print("=" * 40)
+        
+        cursor = self.conn.cursor()
+        
+        # Check if editing existing character
+        cursor.execute("SELECT id, name FROM characters ORDER BY name")
+        characters = cursor.fetchall()
+        
+        char_id = None
+        char_data = {}
+        
+        if characters:
+            print("\nExisting characters:")
+            for i, char in enumerate(characters, 1):
+                print(f"  {i}. {char['name']}")
+            print(f"  {len(characters) + 1}. Create new character")
+            
+            try:
+                choice = int(input("\nSelect option: "))
+                if 1 <= choice <= len(characters):
+                    char_id = characters[choice - 1]['id']
+                    cursor.execute("SELECT * FROM characters WHERE id = ?", (char_id,))
+                    char_data = dict(cursor.fetchone())
+                    print(f"\n📝 Editing: {char_data['name']}")
+            except (ValueError, IndexError):
+                pass
+        
+        print("\n" + "=" * 40)
+        print("Press Enter to keep existing value (if editing)")
+        print("=" * 40 + "\n")
+        
+        # Comprehensive field collection
+        fields = {
+            'name': ("Character Name", "Required - The character's full name"),
+            'role': ("Role", "protagonist/love_interest/antagonist/mentor/comic_relief/supporting"),
+            'gender': ("Gender", "Character's gender identity"),
+            'age': ("Age", "Numeric age of the character"),
+            'description': ("Physical Description", "Appearance, clothing, distinguishing features"),
+            'personality_traits': ("Personality Traits", "Key personality characteristics"),
+            'backstory': ("Backstory", "Character's history and background"),
+            'goals': ("Goals", "What the character wants to achieve"),
+            'conflicts': ("Conflicts", "Internal and external conflicts"),
+            'arc': ("Character Arc", "How the character will change/develop"),
+            'romantic_challenge': ("🎭 Romantic Challenge", "Essential Trinity: What prevents them from love?"),
+            'lovable_trait': ("💝 Lovable Trait", "Essential Trinity: What makes them endearing?"),
+            'comedic_flaw': ("😄 Comedic Flaw", "Essential Trinity: What makes them funny?"),
+            'notes': ("Additional Notes", "Any other important information")
+        }
+        
+        new_data = {}
+        
+        for field, (label, help_text) in fields.items():
+            print(f"\n{label}:")
+            print(f"  ({help_text})")
+            
+            current = char_data.get(field, '') if char_data else ''
+            if current:
+                print(f"  Current: {current}")
+            
+            value = input("  > ").strip()
+            
+            # For new characters, name is required
+            if not char_id and field == 'name' and not value:
+                print("❌ Character name is required for new characters.")
+                return
+            
+            # Handle age as integer
+            if field == 'age' and value:
+                if value.isdigit():
+                    new_data[field] = int(value)
+            elif value:  # Only update if value provided
+                new_data[field] = value
+            elif not char_id and field == 'name':  # New character needs name
+                print("❌ Character name is required.")
+                return
+        
+        # Save to database
+        try:
+            if char_id:  # Update existing
+                if new_data:
+                    set_clause = ", ".join([f"{field} = ?" for field in new_data.keys()])
+                    values = list(new_data.values()) + [char_id]
+                    cursor.execute(f"UPDATE characters SET {set_clause}, updated_at = CURRENT_TIMESTAMP WHERE id = ?", values)
+                    self.conn.commit()
+                    print(f"\n✅ Updated character: {char_data['name']}")
+                else:
+                    print("\nNo changes made.")
+            else:  # Insert new
+                # Check if character name already exists
+                cursor.execute("SELECT name FROM characters WHERE name = ?", (new_data.get('name', ''),))
+                if cursor.fetchone():
+                    print(f"\n❌ Character '{new_data['name']}' already exists.")
+                    return
+                
+                # Prepare insert with all fields
+                field_names = list(new_data.keys())
+                placeholders = ", ".join(["?" for _ in field_names])
+                fields_str = ", ".join(field_names)
+                
+                cursor.execute(f'''
+                    INSERT INTO characters ({fields_str})
+                    VALUES ({placeholders})
+                ''', list(new_data.values()))
+                
+                self.conn.commit()
+                print(f"\n✅ Added character: {new_data['name']}")
+                
+        except sqlite3.Error as e:
+            print(f"\n❌ Database error: {e}")
     
     def add_character(self):
         """Add a new character to the project."""
@@ -298,6 +399,127 @@ class LizzyIntake:
                 
         except (ValueError, IndexError):
             print("❌ Invalid input.")
+    
+    def manage_outline(self):
+        """Comprehensive outline management with guided form."""
+        while True:
+            print("\n📖 Story Outline Management:")
+            self.show_outline_summary()
+            print("\n  1. Add/Edit Scene (Full Form)")
+            print("  2. Delete Scene")
+            print("  3. Quick Three-Act Setup")
+            print("  4. Back to Main Menu")
+            
+            choice = input("\nSelect option (1-4): ").strip()
+            
+            if choice == "1":
+                self.scene_full_form()
+            elif choice == "2":
+                self.delete_scene()
+            elif choice == "3":
+                self.quick_three_act_setup()
+            elif choice == "4":
+                break
+            else:
+                print("❌ Invalid choice. Please select 1-4.")
+    
+    def scene_full_form(self):
+        """Comprehensive scene form with all schema fields."""
+        print("\n🎬 Scene Form (Complete All Fields)")
+        print("=" * 40)
+        
+        cursor = self.conn.cursor()
+        
+        # Get act and scene numbers
+        try:
+            act = int(input("\nAct number: "))
+            scene = int(input("Scene number: "))
+        except ValueError:
+            print("❌ Act and scene must be numbers.")
+            return
+        
+        # Check if scene exists for editing
+        cursor.execute("SELECT * FROM story_outline WHERE act = ? AND scene = ?", (act, scene))
+        scene_data = cursor.fetchone()
+        
+        if scene_data:
+            scene_data = dict(scene_data)
+            print(f"\n📝 Editing: Act {act}, Scene {scene}")
+            print("Press Enter to keep existing value")
+        else:
+            scene_data = {}
+            print(f"\n✨ Creating: Act {act}, Scene {scene}")
+        
+        print("\n" + "=" * 40)
+        print("Complete all fields for this scene")
+        print("=" * 40 + "\n")
+        
+        # Get available characters for reference
+        cursor.execute("SELECT name FROM characters ORDER BY name")
+        char_names = [row['name'] for row in cursor.fetchall()]
+        if char_names:
+            print(f"Available characters: {', '.join(char_names)}\n")
+        
+        # Comprehensive field collection
+        fields = {
+            'scene_title': ("Scene Title", "Brief descriptive title for the scene"),
+            'location': ("Location", "Where does this scene take place?"),
+            'time_of_day': ("Time of Day", "morning/afternoon/evening/night"),
+            'characters_present': ("Characters Present", "Comma-separated list of characters"),
+            'scene_purpose': ("Scene Purpose", "setup/conflict/climax/resolution"),
+            'key_events': ("Key Events", "What happens in this scene?"),
+            'key_characters': ("Key Characters", "Legacy: Main characters in scene"),
+            'beat': ("Beat", "Legacy Lizzy: Story beat/moment"),
+            'nudge': ("Nudge", "Legacy Lizzy: Direction/guidance"),
+            'emotional_beats': ("Emotional Beats", "Emotional journey in the scene"),
+            'dialogue_notes': ("Dialogue Notes", "Key dialogue or conversation points"),
+            'plot_threads': ("Plot Threads", "Which subplots are advanced?"),
+            'notes': ("Additional Notes", "Any other important information")
+        }
+        
+        new_data = {'act': act, 'scene': scene}
+        
+        for field, (label, help_text) in fields.items():
+            print(f"\n{label}:")
+            print(f"  ({help_text})")
+            
+            current = scene_data.get(field, '') if scene_data else ''
+            if current:
+                print(f"  Current: {current}")
+            
+            value = input("  > ").strip()
+            
+            if value:  # Only update if value provided
+                new_data[field] = value
+        
+        # Save to database
+        try:
+            if scene_data:  # Update existing
+                if len(new_data) > 2:  # More than just act and scene
+                    set_clause = ", ".join([f"{field} = ?" for field in new_data.keys() if field not in ['act', 'scene']])
+                    values = [v for k, v in new_data.items() if k not in ['act', 'scene']] + [act, scene]
+                    cursor.execute(f"UPDATE story_outline SET {set_clause}, updated_at = CURRENT_TIMESTAMP WHERE act = ? AND scene = ?", values)
+                    self.conn.commit()
+                    print(f"\n✅ Updated Act {act}, Scene {scene}")
+                else:
+                    print("\nNo changes made.")
+            else:  # Insert new
+                field_names = list(new_data.keys())
+                placeholders = ", ".join(["?" for _ in field_names])
+                fields_str = ", ".join(field_names)
+                
+                cursor.execute(f'''
+                    INSERT INTO story_outline ({fields_str})
+                    VALUES ({placeholders})
+                ''', list(new_data.values()))
+                
+                self.conn.commit()
+                print(f"\n✅ Added Act {act}, Scene {scene}")
+                
+        except sqlite3.IntegrityError:
+            print(f"\n❌ Act {act}, Scene {scene} already exists. Please edit it instead.")
+        except sqlite3.Error as e:
+            print(f"\n❌ Database error: {e}")
     
     def build_story_outline(self):
         """Build or edit story structure."""
@@ -503,6 +725,92 @@ class LizzyIntake:
         
         self.conn.commit()
         print("✅ Project goals updated.")
+    
+    def show_project_summary_tables(self):
+        """Display complete character and outline tables."""
+        print("\n" + "=" * 60)
+        print("📊 PROJECT SUMMARY - COMPLETE DATABASE TABLES")
+        print("=" * 60)
+        
+        cursor = self.conn.cursor()
+        
+        # Display Characters Table
+        print("\n🎭 CHARACTERS TABLE")
+        print("-" * 60)
+        cursor.execute("SELECT * FROM characters ORDER BY id")
+        characters = cursor.fetchall()
+        
+        if characters:
+            for char in characters:
+                print(f"\n[Character #{char['id']}]")
+                print(f"  Name: {char['name'] or 'N/A'}")
+                print(f"  Role: {char['role'] or 'N/A'}")
+                print(f"  Gender: {char['gender'] or 'N/A'}")
+                print(f"  Age: {char['age'] or 'N/A'}")
+                print(f"  Description: {char['description'] or 'N/A'}")
+                print(f"  Personality: {char['personality_traits'] or 'N/A'}")
+                print(f"  Backstory: {char['backstory'] or 'N/A'}")
+                print(f"  Goals: {char['goals'] or 'N/A'}")
+                print(f"  Conflicts: {char['conflicts'] or 'N/A'}")
+                print(f"  Arc: {char['arc'] or 'N/A'}")
+                print(f"  🎭 Romantic Challenge: {char['romantic_challenge'] or 'N/A'}")
+                print(f"  💝 Lovable Trait: {char['lovable_trait'] or 'N/A'}")
+                print(f"  😄 Comedic Flaw: {char['comedic_flaw'] or 'N/A'}")
+                print(f"  Notes: {char['notes'] or 'N/A'}")
+                print("-" * 40)
+        else:
+            print("  (No characters created yet)")
+        
+        # Display Story Outline Table
+        print("\n📖 STORY OUTLINE TABLE")
+        print("-" * 60)
+        cursor.execute("SELECT * FROM story_outline ORDER BY act, scene")
+        scenes = cursor.fetchall()
+        
+        if scenes:
+            current_act = None
+            for scene in scenes:
+                if scene['act'] != current_act:
+                    current_act = scene['act']
+                    print(f"\n>>> ACT {current_act} <<<")
+                
+                print(f"\n[Scene {scene['scene']}]")
+                print(f"  Title: {scene['scene_title'] or 'N/A'}")
+                print(f"  Location: {scene['location'] or 'N/A'}")
+                print(f"  Time: {scene['time_of_day'] or 'N/A'}")
+                print(f"  Characters: {scene['characters_present'] or 'N/A'}")
+                print(f"  Purpose: {scene['scene_purpose'] or 'N/A'}")
+                print(f"  Key Events: {scene['key_events'] or 'N/A'}")
+                print(f"  Key Characters: {scene['key_characters'] or 'N/A'}")
+                print(f"  Beat: {scene['beat'] or 'N/A'}")
+                print(f"  Nudge: {scene['nudge'] or 'N/A'}")
+                print(f"  Emotional Beats: {scene['emotional_beats'] or 'N/A'}")
+                print(f"  Dialogue Notes: {scene['dialogue_notes'] or 'N/A'}")
+                print(f"  Plot Threads: {scene['plot_threads'] or 'N/A'}")
+                print(f"  Notes: {scene['notes'] or 'N/A'}")
+                print("-" * 40)
+        else:
+            print("  (No scenes created yet)")
+        
+        # Summary statistics
+        print("\n📈 STATISTICS")
+        print("-" * 60)
+        print(f"  Total Characters: {len(characters)}")
+        print(f"  Total Scenes: {len(scenes)}")
+        
+        # Count scenes by act
+        act_counts = {}
+        for scene in scenes:
+            act = scene['act']
+            act_counts[act] = act_counts.get(act, 0) + 1
+        
+        if act_counts:
+            for act, count in sorted(act_counts.items()):
+                print(f"    Act {act}: {count} scenes")
+        
+        print("\n" + "=" * 60)
+        print("✨ End of Project Summary")
+        print("=" * 60)
     
     def show_project_summary(self):
         """Display comprehensive project summary."""

@@ -1,827 +1,436 @@
 #!/usr/bin/env python3
 """
 Lizzy Alpha - Brainstorm Module
-===============================
-Generates creative ideas and thematic content using LightRAG knowledge retrieval.
-Utilizes tone presets and contextual source materials for rich creative ideation.
+================================
+Generates creative ideas and thematic content for each scene using LightRAG.
+Queries multiple knowledge buckets to provide diverse perspectives.
 
 Author: Lizzy AI Writing Framework
 """
 
 import os
 import sqlite3
-import sys
-import json
-import asyncio
-from datetime import datetime
 from pathlib import Path
+from datetime import datetime
 
-# Load environment variables from .env file
-try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ImportError:
-    pass
-
+# Import LightRAG and its query parameters
 try:
     from lightrag import LightRAG, QueryParam
-    from lightrag.llm import openai_complete_if_cache, openai_embedding
-    LIGHTRAG_AVAILABLE = True
 except ImportError:
-    print("⚠️  LightRAG not available. Some features will be limited.")
-    LIGHTRAG_AVAILABLE = False
+    print("⚠️  LightRAG not installed. Install with: pip install lightrag")
+    print("   This module requires LightRAG for AI-powered brainstorming.")
+    exit(1)
 
 
-class LizzyBrainstorm:
+# Define prompt tones for different narrative styles
+PROMPT_TONES = {
+    "cheesy-romcom": "Write this scene as if it's from a bubbly, cliché-filled romantic comedy full of silly misunderstandings and charm.",
+    "romantic-dramedy": "Write this scene like it's a grounded romantic dramedy—funny but heartfelt, with honest emotional tension and subtle humor.",
+    "shakespearean-romance": "Craft this scene in the style of a Shakespearean romantic comedy—rich in language, irony, and poetic flare.",
+    "literary-fiction": "Write this scene with literary depth—focus on internal character psychology, symbolism, and nuanced emotional exploration.",
+    "thriller-romance": "Write this scene as a romantic thriller—tension, danger, and passion intertwined with suspenseful pacing."
+}
+
+
+class BrainstormingAgent:
     """
-    The Brainstorm module generates creative ideas using AI and knowledge retrieval.
-    Integrates project context with external knowledge sources for rich inspiration.
+    The Brainstorming Agent generates creative content for each scene
+    by querying different LightRAG knowledge buckets.
     """
     
-    def __init__(self, base_dir="projects", knowledge_dir="lightrag_working_dir"):
+    def __init__(self, lightrag_instances=None, base_dir="projects"):
+        """
+        Initialize the BrainstormingAgent.
+        
+        Args:
+            lightrag_instances: Dictionary mapping bucket names to LightRAG instances
+            base_dir: Directory containing project folders
+        """
+        self.lightrag = lightrag_instances or {}
         self.base_dir = Path(base_dir)
-        self.knowledge_dir = Path(knowledge_dir)
         self.project_name = None
         self.db_path = None
         self.conn = None
-        self.lightrag_instances = {}
+        self.prompt_style = None
+        self.easter_egg = ""
+        self.table_name = None
         
-        # Tone presets for different writing styles
-        self.tone_presets = {
-            "1": {
-                "name": "Romantic Comedy",
-                "description": "Light, humorous, with romantic tension and witty dialogue",
-                "style": "upbeat, charming, with comedic mishaps and romantic misunderstandings"
-            },
-            "2": {
-                "name": "Dramatic Romance", 
-                "description": "Emotionally rich, serious romantic themes with depth",
-                "style": "emotionally resonant, character-driven, with meaningful conflicts"
-            },
-            "3": {
-                "name": "Literary Fiction",
-                "description": "Character-focused, literary style with thematic depth",
-                "style": "thoughtful, nuanced, with rich character development and themes"
-            },
-            "4": {
-                "name": "Thriller/Suspense",
-                "description": "Fast-paced, tension-filled, with mystery elements",
-                "style": "suspenseful, action-oriented, with plot twists and urgency"
-            },
-            "5": {
-                "name": "Fantasy/Sci-Fi",
-                "description": "Imaginative world-building with fantastical elements",
-                "style": "creative, world-building focused, with unique concepts and magic/tech"
-            },
-            "6": {
-                "name": "Historical Fiction",
-                "description": "Period-appropriate, historically grounded narrative",
-                "style": "authentic to period, research-based, with historical context"
-            }
-        }
-    
-    def run(self):
-        """Main entry point for the Brainstorm module."""
-        print("💡 Lizzy Alpha - Brainstorm Module")
-        print("=" * 40)
-        print("AI-powered creative ideation with contextual knowledge")
-        print()
-        
-        try:
-            self.select_project()
-            self.connect_database()
-            self.initialize_knowledge_base()
-            self.main_menu()
-            
-        except KeyboardInterrupt:
-            print("\\n\\n⏸️  Brainstorming session cancelled.")
-            sys.exit(0)
-        except Exception as e:
-            print(f"\\n❌ Error: {e}")
-            sys.exit(1)
-        finally:
-            if self.conn:
-                self.conn.close()
-    
-    def select_project(self):
-        """Select an existing project to brainstorm for."""
+    def setup_project(self):
+        """Select and connect to a project database."""
         print("📂 Available Projects:")
         projects = [d.name for d in self.base_dir.iterdir() if d.is_dir()]
         
         if not projects:
             print("❌ No projects found. Run 'python3 start.py' first to create a project.")
-            sys.exit(1)
-        
-        for i, project in enumerate(projects, 1):
-            print(f"  {i}. {project}")
+            return False
+            
+        for project in projects:
+            print(f"  - {project}")
         
         print()
-        
         while True:
-            choice = input("Enter project name: ").strip()
+            project = input("Enter project name: ").strip()
             
-            if choice in projects:
-                self.project_name = choice
-                self.db_path = self.base_dir / self.project_name / f"{self.project_name}.sqlite"
+            if project in projects:
+                self.project_name = project
+                self.db_path = self.base_dir / project / f"{project}.sqlite"
                 
                 if not self.db_path.exists():
-                    print(f"❌ Database not found for project '{choice}'. Run 'python3 start.py' first.")
+                    print(f"❌ Database not found for project '{project}'.")
                     continue
                     
-                print(f"🎯 Brainstorming for project: {choice}")
-                break
+                try:
+                    self.conn = sqlite3.connect(self.db_path)
+                    self.conn.row_factory = sqlite3.Row
+                    print(f"✅ Connected to project: {project}")
+                    return True
+                except sqlite3.Error as e:
+                    print(f"❌ Database connection error: {e}")
+                    return False
             else:
                 print("❌ Project not found. Please enter a valid project name.")
     
-    def connect_database(self):
-        """Connect to the project database."""
-        try:
-            self.conn = sqlite3.connect(self.db_path)
-            self.conn.row_factory = sqlite3.Row
-            print("✅ Connected to project database")
-        except sqlite3.Error as e:
-            print(f"❌ Database connection error: {e}")
-            raise
-    
-    def initialize_knowledge_base(self):
-        """Initialize LightRAG knowledge base instances."""
-        if not LIGHTRAG_AVAILABLE:
-            print("⚠️  Knowledge base features disabled (LightRAG not available)")
-            return
+    def select_prompt_style(self):
+        """Let user choose a narrative tone for brainstorming."""
+        print("\n🎭 Choose a prompt tone:")
         
-        print("🧠 Initializing knowledge base...")
+        tone_list = list(PROMPT_TONES.keys())
+        for i, key in enumerate(tone_list, 1):
+            # Format the key nicely for display
+            display_name = key.replace('-', ' ').title()
+            print(f"  {i}. {display_name}")
         
-        # Use the local LightRAG knowledge buckets
-        main_knowledge_dir = self.knowledge_dir
-        
-        if not main_knowledge_dir.exists():
-            print("⚠️  Knowledge directory not found. Using limited mode.")
-            return
-        
-        # Get available knowledge buckets from directory structure
-        bucket_dirs = [d for d in main_knowledge_dir.iterdir() 
-                      if d.is_dir() and not d.name.startswith('.') and not d.name.startswith('_')]
-        
-        # Filter out non-bucket directories and check for required files
-        valid_buckets = []
-        for d in bucket_dirs:
-            if d.name in ['books', 'plays', 'scripts']:
-                # Check if bucket has required LightRAG files
-                required_files = ['vdb_entities.json', 'vdb_relationships.json']
-                has_all_files = all((d / f).exists() for f in required_files)
-                if has_all_files:
-                    valid_buckets.append(d)
-                else:
-                    print(f"  ⚠️  Skipping {d.name}: Missing required files")
-        
-        bucket_dirs = valid_buckets
-        
-        print(f"Found {len(bucket_dirs)} knowledge buckets:")
-        for bucket in bucket_dirs:
-            print(f"  • {bucket.name}")
-        
-        # Initialize LightRAG instances for each bucket
-        for bucket_dir in bucket_dirs:
+        while True:
             try:
-                rag = LightRAG(
-                    working_dir=str(bucket_dir),
-                    llm_model_func=openai_complete_if_cache,
-                    embedding_func=openai_embedding
-                )
-                self.lightrag_instances[bucket_dir.name] = rag
-                print(f"  ✅ Loaded: {bucket_dir.name}")
-            except Exception as e:
-                print(f"  ⚠️  Failed to load {bucket_dir.name}: {e}")
-        
-        print(f"✅ Knowledge base ready with {len(self.lightrag_instances)} buckets")
-    
-    def main_menu(self):
-        """Display main brainstorming menu."""
-        while True:
-            print("\\n💡 Brainstorming Menu:")
-            print("  1. Scene-Specific Brainstorming")
-            print("  2. Character Development Ideas")
-            print("  3. Plot Development & Twists")
-            print("  4. Dialogue & Voice Exploration")
-            print("  5. Theme & Symbolism Ideas")
-            print("  6. World Building Expansion")
-            print("  7. Free-Form Creative Session")
-            print("  8. Review Previous Sessions")
-            print("  9. Exit")
-            
-            choice = input("\\nSelect option (1-9): ").strip()
-            
-            if choice == "1":
-                self.scene_brainstorming()
-            elif choice == "2":
-                self.character_brainstorming()
-            elif choice == "3":
-                self.plot_brainstorming()
-            elif choice == "4":
-                self.dialogue_brainstorming()
-            elif choice == "5":
-                self.theme_brainstorming()
-            elif choice == "6":
-                self.world_building_brainstorming()
-            elif choice == "7":
-                self.free_form_brainstorming()
-            elif choice == "8":
-                self.review_sessions()
-            elif choice == "9":
-                print("✅ Brainstorming session complete!")
-                break
-            else:
-                print("❌ Invalid choice. Please select 1-9.")
-    
-    def scene_brainstorming(self):
-        """Brainstorm ideas for specific scenes."""
-        print("\\n🎬 Scene-Specific Brainstorming")
-        
-        # Show available scenes
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT act, scene, scene_title FROM story_outline ORDER BY act, scene")
-        scenes = cursor.fetchall()
-        
-        if not scenes:
-            print("No scenes found. Add scenes in the Intake module first.")
-            return
-        
-        print("\\nAvailable scenes:")
-        for i, scene in enumerate(scenes, 1):
-            title = scene['scene_title'] or "Untitled"
-            print(f"  {i}. Act {scene['act']}, Scene {scene['scene']}: {title}")
-        
-        try:
-            choice = int(input("Select scene number: ")) - 1
-            if 0 <= choice < len(scenes):
-                selected_scene = scenes[choice]
-                self.brainstorm_for_scene(selected_scene['act'], selected_scene['scene'])
-            else:
-                print("❌ Invalid selection.")
-        except ValueError:
-            print("❌ Invalid input.")
-    
-    def brainstorm_for_scene(self, act, scene):
-        """Generate ideas for a specific scene."""
-        # Get scene context from database
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT * FROM story_outline WHERE act = ? AND scene = ?", (act, scene))
-        scene_data = cursor.fetchone()
-        
-        if not scene_data:
-            print(f"Scene not found: Act {act}, Scene {scene}")
-            return
-        
-        # Get project context
-        project_context = self.get_project_context()
-        
-        # Select tone preset
-        tone_preset = self.select_tone_preset()
-        
-        # Select knowledge buckets
-        knowledge_context = self.select_knowledge_buckets()
-        
-        # Build brainstorming prompt
-        prompt = self.build_scene_prompt(scene_data, project_context, tone_preset)
-        
-        # Generate and save brainstorming session
-        self.run_brainstorming_session(
-            f"Scene Brainstorming: Act {act}, Scene {scene}",
-            prompt,
-            knowledge_context,
-            tone_preset
-        )
-    
-    def character_brainstorming(self):
-        """Brainstorm character development ideas."""
-        print("\\n🧑‍🤝‍🧑 Character Development Brainstorming")
-        
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT name, role FROM characters ORDER BY name")
-        characters = cursor.fetchall()
-        
-        if not characters:
-            print("No characters found. Add characters in the Intake module first.")
-            return
-        
-        print("\\nSelect character:")
-        for i, char in enumerate(characters, 1):
-            role = char['role'] or "Unknown"
-            print(f"  {i}. {char['name']} ({role})")
-        
-        try:
-            choice = int(input("Select character number: ")) - 1
-            if 0 <= choice < len(characters):
-                char_name = characters[choice]['name']
-                self.brainstorm_for_character(char_name)
-            else:
-                print("❌ Invalid selection.")
-        except ValueError:
-            print("❌ Invalid input.")
-    
-    def brainstorm_for_character(self, character_name):
-        """Generate character development ideas."""
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT * FROM characters WHERE name = ?", (character_name,))
-        char_data = cursor.fetchone()
-        
-        project_context = self.get_project_context()
-        tone_preset = self.select_tone_preset()
-        knowledge_context = self.select_knowledge_buckets()
-        
-        prompt = self.build_character_prompt(char_data, project_context, tone_preset)
-        
-        self.run_brainstorming_session(
-            f"Character Development: {character_name}",
-            prompt,
-            knowledge_context,
-            tone_preset
-        )
-    
-    def plot_brainstorming(self):
-        """Brainstorm plot development and twists."""
-        print("\\n📚 Plot Development Brainstorming")
-        
-        focus_areas = [
-            "Plot twists and surprises",
-            "Subplot development", 
-            "Conflict escalation",
-            "Rising action ideas",
-            "Climax alternatives",
-            "Resolution options"
-        ]
-        
-        print("\\nFocus areas:")
-        for i, area in enumerate(focus_areas, 1):
-            print(f"  {i}. {area}")
-        
-        try:
-            choice = int(input("Select focus area: ")) - 1
-            if 0 <= choice < len(focus_areas):
-                focus_area = focus_areas[choice]
-                self.brainstorm_plot_element(focus_area)
-            else:
-                print("❌ Invalid selection.")
-        except ValueError:
-            print("❌ Invalid input.")
-    
-    def brainstorm_plot_element(self, focus_area):
-        """Brainstorm specific plot elements."""
-        project_context = self.get_project_context()
-        tone_preset = self.select_tone_preset()
-        knowledge_context = self.select_knowledge_buckets()
-        
-        prompt = f"""
-        PROJECT CONTEXT:
-        {project_context}
-        
-        FOCUS AREA: {focus_area}
-        
-        Generate creative ideas for {focus_area.lower()} that would enhance this story.
-        Consider the existing characters, plot elements, and tone.
-        Provide multiple distinct options with brief explanations.
-        """
-        
-        self.run_brainstorming_session(
-            f"Plot Development: {focus_area}",
-            prompt,
-            knowledge_context,
-            tone_preset
-        )
-    
-    def dialogue_brainstorming(self):
-        """Brainstorm dialogue and character voice."""
-        print("\\n💬 Dialogue & Voice Brainstorming")
-        
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT name FROM characters ORDER BY name")
-        characters = [row['name'] for row in cursor.fetchall()]
-        
-        if not characters:
-            print("No characters found. Add characters first.")
-            return
-        
-        print(f"\\nAvailable characters: {', '.join(characters)}")
-        char_input = input("Enter character name(s) for dialogue (comma-separated): ").strip()
-        
-        if not char_input:
-            return
-        
-        selected_chars = [name.strip() for name in char_input.split(',')]
-        
-        project_context = self.get_project_context()
-        tone_preset = self.select_tone_preset()
-        knowledge_context = self.select_knowledge_buckets()
-        
-        prompt = f"""
-        PROJECT CONTEXT:
-        {project_context}
-        
-        DIALOGUE FOCUS: {', '.join(selected_chars)}
-        
-        Generate dialogue ideas, character voice development, and conversation starters
-        for the specified character(s). Consider their personalities, relationships,
-        and current story situation.
-        """
-        
-        self.run_brainstorming_session(
-            f"Dialogue: {', '.join(selected_chars)}",
-            prompt,
-            knowledge_context,
-            tone_preset
-        )
-    
-    def theme_brainstorming(self):
-        """Brainstorm themes and symbolism."""
-        print("\\n🎭 Theme & Symbolism Brainstorming")
-        
-        project_context = self.get_project_context()
-        tone_preset = self.select_tone_preset()
-        knowledge_context = self.select_knowledge_buckets()
-        
-        prompt = f"""
-        PROJECT CONTEXT:
-        {project_context}
-        
-        Explore themes, symbolism, and deeper meanings that could enhance this story.
-        Consider metaphors, recurring motifs, and thematic elements that would
-        add depth and resonance to the narrative.
-        """
-        
-        self.run_brainstorming_session(
-            "Themes & Symbolism",
-            prompt,
-            knowledge_context,
-            tone_preset
-        )
-    
-    def world_building_brainstorming(self):
-        """Brainstorm world-building elements."""
-        print("\\n🌍 World Building Brainstorming")
-        
-        project_context = self.get_project_context()
-        tone_preset = self.select_tone_preset()
-        knowledge_context = self.select_knowledge_buckets()
-        
-        prompt = f"""
-        PROJECT CONTEXT:
-        {project_context}
-        
-        Develop world-building elements including settings, locations, cultural details,
-        social structures, and environmental factors that would enrich the story world.
-        Consider how these elements support the plot and character development.
-        """
-        
-        self.run_brainstorming_session(
-            "World Building",
-            prompt,
-            knowledge_context,
-            tone_preset
-        )
-    
-    def free_form_brainstorming(self):
-        """Free-form creative brainstorming session."""
-        print("\\n✨ Free-Form Creative Session")
-        
-        custom_prompt = input("Enter your creative prompt or question: ").strip()
-        if not custom_prompt:
-            return
-        
-        project_context = self.get_project_context()
-        tone_preset = self.select_tone_preset()
-        knowledge_context = self.select_knowledge_buckets()
-        
-        full_prompt = f"""
-        PROJECT CONTEXT:
-        {project_context}
-        
-        CREATIVE PROMPT:
-        {custom_prompt}
-        
-        Provide creative ideas, suggestions, and inspiration related to this prompt
-        in the context of the current project.
-        """
-        
-        self.run_brainstorming_session(
-            f"Free-form: {custom_prompt[:50]}...",
-            full_prompt,
-            knowledge_context,
-            tone_preset
-        )
-    
-    def get_project_context(self):
-        """Gather comprehensive project context."""
-        cursor = self.conn.cursor()
-        
-        # Project metadata
-        cursor.execute("SELECT key, value FROM project_metadata")
-        metadata = dict(cursor.fetchall())
-        
-        # Characters
-        cursor.execute("SELECT name, role, description FROM characters")
-        characters = cursor.fetchall()
-        
-        # Story outline
-        cursor.execute("SELECT act, scene, scene_title, scene_purpose FROM story_outline ORDER BY act, scene")
-        outline = cursor.fetchall()
-        
-        context = f"""
-        PROJECT: {metadata.get('project_name', 'Unknown')}
-        GENRE: {metadata.get('genre', 'Not specified')}
-        THEME: {metadata.get('main_theme', 'Not specified')}
-        TONE: {metadata.get('tone', 'Not specified')}
-        
-        CHARACTERS:
-        """
-        
-        for char in characters:
-            role = char['role'] or 'Unknown'
-            desc = char['description'] or 'No description'
-            context += f"- {char['name']} ({role}): {desc}\\n"
-        
-        if outline:
-            context += "\\nSTORY OUTLINE:\\n"
-            current_act = None
-            for scene in outline:
-                if scene['act'] != current_act:
-                    current_act = scene['act']
-                    context += f"\\nAct {current_act}:\\n"
-                title = scene['scene_title'] or 'Untitled'
-                purpose = scene['scene_purpose'] or 'No purpose'
-                context += f"  Scene {scene['scene']}: {title} ({purpose})\\n"
-        
-        return context
-    
-    def select_tone_preset(self):
-        """Let user select a tone preset."""
-        print("\\n🎨 Select Writing Tone:")
-        for key, preset in self.tone_presets.items():
-            print(f"  {key}. {preset['name']} - {preset['description']}")
-        
-        while True:
-            choice = input("\\nSelect tone (1-6): ").strip()
-            if choice in self.tone_presets:
-                selected = self.tone_presets[choice]
-                print(f"✅ Selected: {selected['name']}")
-                return selected
-            else:
-                print("❌ Invalid choice. Please select 1-6.")
-    
-    def select_knowledge_buckets(self):
-        """Let user select knowledge buckets for context."""
-        if not self.lightrag_instances:
-            print("⚠️  No knowledge buckets available.")
-            return []
-        
-        print("\\n🧠 Available Knowledge Buckets:")
-        bucket_names = list(self.lightrag_instances.keys())
-        
-        for i, bucket in enumerate(bucket_names, 1):
-            print(f"  {i}. {bucket}")
-        
-        print("  0. Skip knowledge context")
-        
-        selected_buckets = []
-        
-        while True:
-            choice = input("\\nSelect bucket number (or 'done' to finish): ").strip().lower()
-            
-            if choice == 'done' or choice == '0':
-                break
-            
-            try:
-                bucket_idx = int(choice) - 1
-                if 0 <= bucket_idx < len(bucket_names):
-                    bucket_name = bucket_names[bucket_idx]
-                    if bucket_name not in selected_buckets:
-                        selected_buckets.append(bucket_name)
-                        print(f"✅ Added: {bucket_name}")
-                    else:
-                        print(f"Already selected: {bucket_name}")
+                choice = input(f"\nEnter choice (1-{len(tone_list)}): ").strip()
+                choice_idx = int(choice) - 1
+                
+                if 0 <= choice_idx < len(tone_list):
+                    self.prompt_style = tone_list[choice_idx]
+                    print(f"✅ Selected: {self.prompt_style.replace('-', ' ').title()}")
+                    break
                 else:
-                    print("❌ Invalid bucket number.")
+                    print(f"❌ Please enter a number between 1 and {len(tone_list)}")
             except ValueError:
-                print("❌ Invalid input.")
-        
-        if selected_buckets:
-            print(f"Selected buckets: {', '.join(selected_buckets)}")
-        
-        return selected_buckets
+                print("❌ Please enter a valid number")
     
-    def build_scene_prompt(self, scene_data, project_context, tone_preset):
-        """Build a comprehensive prompt for scene brainstorming."""
-        return f"""
-        {project_context}
+    def input_easter_egg(self):
+        """Optional creative twist or constraint for the brainstorming."""
+        print("\n✨ Easter Egg (Optional Creative Twist)")
+        print("  Add a unique element, constraint, or theme to weave through all scenes")
+        print("  Examples: 'includes a running gag about coffee', 'set during a heatwave'")
+        print("  Press Enter to skip")
         
-        SCENE FOCUS:
-        Act {scene_data['act']}, Scene {scene_data['scene']}: {scene_data['scene_title'] or 'Untitled'}
-        Location: {scene_data['location'] or 'Not specified'}
-        Characters: {scene_data['characters_present'] or 'Not specified'}
-        Purpose: {scene_data['scene_purpose'] or 'Not specified'}
-        Key Events: {scene_data['key_events'] or 'Not specified'}
+        idea = input("\n  > ").strip()
+        self.easter_egg = idea
         
-        TONE: {tone_preset['style']}
-        
-        Generate creative ideas for this scene including:
-        - Specific dialogue snippets or exchanges
-        - Physical actions and staging
-        - Emotional beats and character moments
-        - Sensory details and atmosphere
-        - Potential complications or surprises
-        - Ways to advance character development
-        - Connection to overall story themes
-        """
+        if idea:
+            print(f"✅ Easter egg added: {idea}")
     
-    def build_character_prompt(self, char_data, project_context, tone_preset):
-        """Build a comprehensive prompt for character brainstorming."""
-        return f"""
-        {project_context}
-        
-        CHARACTER FOCUS: {char_data['name']}
-        Role: {char_data['role'] or 'Not specified'}
-        Description: {char_data['description'] or 'Not specified'}
-        Personality: {char_data['personality_traits'] or 'Not specified'}
-        Goals: {char_data['goals'] or 'Not specified'}
-        Conflicts: {char_data['conflicts'] or 'Not specified'}
-        
-        TONE: {tone_preset['style']}
-        
-        Generate character development ideas including:
-        - Specific mannerisms and habits
-        - Dialogue voice and speech patterns
-        - Internal motivations and fears
-        - Relationship dynamics with other characters
-        - Character growth opportunities
-        - Backstory elements that could be revealed
-        - Moments that showcase their personality
-        """
-    
-    def run_brainstorming_session(self, session_name, prompt, knowledge_buckets, tone_preset):
-        """Execute the brainstorming session with AI generation."""
-        print(f"\\n🤖 Generating ideas for: {session_name}")
-        print("=" * 50)
-        
-        # Enhance prompt with knowledge context if available
-        enhanced_prompt = prompt
-        
-        if knowledge_buckets and self.lightrag_instances:
-            print("🔍 Gathering relevant knowledge...")
-            knowledge_context = self.gather_knowledge_context(prompt, knowledge_buckets)
-            if knowledge_context:
-                enhanced_prompt = f"""
-                RELEVANT KNOWLEDGE CONTEXT:
-                {knowledge_context}
-                
-                {prompt}
-                
-                Use the knowledge context above to inform and enrich your creative suggestions.
-                """
-        
-        # For now, simulate AI response (in real implementation, call OpenAI API)
-        ai_response = self.simulate_ai_response(session_name, enhanced_prompt, tone_preset)
-        
-        print("\\n💡 Generated Ideas:")
-        print("-" * 30)
-        print(ai_response)
-        print("-" * 30)
-        
-        # Save to database
-        self.save_brainstorming_session(session_name, prompt, knowledge_buckets, ai_response, tone_preset)
-        
-        # Ask for user rating and notes
-        self.collect_user_feedback()
-    
-    def gather_knowledge_context(self, prompt, bucket_names):
-        """Query LightRAG buckets for relevant context."""
-        if not LIGHTRAG_AVAILABLE:
-            return ""
-        
-        context_snippets = []
-        
-        for bucket_name in bucket_names:
-            if bucket_name in self.lightrag_instances:
-                try:
-                    rag = self.lightrag_instances[bucket_name]
-                    # Create a query based on the prompt
-                    query = f"creative writing ideas related to: {prompt[:200]}"
-                    
-                    # Query the RAG system (this would be async in real implementation)
-                    result = "Sample knowledge context from " + bucket_name
-                    context_snippets.append(f"From {bucket_name}: {result}")
-                    
-                except Exception as e:
-                    print(f"⚠️  Error querying {bucket_name}: {e}")
-        
-        return "\\n\\n".join(context_snippets)
-    
-    def simulate_ai_response(self, session_name, prompt, tone_preset):
-        """Simulate AI response for demonstration."""
-        return f"""
-        Based on your {tone_preset['name'].lower()} tone and project context, here are some creative ideas:
-        
-        1. **Character Moment**: A subtle gesture or habit that reveals deeper personality
-        2. **Dialogue Hook**: An unexpected line that shifts the conversation's direction  
-        3. **Sensory Detail**: A specific smell, sound, or texture that grounds the scene
-        4. **Emotional Beat**: A moment where the character's guard drops, revealing vulnerability
-        5. **Plot Element**: A small complication that creates new story possibilities
-        
-        [This is a simulated response. In the full implementation, this would be generated by OpenAI's API using the enhanced prompt with knowledge context.]
-        """
-    
-    def save_brainstorming_session(self, session_name, prompt, knowledge_buckets, ai_response, tone_preset):
-        """Save the brainstorming session to the database."""
+    def get_next_table_name(self):
+        """Find the next available version number for brainstorming log table."""
         cursor = self.conn.cursor()
         
-        buckets_json = json.dumps(knowledge_buckets) if knowledge_buckets else None
-        tone_json = json.dumps(tone_preset)
+        # Look for existing versioned tables
+        cursor.execute("""
+            SELECT name FROM sqlite_master 
+            WHERE type='table' AND name LIKE 'brainstorming_log_v%'
+        """)
+        tables = cursor.fetchall()
         
-        cursor.execute('''
+        # Extract version numbers
+        versions = []
+        for table in tables:
+            name = table['name']
+            if '_v' in name:
+                try:
+                    version = int(name.split('_v')[-1])
+                    versions.append(version)
+                except ValueError:
+                    continue
+        
+        # Determine next version
+        next_version = max(versions) + 1 if versions else 1
+        return f"brainstorming_log_v{next_version}"
+    
+    def setup_table(self):
+        """Create a new versioned table for this brainstorming session."""
+        self.table_name = self.get_next_table_name()
+        
+        cursor = self.conn.cursor()
+        cursor.execute(f"""
+            CREATE TABLE IF NOT EXISTS {self.table_name} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                act INTEGER NOT NULL,
+                scene INTEGER NOT NULL,
+                scene_description TEXT NOT NULL,
+                bucket_name TEXT NOT NULL,
+                response TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+        
+        # Also record this session in the main brainstorming_sessions table
+        cursor.execute("""
             INSERT INTO brainstorming_sessions 
-            (session_name, prompt, context_buckets, tone_preset, ai_response)
-            VALUES (?, ?, ?, ?, ?)
-        ''', (session_name, prompt, buckets_json, tone_json, ai_response))
+            (session_name, prompt, tone_preset, created_at)
+            VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+        """, (
+            f"Session {self.table_name}",
+            self.easter_egg or "No easter egg",
+            self.prompt_style
+        ))
         
         self.conn.commit()
-        print("\\n💾 Session saved to database")
+        print(f"📝 Created brainstorming table: {self.table_name}")
     
-    def collect_user_feedback(self):
-        """Collect user rating and notes for the session."""
-        try:
-            rating = int(input("\\nRate this session (1-5): "))
-            if 1 <= rating <= 5:
-                notes = input("Additional notes (optional): ").strip()
-                
-                cursor = self.conn.cursor()
-                cursor.execute('''
-                    UPDATE brainstorming_sessions 
-                    SET quality_rating = ?, user_notes = ?
-                    WHERE id = (SELECT MAX(id) FROM brainstorming_sessions)
-                ''', (rating, notes))
-                self.conn.commit()
-                print("✅ Feedback saved")
-            else:
-                print("❌ Rating must be 1-5")
-        except ValueError:
-            print("❌ Invalid rating")
-    
-    def review_sessions(self):
-        """Review previous brainstorming sessions."""
-        print("\\n📚 Previous Brainstorming Sessions")
-        
+    def fetch_all_scenes(self):
+        """Fetch all scenes from story_outline table and synthesize descriptions."""
         cursor = self.conn.cursor()
-        cursor.execute('''
-            SELECT session_name, created_at, quality_rating, user_notes
-            FROM brainstorming_sessions 
-            ORDER BY created_at DESC 
-            LIMIT 10
-        ''')
-        sessions = cursor.fetchall()
         
-        if not sessions:
-            print("No previous sessions found.")
+        # Get all scenes with their details
+        cursor.execute("""
+            SELECT act, scene, scene_title, location, time_of_day,
+                   characters_present, scene_purpose, key_events,
+                   emotional_beats, dialogue_notes, plot_threads
+            FROM story_outline 
+            ORDER BY act, scene
+        """)
+        
+        scenes = []
+        for row in cursor.fetchall():
+            # Synthesize a scene description from available fields
+            description_parts = []
+            
+            if row['scene_title']:
+                description_parts.append(f"Title: {row['scene_title']}")
+            
+            if row['location']:
+                description_parts.append(f"Location: {row['location']}")
+                
+            if row['time_of_day']:
+                description_parts.append(f"Time: {row['time_of_day']}")
+            
+            if row['characters_present']:
+                description_parts.append(f"Characters: {row['characters_present']}")
+            
+            if row['scene_purpose']:
+                description_parts.append(f"Purpose: {row['scene_purpose']}")
+            
+            if row['key_events']:
+                description_parts.append(f"Key Events: {row['key_events']}")
+            
+            if row['emotional_beats']:
+                description_parts.append(f"Emotional Beats: {row['emotional_beats']}")
+            
+            if row['dialogue_notes']:
+                description_parts.append(f"Dialogue Notes: {row['dialogue_notes']}")
+            
+            if row['plot_threads']:
+                description_parts.append(f"Plot Threads: {row['plot_threads']}")
+            
+            # Only include scenes that have some content
+            if description_parts:
+                description = "\n".join(description_parts)
+                scenes.append((row['act'], row['scene'], description))
+        
+        return scenes
+    
+    def create_prompt(self, bucket_name, scene_description):
+        """Generate a tailored prompt for each bucket and scene."""
+        # Start with the selected tone
+        intro = PROMPT_TONES[self.prompt_style]
+        
+        # Add easter egg if provided
+        if self.easter_egg:
+            intro += f"\n\n🎁 Writer twist: {self.easter_egg}"
+        
+        # Define bucket-specific expertise
+        bucket_guidance = {
+            "books": """
+You are an expert on screenwriting theory, drawing from acclaimed screenwriting books.
+Provide insights on **structure, pacing, and character arcs**.
+Explain **scene progression within a three-act structure** based on established principles.
+Consider how this scene serves the overall narrative architecture.
+Reference relevant storytelling frameworks and techniques.""",
+            
+            "scripts": """
+You are an expert in romantic comedy screenplays, knowledgeable of the top 100 romcom scripts.
+Compare this scene to **moments from successful romcoms**.
+Suggest effective use of **romcom tropes** with a focus on dialogue, humor, and pacing.
+Identify opportunities for comedic beats, romantic tension, and character chemistry.
+Draw parallels to iconic scenes that achieved similar narrative goals.""",
+            
+            "plays": """
+You are an expert in Shakespearean drama and comedy, deeply familiar with Shakespeare's complete works.
+Analyze the scene through a **Shakespearean lens**, focusing on **character dynamics, irony, heightened language, and themes**.
+Consider how dramatic irony, soliloquies, or asides might enhance the scene.
+Explore universal themes and the interplay between comedy and tragedy.
+Suggest how elevated language could intensify emotional moments."""
+        }
+        
+        # Get the expertise for this bucket
+        expertise = bucket_guidance.get(bucket_name, "Provide creative insights for this scene.")
+        
+        # Construct the full prompt
+        return f"""
+{intro}
+
+### Scene Description:
+{scene_description}
+
+### Task:
+{expertise.strip()}
+
+Please provide specific, actionable suggestions for this scene.
+"""
+    
+    def query_bucket(self, bucket_name, prompt):
+        """Query a specific LightRAG bucket with the prompt."""
+        if bucket_name not in self.lightrag:
+            return f"Bucket '{bucket_name}' not configured."
+        
+        try:
+            print(f"  🔍 Querying {bucket_name} bucket...")
+            response = self.lightrag[bucket_name].query(
+                prompt, 
+                param=QueryParam(mode="mix")
+            )
+            return response
+        except Exception as e:
+            print(f"  ❌ Error querying {bucket_name}: {e}")
+            return f"Error querying {bucket_name}: {str(e)}"
+    
+    def save_response(self, act, scene, description, bucket_name, response):
+        """Save the brainstorming response to the database."""
+        cursor = self.conn.cursor()
+        
+        cursor.execute(f"""
+            INSERT INTO {self.table_name}
+            (act, scene, scene_description, bucket_name, response)
+            VALUES (?, ?, ?, ?, ?)
+        """, (act, scene, description, bucket_name, response))
+        
+        self.conn.commit()
+    
+    def run(self):
+        """Main workflow: process each scene through all buckets."""
+        scenes = self.fetch_all_scenes()
+        
+        if not scenes:
+            print("❌ No scenes found in story outline.")
+            print("   Run 'python3 intake.py' first to add scenes.")
             return
         
-        for i, session in enumerate(sessions, 1):
-            rating = f"⭐{session['quality_rating']}" if session['quality_rating'] else "Not rated"
-            print(f"{i}. {session['session_name']} - {session['created_at']} ({rating})")
-            if session['user_notes']:
-                print(f"   Notes: {session['user_notes']}")
+        print(f"\n📚 Found {len(scenes)} scenes to brainstorm")
+        print(f"🎯 Will query {len(self.lightrag)} knowledge buckets per scene")
+        print("=" * 60)
         
-        print("\\nEnter session number to view details, or press Enter to continue.")
-        choice = input().strip()
+        # Process each scene
+        for act, scene_num, description in scenes:
+            print(f"\n🎬 Act {act}, Scene {scene_num}")
+            print("-" * 40)
+            
+            # Query each bucket for this scene
+            for bucket_name in self.lightrag.keys():
+                # Create tailored prompt
+                prompt = self.create_prompt(bucket_name, description)
+                
+                # Query the bucket
+                response = self.query_bucket(bucket_name, prompt)
+                
+                # Save to database
+                self.save_response(act, scene_num, description, bucket_name, response)
+                
+                # Display the result
+                print(f"\n🧠 Brainstorm ({bucket_name.capitalize()}):")
+                print(response[:500] + "..." if len(response) > 500 else response)
+                print()
         
-        if choice.isdigit():
-            try:
-                session_idx = int(choice) - 1
-                if 0 <= session_idx < len(sessions):
-                    self.show_session_details(sessions[session_idx]['session_name'])
-            except (ValueError, IndexError):
-                pass
+        print("\n" + "=" * 60)
+        print(f"✅ Brainstorming complete!")
+        print(f"📊 Generated {len(scenes) * len(self.lightrag)} creative responses")
+        print(f"💾 Saved to table: {self.table_name}")
     
-    def show_session_details(self, session_name):
-        """Show detailed view of a brainstorming session."""
-        cursor = self.conn.cursor()
-        cursor.execute('''
-            SELECT * FROM brainstorming_sessions 
-            WHERE session_name = ?
-            ORDER BY created_at DESC LIMIT 1
-        ''', (session_name,))
-        session = cursor.fetchone()
-        
-        if session:
-            print(f"\\n📋 Session: {session['session_name']}")
-            print(f"Date: {session['created_at']}")
-            print(f"Tone: {session['tone_preset']}")
-            print(f"Knowledge Used: {session['context_buckets']}")
-            print(f"\\nAI Response:\\n{session['ai_response']}")
-            if session['user_notes']:
-                print(f"\\nYour Notes: {session['user_notes']}")
+    def close(self):
+        """Close database connection."""
+        if self.conn:
+            self.conn.close()
+
+
+def initialize_lightrag_buckets():
+    """Initialize LightRAG instances for each knowledge bucket."""
+    buckets = {}
+    
+    # Define bucket configurations
+    bucket_configs = {
+        "books": "./lightrag_working_dir/books",
+        "scripts": "./lightrag_working_dir/scripts", 
+        "plays": "./lightrag_working_dir/plays"
+    }
+    
+    print("🔧 Initializing LightRAG buckets...")
+    
+    for bucket_name, working_dir in bucket_configs.items():
+        try:
+            # Create directory if it doesn't exist
+            Path(working_dir).mkdir(parents=True, exist_ok=True)
+            
+            # Initialize LightRAG instance
+            buckets[bucket_name] = LightRAG(working_dir=working_dir)
+            print(f"  ✅ {bucket_name}: {working_dir}")
+            
+        except Exception as e:
+            print(f"  ⚠️  {bucket_name}: Failed to initialize - {e}")
+            print(f"      The {bucket_name} bucket will be skipped during brainstorming.")
+    
+    if not buckets:
+        print("\n❌ No LightRAG buckets could be initialized.")
+        print("   Please check your LightRAG installation and configuration.")
+        return None
+    
+    return buckets
 
 
 def main():
-    """Entry point when running as a script."""
-    brainstorm_module = LizzyBrainstorm()
-    brainstorm_module.run()
+    """Entry point for the brainstorming module."""
+    print("🧠 Lizzy Alpha - Brainstorm Module")
+    print("=" * 40)
+    print("AI-powered creative brainstorming for your scenes")
+    print()
+    
+    # Initialize LightRAG buckets
+    lightrag_instances = initialize_lightrag_buckets()
+    
+    if not lightrag_instances:
+        print("Cannot proceed without LightRAG buckets.")
+        return
+    
+    print()
+    
+    # Create brainstorming agent
+    agent = BrainstormingAgent(lightrag_instances)
+    
+    try:
+        # Setup workflow
+        if not agent.setup_project():
+            return
+        
+        agent.select_prompt_style()
+        agent.input_easter_egg()
+        agent.setup_table()
+        
+        # Run brainstorming
+        print("\n🚀 Starting brainstorming process...")
+        agent.run()
+        
+    except KeyboardInterrupt:
+        print("\n\n⏸️  Brainstorming cancelled.")
+    except Exception as e:
+        print(f"\n❌ Error: {e}")
+    finally:
+        agent.close()
+        print("\n👋 Brainstorming session ended.")
 
 
 if __name__ == "__main__":
