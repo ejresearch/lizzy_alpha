@@ -136,16 +136,15 @@ class LizzyIntake:
     def show_character_summary(self):
         """Display current characters in the project."""
         cursor = self.conn.cursor()
-        cursor.execute("SELECT name, role, age, description FROM characters ORDER BY id")
+        cursor.execute("SELECT name, role, description FROM characters ORDER BY id")
         characters = cursor.fetchall()
         
         if characters:
             print("\nCurrent Characters:")
             for char in characters:
                 role = char['role'] or 'Unknown role'
-                age = f", age {char['age']}" if char['age'] else ""
                 desc = f" - {char['description'][:50]}..." if char['description'] else ""
-                print(f"  • {char['name']} ({role}{age}){desc}")
+                print(f"  • {char['name']} ({role}){desc}")
         else:
             print("\nNo characters added yet.")
     
@@ -187,14 +186,11 @@ class LizzyIntake:
         fields = {
             'name': ("Character Name", "Required - The character's full name"),
             'role': ("Role", "protagonist/love_interest/antagonist/mentor/comic_relief/supporting"),
-            'gender': ("Gender", "Character's gender identity"),
-            'age': ("Age", "Numeric age of the character"),
             'description': ("Physical Description", "Appearance, clothing, distinguishing features"),
             'personality_traits': ("Personality Traits", "Key personality characteristics"),
             'backstory': ("Backstory", "Character's history and background"),
             'goals': ("Goals", "What the character wants to achieve"),
             'conflicts': ("Conflicts", "Internal and external conflicts"),
-            'arc': ("Character Arc", "How the character will change/develop"),
             'romantic_challenge': ("🎭 Romantic Challenge", "Essential Trinity: What prevents them from love?"),
             'lovable_trait': ("💝 Lovable Trait", "Essential Trinity: What makes them endearing?"),
             'comedic_flaw': ("😄 Comedic Flaw", "Essential Trinity: What makes them funny?"),
@@ -218,11 +214,7 @@ class LizzyIntake:
                 print("❌ Character name is required for new characters.")
                 return
             
-            # Handle age as integer
-            if field == 'age' and value:
-                if value.isdigit():
-                    new_data[field] = int(value)
-            elif value:  # Only update if value provided
+            if value:  # Only update if value provided
                 new_data[field] = value
             elif not char_id and field == 'name':  # New character needs name
                 print("❌ Character name is required.")
@@ -262,110 +254,7 @@ class LizzyIntake:
         except sqlite3.Error as e:
             print(f"\n❌ Database error: {e}")
     
-    def add_character(self):
-        """Add a new character to the project."""
-        print("\n✨ Adding New Character")
-        
-        name = input("Character name: ").strip()
-        if not name:
-            print("❌ Character name is required.")
-            return
-        
-        # Check if character already exists
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT name FROM characters WHERE name = ?", (name,))
-        if cursor.fetchone():
-            print(f"❌ Character '{name}' already exists.")
-            return
-        
-        print("\\nCharacter roles: protagonist, love_interest, antagonist, mentor, comic_relief, supporting, obstacle")
-        role = input("Role: ").strip()
-        
-        gender = input("Gender: ").strip()
-        
-        age_str = input("Age (number): ").strip()
-        age = None
-        if age_str.isdigit():
-            age = int(age_str)
-        
-        description = input("Brief description: ").strip()
-        personality = input("Personality traits: ").strip()
-        backstory = input("Backstory: ").strip()
-        goals = input("Character goals: ").strip()
-        conflicts = input("Internal/external conflicts: ").strip()
-        arc = input("Character arc/development: ").strip()
-        notes = input("Additional notes: ").strip()
-        
-        try:
-            cursor.execute('''
-                INSERT INTO characters 
-                (name, role, gender, age, description, personality_traits, backstory, goals, conflicts, arc, notes)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (name, role, gender, age, description, personality, backstory, goals, conflicts, arc, notes))
-            
-            self.conn.commit()
-            print(f"✅ Added character: {name}")
-            
-        except sqlite3.Error as e:
-            print(f"❌ Error adding character: {e}")
     
-    def edit_character(self):
-        """Edit an existing character."""
-        cursor = self.conn.cursor()
-        cursor.execute("SELECT id, name FROM characters ORDER BY name")
-        characters = cursor.fetchall()
-        
-        if not characters:
-            print("No characters to edit.")
-            return
-        
-        print("\\nSelect character to edit:")
-        for i, char in enumerate(characters, 1):
-            print(f"  {i}. {char['name']}")
-        
-        try:
-            choice = int(input("Enter number: ")) - 1
-            if 0 <= choice < len(characters):
-                char_id = characters[choice]['id']
-                char_name = characters[choice]['name']
-                
-                # Get current character data
-                cursor.execute("SELECT * FROM characters WHERE id = ?", (char_id,))
-                char_data = cursor.fetchone()
-                
-                print(f"\\nEditing: {char_name}")
-                print("(Press Enter to keep current value)")
-                
-                # Update fields
-                updates = {}
-                fields = ['role', 'gender', 'age', 'description', 'personality_traits', 
-                         'backstory', 'goals', 'conflicts', 'arc', 'notes']
-                
-                for field in fields:
-                    current = char_data[field] or ""
-                    prompt = f"{field.replace('_', ' ').title()} [{current}]: "
-                    new_value = input(prompt).strip()
-                    if new_value:
-                        if field == 'age' and new_value.isdigit():
-                            updates[field] = int(new_value)
-                        else:
-                            updates[field] = new_value
-                
-                if updates:
-                    # Build update query
-                    set_clause = ", ".join([f"{field} = ?" for field in updates.keys()])
-                    values = list(updates.values()) + [char_id]
-                    
-                    cursor.execute(f"UPDATE characters SET {set_clause}, updated_at = CURRENT_TIMESTAMP WHERE id = ?", values)
-                    self.conn.commit()
-                    print(f"✅ Updated character: {char_name}")
-                else:
-                    print("No changes made.")
-            else:
-                print("❌ Invalid selection.")
-                
-        except (ValueError, IndexError):
-            print("❌ Invalid input.")
     
     def delete_character(self):
         """Delete a character."""
@@ -659,45 +548,7 @@ class LizzyIntake:
         print(f"✅ Added {added_count} scene placeholders.")
         print("You can now edit each scene to add details.")
     
-    def manage_world_building(self):
-        """Manage world-building and setting elements."""
-        print("\\n🌍 World Building & Setting")
-        print("Add locations, cultures, rules, history, and other world elements.")
-        
-        # This is a simplified version - can be expanded
-        category = input("Category (location/culture/rules/history/other): ").strip()
-        name = input("Name: ").strip()
-        description = input("Description: ").strip()
-        importance = input("Importance (major/minor/background): ").strip()
-        notes = input("Notes: ").strip()
-        
-        if name:
-            cursor = self.conn.cursor()
-            cursor.execute('''
-                INSERT INTO world_building (category, name, description, importance, notes)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (category, name, description, importance, notes))
-            self.conn.commit()
-            print(f"✅ Added world element: {name}")
     
-    def manage_research(self):
-        """Manage research and reference materials."""
-        print("\\n📚 Research & References")
-        
-        category = input("Category (genre/historical/technical/other): ").strip()
-        topic = input("Topic: ").strip()
-        source = input("Source: ").strip()
-        content = input("Content/Notes: ").strip()
-        relevance = input("Relevance to story: ").strip()
-        
-        if topic:
-            cursor = self.conn.cursor()
-            cursor.execute('''
-                INSERT INTO research (category, topic, source, content, relevance)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (category, topic, source, content, relevance))
-            self.conn.commit()
-            print(f"✅ Added research item: {topic}")
     
     def set_project_goals(self):
         """Set project goals and themes."""
@@ -745,18 +596,14 @@ class LizzyIntake:
                 print(f"\n[Character #{char['id']}]")
                 print(f"  Name: {char['name'] or 'N/A'}")
                 print(f"  Role: {char['role'] or 'N/A'}")
-                print(f"  Gender: {char['gender'] or 'N/A'}")
-                print(f"  Age: {char['age'] or 'N/A'}")
                 print(f"  Description: {char['description'] or 'N/A'}")
                 print(f"  Personality: {char['personality_traits'] or 'N/A'}")
                 print(f"  Backstory: {char['backstory'] or 'N/A'}")
                 print(f"  Goals: {char['goals'] or 'N/A'}")
                 print(f"  Conflicts: {char['conflicts'] or 'N/A'}")
-                print(f"  Arc: {char['arc'] or 'N/A'}")
                 print(f"  🎭 Romantic Challenge: {char['romantic_challenge'] or 'N/A'}")
                 print(f"  💝 Lovable Trait: {char['lovable_trait'] or 'N/A'}")
                 print(f"  😄 Comedic Flaw: {char['comedic_flaw'] or 'N/A'}")
-                print(f"  Notes: {char['notes'] or 'N/A'}")
                 print("-" * 40)
         else:
             print("  (No characters created yet)")
@@ -846,15 +693,6 @@ class LizzyIntake:
         scene_count = cursor.fetchone()[0]
         print(f"\\nScenes outlined: {scene_count}")
         
-        # World building count
-        cursor.execute("SELECT COUNT(*) FROM world_building")
-        world_count = cursor.fetchone()[0]
-        print(f"World elements: {world_count}")
-        
-        # Research count
-        cursor.execute("SELECT COUNT(*) FROM research")
-        research_count = cursor.fetchone()[0]
-        print(f"Research items: {research_count}")
         
         print("\\n✨ Ready for brainstorming and writing!")
 

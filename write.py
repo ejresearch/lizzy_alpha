@@ -340,9 +340,104 @@ class LizzyWrite:
         
         return "\\n".join(context_parts)
     
+    def get_prev_scene_text(self, act: int, scene: int) -> str:
+        """Return finalized text for previous scene (or empty)."""
+        cursor = self.conn.cursor()
+        # Same act, previous scene
+        cursor.execute("""
+            SELECT final_text FROM finalized_scenes
+            WHERE act = ? AND scene = ?
+            LIMIT 1
+        """, (act, scene - 1))
+        row = cursor.fetchone()
+        if row and row[0]:
+            return row[0]
+
+        # If first scene of act, try last scene of previous act
+        if scene == 1 and act > 1:
+            cursor.execute("""
+                SELECT final_text FROM finalized_scenes
+                WHERE act = ?
+                ORDER BY scene DESC
+                LIMIT 1
+            """, (act - 1,))
+            row = cursor.fetchone()
+            if row and row[0]:
+                return row[0]
+
+        return ""
+
+    def get_next_scene_outline_desc(self, act: int, scene: int) -> str:
+        """Return outline description for next scene (or empty)."""
+        cursor = self.conn.cursor()
+
+        # Same act, next scene
+        cursor.execute("""
+            SELECT scene_title, location, time_of_day, characters_present, scene_purpose,
+                   key_events, emotional_beats, dialogue_notes, beat, nudge, plot_threads, notes
+            FROM story_outline
+            WHERE act = ? AND scene = ?
+            LIMIT 1
+        """, (act, scene + 1))
+        row = cursor.fetchone()
+        if not row and act:  # first scene of next act
+            cursor.execute("""
+                SELECT scene_title, location, time_of_day, characters_present, scene_purpose,
+                       key_events, emotional_beats, dialogue_notes, beat, nudge, plot_threads, notes
+                FROM story_outline
+                WHERE act = ?
+                ORDER BY scene ASC
+                LIMIT 1
+            """, (act + 1,))
+            row = cursor.fetchone()
+
+        if not row:
+            return ""
+
+        # Build description from row data
+        parts = []
+        if row['scene_title']: parts.append(f"Title: {row['scene_title']}")
+        if row['location']: parts.append(f"Location: {row['location']}")
+        if row['time_of_day']: parts.append(f"Time: {row['time_of_day']}")
+        if row['characters_present']: parts.append(f"Characters: {row['characters_present']}")
+        if row['scene_purpose']: parts.append(f"Purpose: {row['scene_purpose']}")
+        if row['key_events']: parts.append(f"Key Events: {row['key_events']}")
+        if row['emotional_beats']: parts.append(f"Emotional Beats: {row['emotional_beats']}")
+        if row['dialogue_notes']: parts.append(f"Dialogue Notes: {row['dialogue_notes']}")
+        if row['beat']: parts.append(f"Story Beat: {row['beat']}")
+        if row['nudge']: parts.append(f"Direction: {row['nudge']}")
+        if row['plot_threads']: parts.append(f"Plot Threads: {row['plot_threads']}")
+        if row['notes']: parts.append(f"Notes: {row['notes']}")
+        return "\\n".join(parts)
+
+    def make_outline_snapshot(self, scenes: List[Dict], current_act: int, current_scene: int, max_chars: int = 1200) -> str:
+        """
+        Return a compact 'full outline' snapshot (one line per scene), 
+        highlighting the current scene. Truncate to max_chars.
+        """
+        lines = []
+        for s in scenes:
+            tag = ">>" if (s["act"] == current_act and s["scene"] == current_scene) else "  "
+            title = s.get("scene_title") or "Untitled"
+            lines.append(f"{tag} Act {s['act']}, Scene {s['scene']} — {title}")
+        snapshot = "\\n".join(lines)
+        if len(snapshot) > max_chars:
+            snapshot = snapshot[:max_chars] + "\\n...[truncated]"
+        return snapshot
+
+    def summarize_prev_if_long(self, text: str, max_chars: int = 2500) -> str:
+        """Hard truncate to stay token-safe for Claude; optionally replace with a short note if empty."""
+        if not text:
+            return "(No previous scene available.)"
+        return text[:max_chars] + ("..." if len(text) > max_chars else "")
+    
     def build_scene_prompt(self, metadata: Dict, characters: List[Dict], 
-                          scene: Dict, brainstorm_context: Optional[str]) -> str:
-        """Build comprehensive prompt for scene generation."""
+                          scene: Dict, brainstorm_context: Optional[str],
+                          outline_snapshot: str = "", prev_scene_text: str = "", 
+                          next_scene_desc: str = "",
+                          style_primary: str = None, style_secondary: str = None,
+                          min_words: int = 700, max_words: int = 900) -> str:
+        """Build comprehensive prompt for scene generation with full continuity context."""
         
         # Project context
         title = metadata.get('project_name', self.project_name or 'Untitled Project')
@@ -378,55 +473,65 @@ class LizzyWrite:
         # Scene context
         scene_context = self.synthesize_scene_context(scene)
         
-        # Bucket guidance
-        bucket_sections = []
-        if self.bucket_guidance:
-            for bucket, guidance in self.bucket_guidance.items():
-                bucket_sections.append(f"[{bucket.upper()} GUIDANCE]: {guidance}")
+        # Style configuration
+        style_primary = style_primary or self.writing_style
+        style_secondary = style_secondary or ""
+        style_blend = f"{style_primary}" + (f" + {style_secondary}" if style_secondary else "")
         
-        bucket_context = "\\n".join(bucket_sections) if bucket_sections else ""
-        
-        # Style guidance
-        style_instructions = {
-            "cinematic": "Write in cinematic prose - visual, action-focused, like a screenplay in narrative form. Show through action and dialogue.",
-            "literary": "Write in rich, literary prose with deep character interiority and symbolic depth.",
-            "commercial": "Write in accessible, fast-paced commercial style with snappy dialogue and clear emotions.",
-            "minimalist": "Write in lean, understated prose focused on subtext and what's left unsaid."
-        }
-        
-        style_guide = style_instructions.get(self.writing_style, style_instructions["cinematic"])
+        # Continuity locks from metadata
+        pov = metadata.get("pov", "third-person limited")
+        tense = metadata.get("tense", "past")
         
         # Easter egg
-        easter_egg_line = f"\\nEaster egg to weave in: {self.easter_egg}" if self.easter_egg else ""
+        easter_egg_line = f"\\n- Easter egg to weave in: {self.easter_egg}" if self.easter_egg else ""
         
         prompt = f"""PROJECT: {title}
 GENRE: {genre}
 
-CHARACTERS:
+CONTINUITY LOCKS (must not change):
+- POV: {pov} | Tense: {tense}
+- Names & spelling: Use exactly as in CHARACTERS.
+- Setting/time for this scene must match SCENE CONTEXT.
+
+CHARACTERS
 {chr(10).join(char_summaries) if char_summaries else '(No characters defined)'}
 
-SCENE CONTEXT:
+SCENE CONTEXT
 Act {scene['act']}, Scene {scene['scene']}
 {scene_context}
 
-{bucket_context}
+CONTINUITY CONTEXT
+- Previous Scene Text (for tone/voice/emotional carry-over):
+{prev_scene_text}
 
-BRAINSTORMING CONTEXT (for inspiration, don't copy verbatim):
+- Outline Snapshot (full structure, current marked with ">>"):
+{outline_snapshot}
+
+- Next Scene Description (for pacing/foreshadowing alignment):
+{next_scene_desc if next_scene_desc else '(No next scene listed.)'}
+
+BRAINSTORMING CONTEXT (for inspiration, do not copy verbatim):
 {brainstorm_context or '(No brainstorming context available)'}
 
-WRITING STYLE: {style_guide}
-TONE: {self.tone}
-GOAL: {self.goal}{easter_egg_line}
+STYLE & TARGET
+- Style blend: {style_blend}
+- Tone: {self.tone or 'engaging'}
+- Target length: {min_words}-{max_words} words{easter_egg_line}
 
-TASK:
-Write this scene as polished, production-ready prose. Focus on:
-- Concrete, visual writing that shows rather than tells
-- Authentic dialogue with distinct character voices
-- Clear emotional beats that advance the story
-- Proper pacing and rhythm
-- Scene structure that serves the larger narrative
+DO
+- Keep POV/tense and SCENE CONTEXT facts invariant.
+- Maintain continuity with the previous scene's emotional and dialogue tone.
+- Build toward the next scene (subtle foreshadowing, preserve open threads).
+- Use distinct character voices, subtext, and concrete action.
+- Structure beats implicitly in prose: Objective → Obstacle → Turn → Decision → Button.
 
-Output ONLY the scene content as flowing prose (no scene headers or formatting).
+DON'T
+- No scene headers or lists; output prose only.
+- Do not quote or closely paraphrase brainstorm text.
+- Do not introduce new named characters or revise canon facts.
+
+TASK
+Silently make a brief internal plan, then write ONE continuous, production-ready scene in polished prose that advances stakes and arcs while honoring all locks and continuity. Output the scene text only.
 """
         
         return prompt.strip()
@@ -512,9 +617,12 @@ Output ONLY the scene content as flowing prose (no scene headers or formatting).
             print("⚠️  No finalized scenes to export")
             return
         
-        # Create output directory
-        output_dir = self.base_dir / self.project_name / "outputs"
-        output_dir.mkdir(exist_ok=True)
+        # Export to Desktop
+        desktop_path = Path.home() / "Desktop"
+        if not desktop_path.exists():
+            # Fallback to project directory if Desktop doesn't exist
+            desktop_path = self.base_dir / self.project_name / "outputs"
+            desktop_path.mkdir(exist_ok=True)
         
         # Generate timestamp for version
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -529,14 +637,14 @@ Output ONLY the scene content as flowing prose (no scene headers or formatting).
         
         full_text = "\\n\\n".join(full_text_parts)
         
-        # Export text file
-        txt_file = output_dir / f"{self.project_name}_full_script_{timestamp}.txt"
+        # Export text file to Desktop
+        txt_file = desktop_path / f"{self.project_name}_full_script_{timestamp}.txt"
         with open(txt_file, 'w', encoding='utf-8') as f:
             f.write(f"{title}\\n{'='*len(title)}\\n\\n")
             f.write(full_text)
         
-        # Export markdown file with outline
-        md_file = output_dir / f"{self.project_name}_script_{timestamp}.md"
+        # Export markdown file with outline to Desktop
+        md_file = desktop_path / f"{self.project_name}_script_{timestamp}.md"
         with open(md_file, 'w', encoding='utf-8') as f:
             f.write(f"# {title}\\n\\n")
             
@@ -551,9 +659,10 @@ Output ONLY the scene content as flowing prose (no scene headers or formatting).
                         f.write(f"- **Setting:** {scene.get('location', '')} / {scene.get('time_of_day', '')}\\n")
                     f.write("\\n")
         
-        print(f"\\n📄 Exported complete script:")
-        print(f"  Text: {txt_file}")
-        print(f"  Markdown: {md_file}")
+        print(f"\\n✅ 📄 Script automatically saved to Desktop:")
+        print(f"  Text: {txt_file.name}")
+        print(f"  Markdown: {md_file.name}")
+        print(f"  Location: {desktop_path}")
     
     def run(self):
         """Main writing workflow."""
@@ -595,8 +704,23 @@ Output ONLY the scene content as flowing prose (no scene headers or formatting).
             if brainstorm_table:
                 brainstorm_context = self.get_brainstorm_for_scene(brainstorm_table, act, scene_num)
             
-            # Build prompt
-            prompt = self.build_scene_prompt(metadata, characters, scene, brainstorm_context)
+            # Get continuity context
+            prev_text_raw = self.get_prev_scene_text(act, scene_num)
+            prev_text = self.summarize_prev_if_long(prev_text_raw)
+            
+            outline_snap = self.make_outline_snapshot(scenes, act, scene_num)
+            next_desc = self.get_next_scene_outline_desc(act, scene_num)
+            
+            # Build prompt with full continuity
+            prompt = self.build_scene_prompt(
+                metadata, characters, scene, brainstorm_context,
+                outline_snapshot=outline_snap,
+                prev_scene_text=prev_text,
+                next_scene_desc=next_desc,
+                style_primary=self.writing_style,
+                style_secondary=None,
+                min_words=700, max_words=900
+            )
             
             # Generate scene
             try:
@@ -614,14 +738,14 @@ Output ONLY the scene content as flowing prose (no scene headers or formatting).
             except Exception as e:
                 print(f"❌ Error writing Act {act}, Scene {scene_num}: {e}")
         
-        # Export complete script
+        # Automatically export complete script to Desktop
         if scenes_written > 0:
             print(f"\\n🎉 Writing session complete!")
             print(f"📊 Wrote {scenes_written} of {len(scenes)} scenes")
             
-            export_choice = input("\\nExport complete script? (y/N): ").strip().lower()
-            if export_choice in ['y', 'yes']:
-                self.export_full_script(scenes, metadata)
+            # Auto-export to Desktop
+            print("\\n📝 Automatically exporting to Desktop...")
+            self.export_full_script(scenes, metadata)
         else:
             print("\\n❌ No scenes were successfully written")
     

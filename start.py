@@ -103,171 +103,95 @@ class LizzyStart:
                     continue
     
     def setup_database(self):
-        """Initialize SQLite database with comprehensive schema for writing projects."""
+        """Initialize ONLY the tables needed by brainstorm.py and write.py."""
         print("🗄️  Setting up project database...")
-        
+
         try:
             self.conn = sqlite3.connect(self.db_path)
             cursor = self.conn.cursor()
-            
-            # Enable foreign keys
             cursor.execute("PRAGMA foreign_keys = ON")
-            
-            # Project metadata table
-            cursor.execute('''
+
+            # 1) Project metadata
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS project_metadata (
                     key TEXT PRIMARY KEY,
                     value TEXT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
-            ''')
-            
-            # Characters table - core story elements
-            cursor.execute('''
+            """)
+
+            # 2) Characters (only fields write.py reads)
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS characters (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL UNIQUE,
-                    role TEXT,  -- protagonist, antagonist, supporting, etc.
-                    gender TEXT,
-                    age INTEGER,
+                    role TEXT,
                     description TEXT,
                     personality_traits TEXT,
                     backstory TEXT,
                     goals TEXT,
                     conflicts TEXT,
-                    arc TEXT,  -- character development arc
-                    romantic_challenge TEXT,  -- from legacy Miranda system
-                    lovable_trait TEXT,       -- from legacy Miranda system  
-                    comedic_flaw TEXT,        -- from legacy Miranda system
-                    notes TEXT,
+                    romantic_challenge TEXT,
+                    lovable_trait TEXT,
+                    comedic_flaw TEXT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
-            ''')
-            
-            # Story structure/outline table
-            cursor.execute('''
+            """)
+
+            # 3) Story outline (expanded for 30-scene structure)
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS story_outline (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     act INTEGER NOT NULL,
                     scene INTEGER NOT NULL,
+                    beat TEXT,
                     scene_title TEXT,
                     location TEXT,
                     time_of_day TEXT,
-                    characters_present TEXT,  -- JSON or comma-separated
-                    scene_purpose TEXT,  -- setup, conflict, resolution, etc.
+                    characters_present TEXT,
+                    scene_purpose TEXT,
                     key_events TEXT,
-                    key_characters TEXT,  -- from legacy systems
-                    beat TEXT,            -- from legacy Lizzy system
-                    nudge TEXT,           -- from legacy Lizzy system
+                    key_characters TEXT,
+                    nudge TEXT,
                     emotional_beats TEXT,
                     dialogue_notes TEXT,
-                    plot_threads TEXT,  -- subplots being advanced
+                    plot_threads TEXT,
                     notes TEXT,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     UNIQUE(act, scene)
                 )
-            ''')
-            
-            # World-building/setting table
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS world_building (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    category TEXT NOT NULL,  -- location, culture, rules, history, etc.
-                    name TEXT NOT NULL,
-                    description TEXT,
-                    importance TEXT,  -- major, minor, background
-                    related_characters TEXT,
-                    related_scenes TEXT,
-                    notes TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            # Brainstorming sessions table
-            cursor.execute('''
+            """)
+
+            # 4) Brainstorming sessions (minimal columns actually written)
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS brainstorming_sessions (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     session_name TEXT,
                     prompt TEXT,
-                    context_buckets TEXT,  -- LightRAG buckets used
                     tone_preset TEXT,
-                    ai_response TEXT,
-                    user_notes TEXT,
-                    quality_rating INTEGER,  -- 1-5 scale
-                    used_in_draft BOOLEAN DEFAULT FALSE,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
-            ''')
-            
-            # Ideas and inspiration table
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS ideas (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    category TEXT,  -- dialogue, scene, character, plot, theme, etc.
-                    title TEXT,
-                    content TEXT,
-                    source TEXT,  -- brainstorming, research, inspiration, etc.
-                    tags TEXT,  -- searchable keywords
-                    priority TEXT,  -- high, medium, low
-                    status TEXT,  -- new, in_progress, used, discarded
-                    related_elements TEXT,  -- links to characters, scenes, etc.
-                    notes TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            # Draft versions table
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS drafts (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    version INTEGER NOT NULL,
-                    title TEXT,
-                    content TEXT,
-                    word_count INTEGER,
-                    summary TEXT,
-                    completion_status TEXT,  -- outline, first_draft, revision, final
-                    notes TEXT,
-                    brainstorm_session_ids TEXT,  -- references to brainstorming used
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            # Research and reference materials
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS research (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    category TEXT,  -- genre_conventions, historical_facts, technical_details, etc.
-                    topic TEXT,
-                    source TEXT,
-                    content TEXT,
-                    relevance TEXT,
-                    notes TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            # Legacy-compatible scene drafts table
-            cursor.execute('''
+            """)
+
+            # 5) Scene drafts (draft_id must be TEXT to match write.py)
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS scene_drafts (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     act INTEGER NOT NULL,
                     scene INTEGER NOT NULL,
-                    draft_id INTEGER,  -- for legacy compatibility
+                    draft_id TEXT,
                     draft_text TEXT,
-                    feedback TEXT,
                     version INTEGER DEFAULT 1,
                     status TEXT DEFAULT 'draft',
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 )
-            ''')
-            
-            # Legacy-compatible finalized scenes
-            cursor.execute('''
+            """)
+
+            # 6) Finalized scenes
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS finalized_scenes (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     act INTEGER NOT NULL,
@@ -277,86 +201,94 @@ class LizzyStart:
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     UNIQUE(act, scene)
                 )
-            ''')
-            
-            # Legacy brainstorming log
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS brainstorming_log (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    question TEXT NOT NULL,
-                    user_response TEXT NOT NULL,
-                    act INTEGER,
-                    scene INTEGER,
-                    bucket_name TEXT,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            # Legacy brainstorming synthesis
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS brainstorming_synthesis (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    question TEXT NOT NULL,
-                    user_response TEXT NOT NULL,
-                    synthesis TEXT NOT NULL,
-                    act INTEGER,
-                    scene INTEGER,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            # Writing goals and progress tracking
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS progress_tracking (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    date DATE DEFAULT CURRENT_DATE,
-                    words_written INTEGER DEFAULT 0,
-                    scenes_completed INTEGER DEFAULT 0,
-                    characters_developed INTEGER DEFAULT 0,
-                    goals_met TEXT,
-                    challenges_faced TEXT,
-                    next_session_plan TEXT,
-                    mood_rating INTEGER,  -- 1-5 scale
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            ''')
-            
-            # Insert initial project metadata
-            cursor.execute('''
+            """)
+
+            # Minimal indexes used by access patterns
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_characters_name ON characters(name)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_story_outline_act_scene ON story_outline(act, scene)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_scene_drafts_act_scene ON scene_drafts(act, scene)")
+            cursor.execute("CREATE INDEX IF NOT EXISTS idx_finalized_scenes_act_scene ON finalized_scenes(act, scene)")
+
+            # Seed metadata
+            cursor.execute("""
                 INSERT OR REPLACE INTO project_metadata (key, value, updated_at)
                 VALUES ('project_name', ?, CURRENT_TIMESTAMP)
-            ''', (self.project_name,))
-            
-            cursor.execute('''
+            """, (self.project_name,))
+
+            cursor.execute("""
                 INSERT OR REPLACE INTO project_metadata (key, value, updated_at)
                 VALUES ('created_date', ?, CURRENT_TIMESTAMP)
-            ''', (datetime.now().isoformat(),))
-            
-            cursor.execute('''
+            """, (datetime.now().isoformat(),))
+
+            cursor.execute("""
                 INSERT OR REPLACE INTO project_metadata (key, value, updated_at)
                 VALUES ('lizzy_version', ?, CURRENT_TIMESTAMP)
-            ''', ('alpha_1.0',))
-            
-            # Create useful indexes for performance
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_characters_name ON characters(name)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_story_outline_act_scene ON story_outline(act, scene)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_brainstorming_sessions_date ON brainstorming_sessions(created_at)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_ideas_category ON ideas(category)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_ideas_status ON ideas(status)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_drafts_version ON drafts(version)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_scene_drafts_act_scene ON scene_drafts(act, scene)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_brainstorming_log_act_scene ON brainstorming_log(act, scene)')
-            cursor.execute('CREATE INDEX IF NOT EXISTS idx_finalized_scenes_act_scene ON finalized_scenes(act, scene)')
-            
+            """, ('alpha_1.0',))
+
             self.conn.commit()
             print("✅ Database schema initialized successfully")
             
+            # Populate 30-scene professional structure
+            self.populate_30_scene_template(cursor)
+
         except sqlite3.Error as e:
             print(f"❌ Database error: {e}")
             raise
         except Exception as e:
             print(f"❌ Unexpected error: {e}")
             raise
+    
+    def populate_30_scene_template(self, cursor):
+        """Populate the story_outline table with the professional 30-scene structure."""
+        print("📝 Populating 30-scene professional template...")
+        
+        # Complete 30-scene romantic comedy structure from professional template
+        template_scenes = [
+            # Act 1 (12 scenes)
+            (1, 1, "Opening Image", "Chemical Equation", "Establish the world and protagonist starting point"),
+            (1, 2, "Theme Stated", "Emotional Baseline", "Introduce the theme through dialogue or action"),
+            (1, 3, "Set-Up", "Meet Cute", "The moment when romantic leads first encounter each other"),
+            (1, 4, "Set-Up", "Meet Cute", "Initial romantic spark that creates future romantic momentum"),
+            (1, 5, "Catalyst", "Stacsis", "Show the characters need to leave their normal routines"),
+            (1, 6, "Catalyst", "Get Out", "Show an event that disrupts the normal routines"),
+            (1, 7, "Debate", "Romantic Complication", "Why they can't and won't fall for each other (or legendary)"),
+            (1, 8, "Debate", "Romantic Complication", "One of the main characters denies their feelings (legendary)"),
+            (1, 9, "Break Into Two", "Best Bet", "Dramatic pressure at deadline (imminent)"),
+            (1, 10, "Break Into Two", "Best Bet", "The most obvious solution to the deadline (imminent)"),
+            (1, 11, "B Story", "Complication/Tension Rise", "Second lead's reveal (in romantic comedies imminent)"),
+            (1, 12, "B Story", "First Revelation", "Characters begin seeing how things (love actually) work"),
+            
+            # Act 2 (12 scenes)  
+            (2, 13, "Fun & Games / Falling in", "Messages or series of bonding moments", "Main characters learning about their charged past things"),
+            (2, 14, "Fun & Games / Falling in", "Subplot Hero", "Subplot characters learn about bonding moments"),
+            (2, 15, "Fun & Games / Falling in", "Magicful Heart", "The sense of connection or about their charged and thing"),
+            (2, 16, "Fun & Games / Falling in", "Magicful Heart", "Making realizations or about their charged and thing"),
+            (2, 17, "Midpoint/Romantic Turning Rise", "Relationship Pause Day", "Obvious realizations or relationship appears destined"),
+            (2, 18, "Midpoint/Romantic Turning Rise", "Extraordinary Turning Rise", "Characters being about their feelings - false"),
+            (2, 19, "Lost Soul", "Lost Soul", "All seems lost - the relationship appears doomed"),
+            (2, 20, "Lost Soul", "Lost Soul", "A misstatement - about their charged and thing (internal)"),
+            (2, 21, "Self-Revelation", "Self-Revelation", "Confronting an awful moment (or hero's worst things)"),
+            (2, 22, "Self-Revelation", "Self-Revelation", "New understanding of love and what charged message"),
+            (2, 23, "Psychological Turning Rise", "Fun", "Putting the new understanding (or love) into theory"),
+            (2, 24, "Break into Three", "Extraordinary Turning Rise", "New understanding of love and what charged message"),
+            
+            # Act 3 (6 scenes)
+            (3, 25, "Finale", "Climatic Interaction", "The characters seem back together destined"),
+            (3, 26, "Finale", "New High, New Higher, New High", "New challenging information or series about destined"),
+            (3, 27, "Finale", "Proof & Revelation", "The breakthrough romantic scene that paid changed"),
+            (3, 28, "Finale", "Proof & Revelation", "Confronting romantic issue that they paid charged"),
+            (3, 29, "Final Image", "Final Chemical Equation", "Any ending note - image, line, hit text book charged"),
+            (3, 30, "Final Image", "Final Chemical Equation", "The final note closing out what we've about/witnessed")
+        ]
+        
+        for act, scene, beat, scene_title, description in template_scenes:
+            cursor.execute("""
+                INSERT OR REPLACE INTO story_outline 
+                (act, scene, beat, scene_title, scene_purpose, notes, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            """, (act, scene, beat, scene_title, description, "Professional 30-scene template"))
+        
+        print("✅ 30-scene template populated successfully")
     
     def get_project_info(self):
         """Return basic project information."""
@@ -376,7 +308,7 @@ class LizzyStart:
         cursor.execute('SELECT COUNT(*) FROM brainstorming_sessions')
         brainstorm_count = cursor.fetchone()[0]
         
-        cursor.execute('SELECT COUNT(*) FROM drafts')
+        cursor.execute('SELECT COUNT(*) FROM scene_drafts')
         draft_count = cursor.fetchone()[0]
         
         return {
@@ -418,7 +350,7 @@ def create_new_project(project_name, title=None, genre="Romance", tone="Romantic
         project_dir.mkdir(exist_ok=True)
         
         # Set database path
-        start_module.db_path = project_dir / f"{sanitized_name}.db"
+        start_module.db_path = project_dir / f"{sanitized_name}.sqlite"
         
         # Initialize database
         start_module.setup_database()

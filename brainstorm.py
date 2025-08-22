@@ -22,14 +22,22 @@ except ImportError:
     exit(1)
 
 
-# Define prompt tones for different narrative styles
-PROMPT_TONES = {
-    "cheesy-romcom": "Write this scene as if it's from a bubbly, cliché-filled romantic comedy full of silly misunderstandings and charm.",
-    "romantic-dramedy": "Write this scene like it's a grounded romantic dramedy—funny but heartfelt, with honest emotional tension and subtle humor.",
-    "shakespearean-romance": "Craft this scene in the style of a Shakespearean romantic comedy—rich in language, irony, and poetic flare.",
-    "literary-fiction": "Write this scene with literary depth—focus on internal character psychology, symbolism, and nuanced emotional exploration.",
-    "thriller-romance": "Write this scene as a romantic thriller—tension, danger, and passion intertwined with suspenseful pacing."
-}
+# Define the golden era romcom tone for all brainstorming
+GOLDEN_ERA_ROMCOM_TONE = """You are brainstorming a romantic comedy that will revive the golden era of the genre—think When Harry Met Sally, You've Got Mail, Pretty Woman, Sleepless in Seattle, and Notting Hill. 
+
+This means crafting scenes with:
+• **Genuine emotional stakes** - Characters we deeply care about facing real vulnerabilities, not just manufactured obstacles
+• **Witty, quotable dialogue** - Sharp, intelligent banter that reveals character while advancing the story, not just filler jokes
+• **Earned romantic moments** - Chemistry that builds through meaningful interaction, not just physical attraction or coincidence
+• **Universal yet specific conflicts** - Problems that feel both deeply personal and widely relatable (career vs. love, timing, class differences, emotional baggage)
+• **The "why them?" factor** - Clear reasons why THESE TWO PEOPLE specifically need each other to become their best selves
+• **Memorable set pieces** - Iconic scenes that become cultural touchstones (the deli scene, the Empire State Building, the bookshop)
+• **Heart over hijinks** - Comedy arising from character truth and situation, not slapstick or embarrassment
+• **The yearning** - That delicious tension where the audience desperately wants them together but understands exactly why they're apart
+
+Avoid modern romcom pitfalls: manufactured misunderstandings that could be solved with one conversation, protagonists who are horrible to each other, comedy based on humiliation, or relationships with no foundation beyond "hot people in proximity."
+
+Instead, create something audiences will rewatch for decades—where every scene either deepens character, advances the relationship, or ideally both. Make us laugh, make us cry, make us believe in love again."""
 
 
 class BrainstormingAgent:
@@ -51,7 +59,6 @@ class BrainstormingAgent:
         self.project_name = None
         self.db_path = None
         self.conn = None
-        self.prompt_style = None
         self.easter_egg = ""
         self.table_name = None
         
@@ -90,29 +97,6 @@ class BrainstormingAgent:
             else:
                 print("❌ Project not found. Please enter a valid project name.")
     
-    def select_prompt_style(self):
-        """Let user choose a narrative tone for brainstorming."""
-        print("\n🎭 Choose a prompt tone:")
-        
-        tone_list = list(PROMPT_TONES.keys())
-        for i, key in enumerate(tone_list, 1):
-            # Format the key nicely for display
-            display_name = key.replace('-', ' ').title()
-            print(f"  {i}. {display_name}")
-        
-        while True:
-            try:
-                choice = input(f"\nEnter choice (1-{len(tone_list)}): ").strip()
-                choice_idx = int(choice) - 1
-                
-                if 0 <= choice_idx < len(tone_list):
-                    self.prompt_style = tone_list[choice_idx]
-                    print(f"✅ Selected: {self.prompt_style.replace('-', ' ').title()}")
-                    break
-                else:
-                    print(f"❌ Please enter a number between 1 and {len(tone_list)}")
-            except ValueError:
-                print("❌ Please enter a valid number")
     
     def input_easter_egg(self):
         """Optional creative twist or constraint for the brainstorming."""
@@ -178,7 +162,7 @@ class BrainstormingAgent:
         """, (
             f"Session {self.table_name}",
             self.easter_egg or "No easter egg",
-            self.prompt_style
+            "golden-era-romcom"
         ))
         
         self.conn.commit()
@@ -238,8 +222,8 @@ class BrainstormingAgent:
     
     def create_prompt(self, bucket_name, scene_description):
         """Generate a tailored prompt for each bucket and scene."""
-        # Start with the selected tone
-        intro = PROMPT_TONES[self.prompt_style]
+        # Start with the golden era romcom tone
+        intro = GOLDEN_ERA_ROMCOM_TONE
         
         # Add easter egg if provided
         if self.easter_egg:
@@ -416,7 +400,6 @@ def main():
         if not agent.setup_project():
             return
         
-        agent.select_prompt_style()
         agent.input_easter_egg()
         agent.setup_table()
         
