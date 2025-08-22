@@ -1,0 +1,2313 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d11" for="edge" attr.name="created_at" attr.type="long" />
+  <key id="d10" for="edge" attr.name="file_path" attr.type="string" />
+  <key id="d9" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d8" for="edge" attr.name="keywords" attr.type="string" />
+  <key id="d7" for="edge" attr.name="description" attr.type="string" />
+  <key id="d6" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d5" for="node" attr.name="created_at" attr.type="long" />
+  <key id="d4" for="node" attr.name="file_path" attr.type="string" />
+  <key id="d3" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d2" for="node" attr.name="description" attr.type="string" />
+  <key id="d1" for="node" attr.name="entity_type" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_id" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="J.D. Vance">
+      <data key="d0">J.D. Vance</data>
+      <data key="d1">person</data>
+      <data key="d2">J.D. Vance is a public figure, possibly a politician or speaker, mentioned in relation to a speech that was attended or discussed.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="GitHub">
+      <data key="d0">GitHub</data>
+      <data key="d1">organization</data>
+      <data key="d2">GitHub is a platform used for version control and collaborative software development, highlighted for its ability to manage code repositories.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Mac">
+      <data key="d0">Mac</data>
+      <data key="d1">geo</data>
+      <data key="d2">Mac refers to the macOS operating system, which is mentioned in the context of user experiences while using GitHub.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Miranda legacy">
+      <data key="d0">Miranda legacy</data>
+      <data key="d1">category</data>
+      <data key="d2">The Miranda legacy represents an aspect of the speaker's work or projects, showcased in their discussions about coding and app development.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Lizzy legacy">
+      <data key="d0">Lizzy legacy</data>
+      <data key="d1">category</data>
+      <data key="d2">The Lizzy legacy refers to another aspect of the speaker's work or projects, mentioned in relation to their coding demonstrations.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Nell Alpha">
+      <data key="d0">Nell Alpha</data>
+      <data key="d1">category</data>
+      <data key="d2">Nell Alpha seems to be a project or model used by the speaker, indicating an evolution in their development work.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Nell Beta">
+      <data key="d0">Nell Beta</data>
+      <data key="d1">category</data>
+      <data key="d2">Nell Beta is an iteration of a project related to the speaker's work, showcased alongside the other legacies.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="PathRite">
+      <data key="d0">PathRite</data>
+      <data key="d1">organization</data>
+      <data key="d2">PathRite is a platform mentioned as a resource for support in educational technology initiatives.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Socratic method">
+      <data key="d0">Socratic method</data>
+      <data key="d1">category</data>
+      <data key="d2">The Socratic method refers to a form of cooperative argumentative dialogue that the speaker considers incorporating into their app for educational purposes.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Thousand Brain book">
+      <data key="d0">Thousand Brain book</data>
+      <data key="d1">category</data>
+      <data key="d2">The Thousand Brain book is a resource referenced by the speaker in discussing cognitive concepts and methods of learning.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Miranda Legacy">
+      <data key="d0">Miranda Legacy</data>
+      <data key="d1">category</data>
+      <data key="d2">Miranda Legacy denotes a framework or collection of projects that the speaker has worked on, referred to in discussions about coding practices.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Lizzy Legacy">
+      <data key="d0">Lizzy Legacy</data>
+      <data key="d1">category</data>
+      <data key="d2">Lizzy Legacy is another project that the speaker has presented as part of their coding work, indicating a focus on software development.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Socratic Method">
+      <data key="d0">Socratic Method</data>
+      <data key="d1">category</data>
+      <data key="d2">The Socratic Method is a form of cooperative argumentative dialogue that stimulates critical thinking and illuminates ideas through questioning.&lt;SEP&gt;The Socratic Method is a form of cooperative argumentative dialogue that stimulates critical thinking and illuminates ideas.&lt;SEP&gt;The Socratic Method is a form of dialogue and teaching that encourages critical thinking, proposed by the speaker as an educational approach for their app.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e&lt;SEP&gt;chunk-c6f001ba9bbac3afe6b5201a7d9d8658&lt;SEP&gt;chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Thousand Brain Book">
+      <data key="d0">Thousand Brain Book</data>
+      <data key="d1">category</data>
+      <data key="d2">The Thousand Brain Book is a resource referred to by the speaker, discussing cognitive theories that may relate to their educational strategies.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="EdTech">
+      <data key="d0">EdTech</data>
+      <data key="d1">category</data>
+      <data key="d2">EdTech refers to educational technology initiatives mentioned by the speaker focusing on enhancing learning experiences through digital tools.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="ChatGPT">
+      <data key="d0">ChatGPT</data>
+      <data key="d1">organization</data>
+      <data key="d2">ChatGPT is a conversational AI tool mentioned by the speaker, recognized for its application in educational contexts and student interaction.</data>
+      <data key="d3">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Headway">
+      <data key="d0">Headway</data>
+      <data key="d1">organization</data>
+      <data key="d2">Headway is a self-improvement platform that uses algorithms to recommend content tailored to individual users for self-growth.&lt;SEP&gt;Headway is an app that offers bite-sized learning by breaking down long-form content into shorter, manageable chunks for users to study.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92&lt;SEP&gt;chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Lizzy Project">
+      <data key="d0">Lizzy Project</data>
+      <data key="d1">organization</data>
+      <data key="d2">The Lizzy Project is associated with the development of a product that allows users to upload their own content for personalized learning.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="John">
+      <data key="d0">John</data>
+      <data key="d1">person</data>
+      <data key="d2">John is a hypothetical student referenced in a discussion about teaching concepts in a way that fits individual learning styles.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Fruit Popping Game">
+      <data key="d0">Fruit Popping Game</data>
+      <data key="d1">event</data>
+      <data key="d2">The Fruit Popping Game is a simple game that involves combining fruits to fill a box without overflowing, which aids the player's learning process.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Apple TV Plus">
+      <data key="d0">Apple TV Plus</data>
+      <data key="d1">organization</data>
+      <data key="d2">Apple TV Plus is a streaming service where users can watch shows, mentioned as a source of media consumed while engaging in another activity.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Common Core">
+      <data key="d0">Common Core</data>
+      <data key="d1">category</data>
+      <data key="d2">Common Core refers to a set of educational standards focused on concepts, contrasting with the ability to teach and comprehend material effectively.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Neurodivergent">
+      <data key="d0">Neurodivergent</data>
+      <data key="d1">category</data>
+      <data key="d2">Neurodivergent refers to individuals whose neurological development and functioning differ from what is considered typical, encompassing various conditions such as autism and ADHD.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Neuroses">
+      <data key="d0">Neuroses</data>
+      <data key="d1">category</data>
+      <data key="d2">Neuroses refer to a range of mental health conditions characterized by anxiety, depression, and other psychological issues, affecting a person's ability to function.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Dopamine Hit">
+      <data key="d0">Dopamine Hit</data>
+      <data key="d1">category</data>
+      <data key="d2">Dopamine hit refers to the release of dopamine following an action, often linked to feelings of pleasure and reward, commonly associated with addictive behaviors, especially in relation to technology use.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Mind Map">
+      <data key="d0">Mind Map</data>
+      <data key="d1">category</data>
+      <data key="d2">Mind maps are visual tools used to organize information, helping to enhance memory and understanding among learners.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Agent">
+      <data key="d0">Agent</data>
+      <data key="d1">category</data>
+      <data key="d2">Agent refers to a hypothetical learning entity used in educational contexts to assess understanding and facilitate learning.&lt;SEP&gt;An agent in this context refers to an AI or digital assistant that helps users in learning and comprehension tasks.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92&lt;SEP&gt;chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Testing">
+      <data key="d0">Testing</data>
+      <data key="d1">event</data>
+      <data key="d2">Testing refers to the process of evaluation used to measure a person's knowledge or skills in a subject, often linked to educational assessments.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Game-based Learning">
+      <data key="d0">Game-based Learning</data>
+      <data key="d1">category</data>
+      <data key="d2">Game-based learning refers to the use of games to enhance the educational experience, promoting engagement and retention through interactive elements.</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="NEL 2 Beta">
+      <data key="d0">NEL 2 Beta</data>
+      <data key="d1">category</data>
+      <data key="d2">NEL 2 Beta is a program that utilizes technological advancements to curate customized learning experiences for users.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Duolingo">
+      <data key="d0">Duolingo</data>
+      <data key="d1">organization</data>
+      <data key="d2">Duolingo is a language-learning platform that gamifies education, encouraging users to learn languages in a fun way.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Miranda">
+      <data key="d0">Miranda</data>
+      <data key="d1">organization</data>
+      <data key="d2">Miranda is proposed as a vertical app aimed at enhancing educational experiences and content delivery.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Intro to MassCon">
+      <data key="d0">Intro to MassCon</data>
+      <data key="d1">event</data>
+      <data key="d2">Intro to MassCon is a course that likely integrates mass communication principles and practices, serving as a subject for discussion in the text.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="AI">
+      <data key="d0">AI</data>
+      <data key="d1">category</data>
+      <data key="d2">AI (Artificial Intelligence) is discussed as a tool for decision-making and finding solutions quickly in business matters.&lt;SEP&gt;AI refers to artificial intelligence technologies that can be trained and utilized for various applications, including gaming and education.&lt;SEP&gt;AI refers to artificial intelligence which is used to analyze educational content and customize learning pathways for students.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72&lt;SEP&gt;chunk-2f85d0fc79137c472576ddf4e53a7c33&lt;SEP&gt;chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Content Tokens">
+      <data key="d0">Content Tokens</data>
+      <data key="d1">category</data>
+      <data key="d2">Content Tokens are a subscription-based currency that students must purchase to access educational materials and services within the app.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Agents">
+      <data key="d0">Agents</data>
+      <data key="d1">organization</data>
+      <data key="d2">Agents are individuals or entities that work behind the scenes in the NEL 2 Beta to curate personalized educational content for users.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Students">
+      <data key="d0">Students</data>
+      <data key="d1">person</data>
+      <data key="d2">Students are individuals participating in the class, engaging with educational content and technologies during the learning process.&lt;SEP&gt;Students are the primary users of the educational platform benefiting from curated learning materials and customized experiences.&lt;SEP&gt;Students refer to individuals engaged in learning, utilizing platforms like Headway for educational enhancement and content consumption.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72&lt;SEP&gt;chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7&lt;SEP&gt;chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Curriculum">
+      <data key="d0">Curriculum</data>
+      <data key="d1">category</data>
+      <data key="d2">Curriculum refers to the structured educational content designed to be personalized and delivered to students based on various factors.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Token System">
+      <data key="d0">Token System</data>
+      <data key="d1">category</data>
+      <data key="d2">Token System outlines the payment mechanism in which students purchase tokens to access curated educational content.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Classroom">
+      <data key="d0">Classroom</data>
+      <data key="d1">event</data>
+      <data key="d2">Classroom refers to the physical or virtual environment where students engage with the educational materials curated through the app.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Content Upload">
+      <data key="d0">Content Upload</data>
+      <data key="d1">event</data>
+      <data key="d2">Content Upload is the process by which teachers input their teaching materials into the app for student access.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="AI Analysis">
+      <data key="d0">AI Analysis</data>
+      <data key="d1">category</data>
+      <data key="d2">AI Analysis involves the usage of artificial intelligence to process educational content and assess students' learning progress.</data>
+      <data key="d3">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Daniel Kahneman">
+      <data key="d0">Daniel Kahneman</data>
+      <data key="d1">person</data>
+      <data key="d2">Daniel Kahneman is a recognized psychologist known for his work in behavioral economics and cognitive psychology, particularly in decision making.</data>
+      <data key="d3">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Content Summary on Thinking Fast and Slow">
+      <data key="d0">Content Summary on Thinking Fast and Slow</data>
+      <data key="d1">event</data>
+      <data key="d2">This event refers to the presentation and discussion of key ideas from Daniel Kahneman's book 'Thinking Fast and Slow,' focusing on mental processes and decision-making.</data>
+      <data key="d3">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Algorithm">
+      <data key="d0">Algorithm</data>
+      <data key="d1">category</data>
+      <data key="d2">An algorithm is a process or set of rules followed in calculations or problem-solving operations, often used to match users with content based on preferences.</data>
+      <data key="d3">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Content">
+      <data key="d0">Content</data>
+      <data key="d1">category</data>
+      <data key="d2">Content encompasses the materials, readings, and information provided to students for learning and comprehension.&lt;SEP&gt;Content refers to any information or material that is delivered through various mediums, in this case, tailored to enhance self-growth and learning.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658&lt;SEP&gt;chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Socratic Groups">
+      <data key="d0">Socratic Groups</data>
+      <data key="d1">category</data>
+      <data key="d2">Socratic Groups encourage discussion and critical thinking among participants through the Socratic Method, fostering collaborative learning.</data>
+      <data key="d3">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Teaching Agent">
+      <data key="d0">Teaching Agent</data>
+      <data key="d1">category</data>
+      <data key="d2">A Teaching Agent is an educational tool or AI that interacts with students to enhance their learning experience through personalized content and feedback.</data>
+      <data key="d3">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Self-Growth">
+      <data key="d0">Self-Growth</data>
+      <data key="d1">category</data>
+      <data key="d2">Self-growth is the process of improving oneself through various means including education, reflection, and personal development strategies.</data>
+      <data key="d3">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Game-Based Learning">
+      <data key="d0">Game-Based Learning</data>
+      <data key="d1">category</data>
+      <data key="d2">Game-Based Learning involves using game design elements to improve student engagement and enhance the learning process through interactive experiences.</data>
+      <data key="d3">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Lecture">
+      <data key="d0">Lecture</data>
+      <data key="d1">event</data>
+      <data key="d2">Lecture refers to the educational delivery method employed in classrooms, often incorporating reading and discussion.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Homework">
+      <data key="d0">Homework</data>
+      <data key="d1">event</data>
+      <data key="d2">Homework consists of tasks assigned to students to reinforce learning, often through practice and application of concepts.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Lizzie Project">
+      <data key="d0">Lizzie Project</data>
+      <data key="d1">organization</data>
+      <data key="d2">The Lizzie Project is an initiative focused on building educational frameworks and architectures for learning applications.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Nell Architecture">
+      <data key="d0">Nell Architecture</data>
+      <data key="d1">organization</data>
+      <data key="d2">Nell Architecture is a framework aimed at facilitating long-form content generation and comprehension.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Miranda Project">
+      <data key="d0">Miranda Project</data>
+      <data key="d1">organization</data>
+      <data key="d2">The Miranda Project aims to develop an application that enhances learning through coding challenges and is associated with educational initiatives.&lt;SEP&gt;The Miranda Project is an initiative tied to Miranda Company, focusing on education and technology development.&lt;SEP&gt;The Miranda Project is designed to support short-form writing and enhance interaction with AI agents in learning.&lt;SEP&gt;The Miranda Project is referred to in the context of teamwork and development, where innovative processes are applied to problem-solving.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c&lt;SEP&gt;chunk-2e228d2d89b2e14d33e9f0152dd65baf&lt;SEP&gt;chunk-c6f001ba9bbac3afe6b5201a7d9d8658&lt;SEP&gt;chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Bill Poucher">
+      <data key="d0">Bill Poucher</data>
+      <data key="d1">person</data>
+      <data key="d2">Bill Poucher is a figure mentioned in discussions about educational problem sets and potential collaboration.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Project">
+      <data key="d0">Project</data>
+      <data key="d1">category</data>
+      <data key="d2">A project in the context of this text encompasses various educational initiatives that aim to enhance learning through technical infrastructure and methods.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Unit">
+      <data key="d0">Unit</data>
+      <data key="d1">category</data>
+      <data key="d2">Unit refers to a segment of educational content or curriculum that students work through in their learning activities.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Funding">
+      <data key="d0">Funding</data>
+      <data key="d1">category</data>
+      <data key="d2">Funding refers to financial resources allocated for educational projects and initiatives, crucial for their development and success.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Markdown">
+      <data key="d0">Markdown</data>
+      <data key="d1">category</data>
+      <data key="d2">Markdown is a lightweight markup language used to format text, which is mentioned as a tool for structuring data.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Data Science">
+      <data key="d0">Data Science</data>
+      <data key="d1">category</data>
+      <data key="d2">Data Science involves methods and techniques used to analyze and interpret complex data sets, improving project outcomes.</data>
+      <data key="d3">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="ICPC">
+      <data key="d0">ICPC</data>
+      <data key="d1">organization</data>
+      <data key="d2">ICPC, or the International Collegiate Programming Contest, is a prestigious competitive programming competition for university students worldwide.&lt;SEP&gt;The ICPC (International Collegiate Programming Contest) is a competitive programming competition that brings together students from universities worldwide.&lt;SEP&gt;The ICPC (International Collegiate Programming Contest) is a global competitive programming competition for university students, focusing on algorithmic problem solving.&lt;SEP&gt;The ICPC (International Collegiate Programming Contest) is mentioned as a future ambition related to the educational project being discussed.&lt;SEP&gt;The International Collegiate Programming Contest (ICPC) is a competitive programming competition where teams solve problems under time constraints.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf&lt;SEP&gt;chunk-886d1329104e4dcd85ebc77296d09294&lt;SEP&gt;chunk-99c189d0a640b05202e41f0c0e1744e7&lt;SEP&gt;chunk-003acc2ab4fc81db039ffb5601360a59&lt;SEP&gt;chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Baylor">
+      <data key="d0">Baylor</data>
+      <data key="d1">organization</data>
+      <data key="d2">Baylor University is an educational institution that could be involved in partnerships for projects like the Miranda Project.&lt;SEP&gt;Baylor is a university known for its educational programs and research opportunities, mentioned in the context of graduate-level education.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf&lt;SEP&gt;chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Poucher">
+      <data key="d0">Poucher</data>
+      <data key="d1">person</data>
+      <data key="d2">Poucher is a person involved in the educational project, whose support is needed for moving forward with the plans.&lt;SEP&gt;Poucher is a potential funder for the Miranda Project and is recognized for his contributions to the field.&lt;SEP&gt;Poucher is mentioned as part of funding discussions related to the ICPC and the Miranda Project, hinting at a position of influence in financial decisions.&lt;SEP&gt;Poucher is mentioned as someone who may be open to supporting a project and has made prior donations.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7&lt;SEP&gt;chunk-2e228d2d89b2e14d33e9f0152dd65baf&lt;SEP&gt;chunk-ed3cf7828a9245de0eeabe8f9cd93936&lt;SEP&gt;chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Pathright">
+      <data key="d0">Pathright</data>
+      <data key="d1">organization</data>
+      <data key="d2">Pathright is a web delivery platform that facilitates online content delivery, particularly for educational purposes.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Amazon">
+      <data key="d0">Amazon</data>
+      <data key="d1">organization</data>
+      <data key="d2">Amazon is a multinational technology company that could be a potential workplace for individuals involved in the Miranda Project.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Media Lab">
+      <data key="d0">Media Lab</data>
+      <data key="d1">organization</data>
+      <data key="d2">The Media Lab is a research lab associated with technology and innovation that the speaker wishes to join.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="ICPC Problem Archive">
+      <data key="d0">ICPC Problem Archive</data>
+      <data key="d1">organization</data>
+      <data key="d2">The ICPC Problem Archive is a public repository of programming competition problems, used for educational and competitive purposes.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="LLC">
+      <data key="d0">LLC</data>
+      <data key="d1">category</data>
+      <data key="d2">An LLC (Limited Liability Company) is referred to in the context of making money and structuring services.&lt;SEP&gt;An LLC, or Limited Liability Company, is a business structure that offers flexibility in management and protection from personal liability for its owners.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33&lt;SEP&gt;chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Frederick">
+      <data key="d0">Frederick</data>
+      <data key="d1">person</data>
+      <data key="d2">Frederick is a consultant and director of contest systems at the ICPC, overseeing various activities related to competitive coding.&lt;SEP&gt;Frederick is mentioned as a collaborator and potential supporter of the Miranda Project based in Waco.&lt;SEP&gt;Frederick is mentioned as a consultant for the ICPC and plays a role in its contest system management.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c&lt;SEP&gt;chunk-2e228d2d89b2e14d33e9f0152dd65baf&lt;SEP&gt;chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Waco">
+      <data key="d0">Waco</data>
+      <data key="d1">geo</data>
+      <data key="d2">Waco is a city in Texas, where project collaborators, including Frederick, are located.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Startup">
+      <data key="d0">Startup</data>
+      <data key="d1">organization</data>
+      <data key="d2">A startup is a newly established business, often focused on innovative products or services, and is mentioned as a potential opportunity for the speaker.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Games">
+      <data key="d0">Games</data>
+      <data key="d1">category</data>
+      <data key="d2">Games refer to interactive entertainment activities that are planned for developing features related to the Miranda Project.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Claude">
+      <data key="d0">Claude</data>
+      <data key="d1">person</data>
+      <data key="d2">Claude is referenced as an AI that may be used in conjunction with the proposed application efforts.</data>
+      <data key="d3">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Dr. C Superfan">
+      <data key="d0">Dr. C Superfan</data>
+      <data key="d1">person</data>
+      <data key="d2">Dr. C Superfan is an individual who is wealthy and has produced a feature film with disorganized production.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Sarah">
+      <data key="d0">Sarah</data>
+      <data key="d1">person</data>
+      <data key="d2">Sarah is a friend of the narrator who worked on a film featuring Dr. C Superfan.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="ICPC Go">
+      <data key="d0">ICPC Go</data>
+      <data key="d1">event</data>
+      <data key="d2">ICPC Go is an initiative aimed at encouraging students to engage with programming-related activities and games.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Mojang">
+      <data key="d0">Mojang</data>
+      <data key="d1">organization</data>
+      <data key="d2">Mojang is the creator of Minecraft, and a potential partner for collaboration on game development.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Minecraft">
+      <data key="d0">Minecraft</data>
+      <data key="d1">category</data>
+      <data key="d2">Minecraft is a sandbox game that encourages creativity and problem-solving, often used in educational contexts.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Leaderboard">
+      <data key="d0">Leaderboard</data>
+      <data key="d1">category</data>
+      <data key="d2">A leaderboard is a competitive feature that ranks participants based on their performance in games or challenges.&lt;SEP&gt;The Leaderboard refers to a ranking system where competitors are listed based on their performance in events, fostering a competitive spirit.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c&lt;SEP&gt;chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Discord">
+      <data key="d0">Discord</data>
+      <data key="d1">organization</data>
+      <data key="d2">Discord is a communication platform that supports voice, video, and text chat, widely used in gaming and community engagement.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="AI Training Platform">
+      <data key="d0">AI Training Platform</data>
+      <data key="d1">category</data>
+      <data key="d2">An AI training platform refers to systems designed to train artificial intelligence models, potentially at a low cost as discussed in the text.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Mini AI Device">
+      <data key="d0">Mini AI Device</data>
+      <data key="d1">category</data>
+      <data key="d2">A mini AI device is suggested as a cost-effective solution for AI training and application, ideally priced under a hundred dollars.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Business School">
+      <data key="d0">Business School</data>
+      <data key="d1">organization</data>
+      <data key="d2">The Business School is an educational institution where students learn various business-related subjects, mentioned as lacking specific features related to AI.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Dr. C Superfan's Feature Film">
+      <data key="d0">Dr. C Superfan's Feature Film</data>
+      <data key="d1">event</data>
+      <data key="d2">Dr. C Superfan's feature film is a film project that faced organizational challenges during production, as mentioned by the narrator.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="LinkedIn">
+      <data key="d0">LinkedIn</data>
+      <data key="d1">organization</data>
+      <data key="d2">LinkedIn is a professional networking platform where individuals can share their professional experiences, mentioned in the context of sharing contacts.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="ICPC Kids">
+      <data key="d0">ICPC Kids</data>
+      <data key="d1">category</data>
+      <data key="d2">ICPC Kids is an initiative aimed at introducing programming concepts to younger students through engaging formats, as mentioned in the text.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Peloton">
+      <data key="d0">Peloton</data>
+      <data key="d1">organization</data>
+      <data key="d2">Peloton is a fitness company that offers an interactive platform where users can compete in fitness challenges, compared to ICPC Go in terms of competitive engagement.</data>
+      <data key="d3">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="class">
+      <data key="d0">class</data>
+      <data key="d1">event</data>
+      <data key="d2">The class is a gathering where students participate in activities and engage with educational content, utilizing various methods and technologies.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Fruit Ninja">
+      <data key="d0">Fruit Ninja</data>
+      <data key="d1">category</data>
+      <data key="d2">Fruit Ninja is a popular mobile game that involves slicing fruit while avoiding bombs, often used competitively in educational settings.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="PS5">
+      <data key="d0">PS5</data>
+      <data key="d1">category</data>
+      <data key="d2">The PS5 is a gaming console that can be used for educational or entertainment activities, suggesting the integration of gaming in learning environments.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Twitch Channel">
+      <data key="d0">Twitch Channel</data>
+      <data key="d1">organization</data>
+      <data key="d2">The Twitch Channel is a streaming platform where classes could be broadcast live to engage with students remotely and attract media attention.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Lizzie">
+      <data key="d0">Lizzie</data>
+      <data key="d1">person</data>
+      <data key="d2">Lizzie is mentioned as someone associated with prior work that potentially contributes to the current educational project being discussed.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="ICBC Go">
+      <data key="d0">ICBC Go</data>
+      <data key="d1">category</data>
+      <data key="d2">ICBC Go is a platform mentioned in the context of sharing updates and engagement through social media, likely related to ICPC events.&lt;SEP&gt;ICBC Go is an educational app designed to facilitate training and interaction among users, similar to a gaming experience.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7&lt;SEP&gt;chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Bandwidth">
+      <data key="d0">Bandwidth</data>
+      <data key="d1">category</data>
+      <data key="d2">Bandwidth refers to the capacity for data transmission in a given timeframe, relevant in discussions about technology use in classrooms.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Headphones">
+      <data key="d0">Headphones</data>
+      <data key="d1">category</data>
+      <data key="d2">Headphones are personal audio devices that allow users to listen to audio content privately, which can affect classroom dynamics.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Earbuds">
+      <data key="d0">Earbuds</data>
+      <data key="d1">category</data>
+      <data key="d2">Earbuds are compact audio devices worn in the ear, commonly used by students to listen to music, creating challenges in classrooms.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Game">
+      <data key="d0">Game</data>
+      <data key="d1">category</data>
+      <data key="d2">Games, such as Fruit Ninja or Mario Brothers, are used as teaching tools to enhance engagement and competition among students.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="iPad">
+      <data key="d0">iPad</data>
+      <data key="d1">category</data>
+      <data key="d2">An iPad is a tablet device used in educational settings to facilitate learning through interactive applications and games.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Graduate School Research">
+      <data key="d0">Graduate School Research</data>
+      <data key="d1">category</data>
+      <data key="d2">Graduate School Research refers to advanced academic studies that explore innovative educational practices and methodologies.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Discord Channel">
+      <data key="d0">Discord Channel</data>
+      <data key="d1">organization</data>
+      <data key="d2">A Discord Channel is a platform for online communication, often used by students to connect and collaborate with peers.&lt;SEP&gt;The Discord Channel serves as an online platform for communication among competitors, allowing them to connect and share experiences during competitions.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7&lt;SEP&gt;chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Thesis Films">
+      <data key="d0">Thesis Films</data>
+      <data key="d1">event</data>
+      <data key="d2">Thesis Films refer to final projects created by students that showcase their learning and creative skills, often presented for evaluation.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Media Attention">
+      <data key="d0">Media Attention</data>
+      <data key="d1">category</data>
+      <data key="d2">Media Attention refers to the focus and interest of the press and public in an event or initiative, crucial for promoting educational projects.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="2026">
+      <data key="d0">2026</data>
+      <data key="d1">geo</data>
+      <data key="d2">2026 is referenced as a future time frame for potential project launches and developments in the educational initiative.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Perfect Evolution">
+      <data key="d0">Perfect Evolution</data>
+      <data key="d1">category</data>
+      <data key="d2">Perfect Evolution refers to the concept of advancing educational methods and practices in a way that maximizes effectiveness.</data>
+      <data key="d3">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Baku">
+      <data key="d0">Baku</data>
+      <data key="d1">geo</data>
+      <data key="d2">Baku is a city that hosts competitive events, referenced in the context of meeting other competitors in an international setting.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Taylor Watson">
+      <data key="d0">Taylor Watson</data>
+      <data key="d1">person</data>
+      <data key="d2">Taylor Watson is an individual involved with the ICPC who believes in the value of young professionals bringing fresh perspectives to the organization.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Women in ICPC">
+      <data key="d0">Women in ICPC</data>
+      <data key="d1">category</data>
+      <data key="d2">Women in ICPC refers to the female participants and their representation within the International Collegiate Programming Contest, highlighting issues of diversity and inclusion.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Gamification">
+      <data key="d0">Gamification</data>
+      <data key="d1">category</data>
+      <data key="d2">Gamification is a strategy to enhance engagement and interest in activities such as computer programming by incorporating game-like elements.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Computer Science Program">
+      <data key="d0">Computer Science Program</data>
+      <data key="d1">category</data>
+      <data key="d2">The Computer Science Program encompasses educational pathways in computing, where challenges of retention and representation for women are discussed.</data>
+      <data key="d3">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Wimped">
+      <data key="d0">Wimped</data>
+      <data key="d1">organization</data>
+      <data key="d2">Wimped is a sports platform designed to engage supporters and creators, centralizing sports media to drive revenue.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="The Miranda Project">
+      <data key="d0">The Miranda Project</data>
+      <data key="d1">organization</data>
+      <data key="d2">The Miranda Project at Baylor is an initiative aimed at enhancing educational engagement through problem-solving techniques and content creation after competitive contests.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="University of Warsaw">
+      <data key="d0">University of Warsaw</data>
+      <data key="d1">organization</data>
+      <data key="d2">The University of Warsaw is a higher education institution that has produced world champions in competitive programming, contributing to knowledge and innovation in the field.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Baylor University">
+      <data key="d0">Baylor University</data>
+      <data key="d1">geo</data>
+      <data key="d2">Baylor University is a private Christian university in Waco, Texas, where the Miranda Project is being launched.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Podcast">
+      <data key="d0">Podcast</data>
+      <data key="d1">event</data>
+      <data key="d2">The podcast is a proposed content format to discuss problem-solving techniques and interview teams post-competition to enhance engagement and learning.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Coding">
+      <data key="d0">Coding</data>
+      <data key="d1">category</data>
+      <data key="d2">Coding refers to the practice of writing computer programs, a focus area in education and competitive events.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Problem Set">
+      <data key="d0">Problem Set</data>
+      <data key="d1">category</data>
+      <data key="d2">The problem set consists of algorithmic challenges presented during competitive events like the ICPC, aimed at testing participants' skills.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Independent Consulting">
+      <data key="d0">Independent Consulting</data>
+      <data key="d1">category</data>
+      <data key="d2">Independent consulting involves providing expert advice and services, which Frederick engages in, particularly concerning educational platforms and systems.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Strategic Problem Solving">
+      <data key="d0">Strategic Problem Solving</data>
+      <data key="d1">category</data>
+      <data key="d2">Strategic problem solving is the method of addressing and resolving complex issues, an important skill taught to enhance coding abilities.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Content Creation">
+      <data key="d0">Content Creation</data>
+      <data key="d1">category</data>
+      <data key="d2">Content creation involves developing materials for educational purposes, which is a key aspect of the initiatives discussed for the Miranda Project.</data>
+      <data key="d3">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Noah Carter">
+      <data key="d0">Noah Carter</data>
+      <data key="d1">person</data>
+      <data key="d2">Noah Carter is referenced in the context of discussing aspirations for academic qualifications and positioning within educational institutions.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Miranda Company">
+      <data key="d0">Miranda Company</data>
+      <data key="d1">organization</data>
+      <data key="d2">Miranda Company is involved in developing an educational-related app and is associated with a project mentioned in the dialogue.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="California">
+      <data key="d0">California</data>
+      <data key="d1">geo</data>
+      <data key="d2">California is mentioned as a destination for travel, particularly in relation to the person's social connections.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="San Francisco">
+      <data key="d0">San Francisco</data>
+      <data key="d1">geo</data>
+      <data key="d2">San Francisco is noted as one of the cities in California where the person plans to visit.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Los Angeles">
+      <data key="d0">Los Angeles</data>
+      <data key="d1">geo</data>
+      <data key="d2">Los Angeles is indicated as another destination in California where the person's best friend lives.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="PhD">
+      <data key="d0">PhD</data>
+      <data key="d1">category</data>
+      <data key="d2">PhD refers to the advanced academic degree being discussed and considered for future educational pursuits.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Dr. Poucher">
+      <data key="d0">Dr. Poucher</data>
+      <data key="d1">person</data>
+      <data key="d2">Dr. Poucher is a professional referenced in the conversation, providing guidance on educational paths and helping with project development.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Lydia">
+      <data key="d0">Lydia</data>
+      <data key="d1">person</data>
+      <data key="d2">Lydia is a potential collaborator or advisor who discusses career opportunities and paths with the speaker.&lt;SEP&gt;Lydia is mentioned in the dialogue as a peer discussing career aspirations and opportunities in product management.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294&lt;SEP&gt;chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Christian Limb">
+      <data key="d0">Christian Limb</data>
+      <data key="d1">person</data>
+      <data key="d2">Christian Limb is referenced as someone involved in high-stakes poker and related activities, emphasizing a lifestyle of wealth and leisure.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Cassie">
+      <data key="d0">Cassie</data>
+      <data key="d1">person</data>
+      <data key="d2">Cassie is mentioned as a person with a PhD, serving as a comparison point for aspirations regarding academic qualifications.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Tenure">
+      <data key="d0">Tenure</data>
+      <data key="d1">category</data>
+      <data key="d2">Tenure is the academic status being discussed concerning job security and positions within universities.</data>
+      <data key="d3">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Michael Saylor">
+      <data key="d0">Michael Saylor</data>
+      <data key="d1">person</data>
+      <data key="d2">Michael Saylor is mentioned as someone who advocates for the use of AI in decision-making and has extensive experience working with lawyers.&lt;SEP&gt;Michael Saylor is the CEO of MicroStrategy, notable for his speech on wealth acquisition strategies related to Bitcoin.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294&lt;SEP&gt;chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="MicroStrategy">
+      <data key="d0">MicroStrategy</data>
+      <data key="d1">organization</data>
+      <data key="d2">MicroStrategy is a technology company known for its enterprise analytics and business intelligence solutions, led by Michael Saylor.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Veranda Project">
+      <data key="d0">Veranda Project</data>
+      <data key="d1">project</data>
+      <data key="d2">The Veranda Project is a proposed venture that the speaker is working on, possibly involving technological or digital services.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Texas">
+      <data key="d0">Texas</data>
+      <data key="d1">geo</data>
+      <data key="d2">Texas is a U.S. state where the speaker discusses potential business opportunities and advantages related to tax breaks.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Hybrid Land Cruiser FJ">
+      <data key="d0">Hybrid Land Cruiser FJ</data>
+      <data key="d1">vehicle</data>
+      <data key="d2">A new hybrid model of the Land Cruiser FJ is anticipated next year, merging features of the original FJ Cruiser with modern advancements.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Cyber Truck">
+      <data key="d0">Cyber Truck</data>
+      <data key="d1">vehicle</data>
+      <data key="d2">The Cyber Truck is an innovative electric pickup truck known for its unique design and durability, with limited units available at a recent event.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="VPN">
+      <data key="d0">VPN</data>
+      <data key="d1">technology</data>
+      <data key="d2">A Virtual Private Network (VPN) that provides zero-knowledge encryption, allowing users to connect to the internet while maintaining privacy and security.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Onion Network">
+      <data key="d0">Onion Network</data>
+      <data key="d1">technology</data>
+      <data key="d2">The Onion Network is a form of technology that helps anonymize user data by routing it through multiple servers, ensuring privacy.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Generative AI">
+      <data key="d0">Generative AI</data>
+      <data key="d1">technology</data>
+      <data key="d2">Generative AI refers to AI systems capable of creating content or data, which may assist in various applications, including business.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Business LLC">
+      <data key="d0">Business LLC</data>
+      <data key="d1">organization</data>
+      <data key="d2">A Business LLC is a limited liability company structure that protects its owners from personal liability for business debts.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Non-Profit">
+      <data key="d0">Non-Profit</data>
+      <data key="d1">organization</data>
+      <data key="d2">A Non-Profit organization is a type of organization that operates without profit motives and is often focused on charitable goals.</data>
+      <data key="d3">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Bitcoin">
+      <data key="d0">Bitcoin</data>
+      <data key="d1">category</data>
+      <data key="d2">Bitcoin is a cryptocurrency that is discussed as an investment opportunity in the text.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Stocks">
+      <data key="d0">Stocks</data>
+      <data key="d1">category</data>
+      <data key="d2">Stocks are mentioned as assets that the speaker wants to liquidate due to a gut feeling about their value.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Uncle Mike">
+      <data key="d0">Uncle Mike</data>
+      <data key="d1">person</data>
+      <data key="d2">Uncle Mike is referenced as someone who manages the speaker's stock portfolio but is perceived to be not very good at it.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Service">
+      <data key="d0">Service</data>
+      <data key="d1">category</data>
+      <data key="d2">Service refers to the activities provided by an LLC or organization in exchange for payment, mentioned in the context of business structure.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="LLC Foundation">
+      <data key="d0">LLC Foundation</data>
+      <data key="d1">organization</data>
+      <data key="d2">An LLC foundation is discussed as a potential structure to generate income while managing services and assets.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Stocks Portfolio">
+      <data key="d0">Stocks Portfolio</data>
+      <data key="d1">category</data>
+      <data key="d2">Stocks portfolio refers to the collection of stock investments owned by the speaker, which they wish to manage and liquidate.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Taxes">
+      <data key="d0">Taxes</data>
+      <data key="d1">category</data>
+      <data key="d2">Taxes are implied in the context of managing LLCs and the financial implications of making money.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Brokerage Account">
+      <data key="d0">Brokerage Account</data>
+      <data key="d1">organization</data>
+      <data key="d2">Brokerage account is referenced as an account needed to manage and liquidate stocks.</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Learning Styles">
+      <data key="d0">Learning Styles</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d2">Individuals who are neurodivergent may have unique learning styles that differ from the traditional educational approaches, requiring tailored strategies for effective learning.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Addiction">
+      <data key="d0">Addiction</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d2">The concept of a dopamine hit is directly related to the addictive nature of technology, influencing how individuals engage with learning tools and games.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Learning">
+      <data key="d0">Learning</data>
+      <data key="d3">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d2">Mind maps enhance the learning process by visually organizing information, making it easier for users to comprehend and retain material.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Tax">
+      <data key="d0">Tax</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d2">The management of a stocks portfolio involves considerations regarding taxes and financial implications.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Investor">
+      <data key="d0">Investor</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d2">The investor's desire to liquidate their stocks portfolio relates to their perceptions of current stock performance and market conditions.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <node id="Portfolio Management">
+      <data key="d0">Portfolio Management</data>
+      <data key="d3">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d2">Bitcoin is suggested as an alternative investment opportunity while discussing overall portfolio management strategies.</data>
+      <data key="d1">UNKNOWN</data>
+      <data key="d4">unknown_source</data>
+      <data key="d5">1749771180</data>
+    </node>
+    <edge source="J.D. Vance" target="GitHub">
+      <data key="d6">5.0</data>
+      <data key="d7">J.D. Vance's speech is indirectly linked to the technological context discussed around GitHub and app development.</data>
+      <data key="d8">speech relevance,technology</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="GitHub" target="PathRite">
+      <data key="d6">6.0</data>
+      <data key="d7">GitHub repositories are potentially utilized in conjunction with PathRite's platform for educational technology applications.</data>
+      <data key="d8">collaboration,platform integration</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="GitHub" target="ChatGPT">
+      <data key="d6">8.0</data>
+      <data key="d7">GitHub repositories can leverage ChatGPT for improved coding assistance and educational interactions.</data>
+      <data key="d8">AI in education,collaboration</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda legacy" target="Lizzy legacy">
+      <data key="d6">7.0</data>
+      <data key="d7">Both the Miranda and Lizzy legacies are projects mentioned by the speaker in a continuum of their coding work.</data>
+      <data key="d8">coding narrative,project continuity</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Nell Alpha" target="Nell Beta">
+      <data key="d6">8.0</data>
+      <data key="d7">Nell Alpha and Nell Beta represent different iterations of a project in the speaker's development workflow.</data>
+      <data key="d8">iteration,project development</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="PathRite" target="Socratic method">
+      <data key="d6">6.0</data>
+      <data key="d7">PathRite could potentially support the implementation of the Socratic method in educational technology applications.</data>
+      <data key="d8">educational strategy,platform support</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="PathRite" target="Socratic Method">
+      <data key="d6">7.0</data>
+      <data key="d7">PathRite is mentioned as potentially instrumental in applying the Socratic Method for interactive learning experiences.</data>
+      <data key="d8">educational strategy,interactive learning</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic method" target="Thousand Brain book">
+      <data key="d6">7.0</data>
+      <data key="d7">The concepts in the Thousand Brain book may relate to the efficacy and implementation of the Socratic method in learning.</data>
+      <data key="d8">cognitive science,learning methodologies</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Legacy" target="Lizzy Legacy">
+      <data key="d6">8.0</data>
+      <data key="d7">Both projects exemplify the speaker's coding evolution and contribute to their overall portfolio of work.</data>
+      <data key="d8">project development,software portfolio</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic Method" target="Thousand Brain Book">
+      <data key="d6">6.0</data>
+      <data key="d7">The Thousand Brain Book provides cognitive insights that may support the implementation of the Socratic Method in education.</data>
+      <data key="d8">cognitive science,teaching methods</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic Method" target="EdTech">
+      <data key="d6">9.0</data>
+      <data key="d7">EdTech initiatives incorporate strategies like the Socratic Method to enhance learning experiences in digital environments.</data>
+      <data key="d8">educational innovation,learning strategies</data>
+      <data key="d9">chunk-9368e73c1eeaa98d3ea7e189752d4d3e</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic Method" target="Content Summary on Thinking Fast and Slow">
+      <data key="d6">7.0</data>
+      <data key="d7">The content aims to engage learners using the Socratic Method, fostering deeper understanding through guided discussion based on Kahneman's ideas.</data>
+      <data key="d8">engagement,teaching method</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic Method" target="Lecture">
+      <data key="d6">8.0</data>
+      <data key="d7">Lectures are designed to enhance the Socratic Method by incorporating discussions and comprehension activities.</data>
+      <data key="d8">education,teaching methods</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic Method" target="Homework">
+      <data key="d6">7.0</data>
+      <data key="d7">Homework tasks reinforce the principles of the Socratic Method by encouraging independent critical thinking.</data>
+      <data key="d8">education,learning reinforcement</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic Method" target="Agent">
+      <data key="d6">8.0</data>
+      <data key="d7">The agent facilitates the application of the Socratic Method by promoting dialogue and critical thinking among learners.</data>
+      <data key="d8">AI assistance,learning methods</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Headway" target="Lizzy Project">
+      <data key="d6">9.0</data>
+      <data key="d7">Headway and the Lizzy Project are related through their focus on educational technology and personalized learning solutions.</data>
+      <data key="d8">educational technology,personalized learning</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Headway" target="Common Core">
+      <data key="d6">7.0</data>
+      <data key="d7">Headway's approach offers an alternative to traditional Common Core standards by providing personalized and bite-sized content.</data>
+      <data key="d8">alternative learning,educational approach</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Headway" target="Game-based Learning">
+      <data key="d6">8.0</data>
+      <data key="d7">Headway may utilize game-based learning techniques to enhance the educational experience of users by breaking down concepts into engaging formats.</data>
+      <data key="d8">educational methods,engagement</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Headway" target="Daniel Kahneman">
+      <data key="d6">8.0</data>
+      <data key="d7">Headway utilizes insights from experts like Daniel Kahneman to enhance user experience and promote self-growth through tailored content.</data>
+      <data key="d8">platform utilization,self-improvement</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Headway" target="Algorithm">
+      <data key="d6">9.0</data>
+      <data key="d7">Headway utilizes algorithms to personalize content and match users with learning materials tailored to their preferences.</data>
+      <data key="d8">content personalization,technology integration</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Headway" target="Self-Growth">
+      <data key="d6">10.0</data>
+      <data key="d7">Headway is designed to promote self-growth by providing users with personalized content that enhances their learning experience.</data>
+      <data key="d8">educational platform,personal development</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Headway" target="Students">
+      <data key="d6">9.0</data>
+      <data key="d7">Students use Headway to facilitate their learning through curated content aimed at self-improvement and growth.</data>
+      <data key="d8">learning platforms,student engagement</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="John" target="Common Core">
+      <data key="d6">6.0</data>
+      <data key="d7">John's learning style is discussed in relation to the effectiveness of Common Core standards and how concepts should be taught.</data>
+      <data key="d8">educational methods,learning styles</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Fruit Popping Game" target="Apple TV Plus">
+      <data key="d6">8.0</data>
+      <data key="d7">Playing the Fruit Popping Game while watching shows on Apple TV Plus enhances comprehension of the shows for the player.</data>
+      <data key="d8">learning enhancement,multitasking</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Neurodivergent" target="Learning Styles">
+      <data key="d6">9.0</data>
+      <data key="d7">Individuals who are neurodivergent may have unique learning styles that differ from the traditional educational approaches, requiring tailored strategies for effective learning.</data>
+      <data key="d8">educational diversity,tailored learning</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Dopamine Hit" target="Addiction">
+      <data key="d6">10.0</data>
+      <data key="d7">The concept of a dopamine hit is directly related to the addictive nature of technology, influencing how individuals engage with learning tools and games.</data>
+      <data key="d8">addiction,technology</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Mind Map" target="Learning">
+      <data key="d6">8.0</data>
+      <data key="d7">Mind maps enhance the learning process by visually organizing information, making it easier for users to comprehend and retain material.</data>
+      <data key="d8">comprehension,visual learning</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Agent" target="Testing">
+      <data key="d6">7.0</data>
+      <data key="d7">The concept of an agent is linked to testing, as agents are used to evaluate how well someone can teach or learn specific concepts based on their understanding.</data>
+      <data key="d8">education,evaluation</data>
+      <data key="d9">chunk-efadf490bef0e43c96b855492aabab92</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Agent" target="Content">
+      <data key="d6">9.0</data>
+      <data key="d7">The agent processes and delivers educational content to enhance understanding and engagement for the learners.</data>
+      <data key="d8">content delivery,digital learning</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Agent" target="Lizzie Project">
+      <data key="d6">8.0</data>
+      <data key="d7">The Lizzie Project may incorporate agents to assist students by providing dynamic responses and personalized learning experiences.</data>
+      <data key="d8">AI integration,educational innovation</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="NEL 2 Beta" target="Duolingo">
+      <data key="d6">8.0</data>
+      <data key="d7">Both NEL 2 Beta and Duolingo aim to enhance learning experiences using technology, particularly in a gamified format.</data>
+      <data key="d8">educational technology,gamification</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="NEL 2 Beta" target="AI">
+      <data key="d6">9.0</data>
+      <data key="d7">AI is employed within the NEL 2 Beta to analyze data and tailor educational programs for users.</data>
+      <data key="d8">personalized learning,technological enhancement</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="NEL 2 Beta" target="Agents">
+      <data key="d6">8.0</data>
+      <data key="d7">The NEL 2 Beta program is supported by Agents who help create and manage personalized learning experiences for users.</data>
+      <data key="d8">content curation,educational support</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda" target="Intro to MassCon">
+      <data key="d6">7.0</data>
+      <data key="d7">Miranda is proposed to integrate educational content for courses like Intro to MassCon, enhancing student engagement.</data>
+      <data key="d8">course development,educational integration</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda" target="Content Tokens">
+      <data key="d6">6.0</data>
+      <data key="d7">Content Tokens are a payment mechanism proposed for accessing features and content within the Miranda app.</data>
+      <data key="d8">accessibility,subscription model</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="AI" target="Michael Saylor">
+      <data key="d6">8.0</data>
+      <data key="d7">Michael Saylor emphasizes the importance of AI for decision-making and problem-solving, indicating a strong relationship between his professional insights and the utility of AI.</data>
+      <data key="d8">advocacy,technology utilization</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Students" target="Curriculum">
+      <data key="d6">9.0</data>
+      <data key="d7">"Students engage with the Curriculum, which is tailored specifically for their educational needs in the NEL 2 Beta."áj</data>
+      <data key="d8">learner focus,personalized education</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Students" target="Classroom">
+      <data key="d6">8.0</data>
+      <data key="d7">Students participate in learning activities within a Classroom setting facilitated by the NEL 2 Beta curriculum.</data>
+      <data key="d8">educational interaction,learning environment</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Students" target="class">
+      <data key="d6">9.0</data>
+      <data key="d7">The class involves Students who participate in learning activities using technology and games to enhance their experience.</data>
+      <data key="d8">education,participation</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Students" target="Thesis Films">
+      <data key="d6">9.0</data>
+      <data key="d7">Students produce Thesis Films as part of their learning, which can integrate with class projects and discussions.</data>
+      <data key="d8">evaluation,project-based learning</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Students" target="Discord Channel">
+      <data key="d6">8.0</data>
+      <data key="d7">Discord Channel provides a platform for Students to communicate and collaborate outside of class settings.</data>
+      <data key="d8">collaboration,community</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Curriculum" target="Token System">
+      <data key="d6">7.0</data>
+      <data key="d7">The Curriculum is accessed by Students through a Token System, which requires payment for educational materials.</data>
+      <data key="d8">access mechanism,payment structure</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Curriculum" target="Content Upload">
+      <data key="d6">9.0</data>
+      <data key="d7">Content Upload is integral for building the Curriculum that Students will engage with in the app.</data>
+      <data key="d8">content creation,educational resources</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Curriculum" target="AI Analysis">
+      <data key="d6">9.0</data>
+      <data key="d7">AI Analysis plays a crucial role in developing and adapting the Curriculum based on students' performance.</data>
+      <data key="d8">data-driven education,performance assessment</data>
+      <data key="d9">chunk-35354c1a110c629eb2844e1e39f61a72</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Daniel Kahneman" target="Content Summary on Thinking Fast and Slow">
+      <data key="d6">9.0</data>
+      <data key="d7">Daniel Kahneman is the author of 'Thinking Fast and Slow,' and his ideas are being summarized in this content, indicating his influence in the discussion.</data>
+      <data key="d8">author influence,knowledge dissemination</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Content" target="Game-Based Learning">
+      <data key="d6">7.0</data>
+      <data key="d7">Game-Based Learning incorporates interactive content designed to engage students and improve retention through entertaining educational experiences.</data>
+      <data key="d8">engagement,interactive education</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Content" target="Unit">
+      <data key="d6">8.0</data>
+      <data key="d7">Each unit consists of specific content designed to achieve learning objectives and enhance comprehension skills.</data>
+      <data key="d8">curriculum structure,educational content</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Socratic Groups" target="Teaching Agent">
+      <data key="d6">8.0</data>
+      <data key="d7">The Teaching Agent uses the Socratic Method to promote critical thinking among students by facilitating discussions in Socratic Groups.</data>
+      <data key="d8">educational strategy,interactive learning</data>
+      <data key="d9">chunk-898a895a7aa90165cb3569c81b74a954</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Lizzie Project" target="Nell Architecture">
+      <data key="d6">9.0</data>
+      <data key="d7">The Lizzie Project's architecture is aligned with the Nell Architecture to structure educational content effectively.</data>
+      <data key="d8">architecture,educational frameworks</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Lizzie Project" target="Bill Poucher">
+      <data key="d6">8.0</data>
+      <data key="d7">Bill Poucher is discussed in relation to potential funding and support for the Lizzie Project initiatives.</data>
+      <data key="d8">collaboration,educational support</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Nell Architecture" target="Miranda Project">
+      <data key="d6">9.0</data>
+      <data key="d7">Nell Architecture's principles are adapted for the short-form writing focus of the Miranda Project.</data>
+      <data key="d8">content generation,educational applications</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Nell Architecture" target="Markdown">
+      <data key="d6">6.0</data>
+      <data key="d7">Nell Architecture may be documented or structured using Markdown for clarity in data organization and presentation.</data>
+      <data key="d8">documentation,technical structure</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="ICPC">
+      <data key="d6">17.0</data>
+      <data key="d7">The ICPC is tied to the goals of the Miranda Project as a platform for showcasing educational success in programming and technology.&lt;SEP&gt;The Miranda Project is linked to ICPC as it aims to create an educational platform that involves competitive programming challenges.</data>
+      <data key="d8">competition,educational goals,educational initiative,project collaboration</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf&lt;SEP&gt;chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Poucher">
+      <data key="d6">16.0</data>
+      <data key="d7">Poucher's interest in funding could provide necessary resources for advancing the Miranda Project.&lt;SEP&gt;Poucher's involvement in funding discussions indicates a relationship with the operational needs of the Miranda Project.</data>
+      <data key="d8">financial support,funding,project management,support</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c&lt;SEP&gt;chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Baylor">
+      <data key="d6">14.0</data>
+      <data key="d7">Baylor's potential involvement could enhance the legitimacy and reach of the Miranda Project.&lt;SEP&gt;The Miranda Project is linked to Baylor in the context of educational development and seeking collaboration for initiatives.</data>
+      <data key="d8">educational collaboration,educational partnership,project development,project support</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf&lt;SEP&gt;chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Pathright">
+      <data key="d6">8.0</data>
+      <data key="d7">Pathright's platform is crucial for the delivery and implementation of the content related to the Miranda Project.</data>
+      <data key="d8">content delivery,technology platform</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Amazon">
+      <data key="d6">6.0</data>
+      <data key="d7">The potential employment at Amazon may allow contributors to leverage skills beneficial for the Miranda Project.</data>
+      <data key="d8">employment opportunity,skill application</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Media Lab">
+      <data key="d6">7.0</data>
+      <data key="d7">The Media Lab's association with technology could provide valuable insights and resources for the Miranda Project.</data>
+      <data key="d8">innovation,research partnership</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="ICPC Problem Archive">
+      <data key="d6">9.0</data>
+      <data key="d7">The Miranda Project utilizes the ICPC Problem Archive as a resource for educational programming challenges.</data>
+      <data key="d8">educational resource,programming challenges</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="LLC">
+      <data key="d6">8.0</data>
+      <data key="d7">The Miranda Project is proposed to be structured as an LLC, providing legal and financial benefits for its operations.</data>
+      <data key="d8">business structure,project organization</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Frederick">
+      <data key="d6">7.0</data>
+      <data key="d7">Frederick's support and location in Waco could aid in the development and funding of the Miranda Project.</data>
+      <data key="d8">collaboration,regional support</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Startup">
+      <data key="d6">7.0</data>
+      <data key="d7">The potential for a startup is discussed in conjunction with the advancement and funding of the Miranda Project.</data>
+      <data key="d8">entrepreneurship,project funding</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Games">
+      <data key="d6">8.0</data>
+      <data key="d7">Games are integrated into the Miranda Project as part of its development for educational purposes.</data>
+      <data key="d8">educational tools,interactive learning</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Claude">
+      <data key="d6">7.0</data>
+      <data key="d7">Claude, as an AI assistant, may play a role in enhancing the features of the Miranda Project application.</data>
+      <data key="d8">AI integration,technological enhancement</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Miranda Project" target="Taylor Watson">
+      <data key="d6">8.0</data>
+      <data key="d7">Taylor Watson sees her role in the Miranda Project as important to both projects and believes in the potential for innovation and organization improvements.</data>
+      <data key="d8">innovation,project management</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Project" target="Funding">
+      <data key="d6">9.0</data>
+      <data key="d7">The success of the project is dependent on obtaining adequate funding to support its development and execution.</data>
+      <data key="d8">financial support,project sustainability</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Markdown" target="Data Science">
+      <data key="d6">7.0</data>
+      <data key="d7">Markdown is utilized within data science processes to structure and present analytical results clearly.</data>
+      <data key="d8">data presentation,information structuring</data>
+      <data key="d9">chunk-c6f001ba9bbac3afe6b5201a7d9d8658</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="Taylor Watson">
+      <data key="d6">8.0</data>
+      <data key="d7">Taylor Watson considers herself a valuable asset to the ICPC, advocating for representation and innovation within the organization.</data>
+      <data key="d8">innovation,representation</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="Baku">
+      <data key="d6">7.0</data>
+      <data key="d7">The city of Baku serves as a venue for ICPC events, bringing together competitors globally.</data>
+      <data key="d8">event location,international competition</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="Frederick">
+      <data key="d6">18.0</data>
+      <data key="d7">As the director of contest systems at ICPC, Frederick plays a critical role in managing and organizing competitive programming contests.&lt;SEP&gt;Frederick is associated with the ICPC as a consultant, indicating a professional relationship focused on the contest system.</data>
+      <data key="d8">competition oversight,consultancy,leadership,management</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c&lt;SEP&gt;chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="Poucher">
+      <data key="d6">8.0</data>
+      <data key="d7">Poucher's role in funding discussions indicates a significant link to the operational aspects of the ICPC.</data>
+      <data key="d8">funding,organizational support</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="Leaderboard">
+      <data key="d6">9.0</data>
+      <data key="d7">The Leaderboard is a key feature of the ICPC, tracking the performance of competitors in real-time during competitions.</data>
+      <data key="d8">competition tracking,performance measurement</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="The Miranda Project">
+      <data key="d6">8.0</data>
+      <data key="d7">The Miranda Project aims to utilize ICPC's competitive coding problems to enhance engagement and educational outcomes.</data>
+      <data key="d8">educational application,problem-based learning</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="University of Warsaw">
+      <data key="d6">9.0</data>
+      <data key="d7">The University of Warsaw has produced successful competitors in ICPC, showcasing its role in the development of competitive programming talent.</data>
+      <data key="d8">competitive success,educational impact</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="Michael Saylor">
+      <data key="d6">6.0</data>
+      <data key="d7">Michael Saylor's speech referenced during discussions highlights the influence of wealth acquisition strategies in competitive environments like ICPC.</data>
+      <data key="d8">education,influence</data>
+      <data key="d9">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC" target="Cyber Truck">
+      <data key="d6">7.0</data>
+      <data key="d7">The Cyber Truck's presence at the event suggests alignment with technological advancements relevant to participants of the ICPC.</data>
+      <data key="d8">innovation,technology</data>
+      <data key="d9">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Baylor" target="Noah Carter">
+      <data key="d6">8.0</data>
+      <data key="d7">Noah Carter is contemplating pursuing a PhD at Baylor, discussing the implications and process involved.</data>
+      <data key="d8">academic paths,educational aspirations</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Baylor" target="Miranda Company">
+      <data key="d6">7.0</data>
+      <data key="d7">Miranda Company is involved in educational initiatives and seeks collaboration with Baylor for their project.</data>
+      <data key="d8">educational development,partnership</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Baylor" target="PhD">
+      <data key="d6">9.0</data>
+      <data key="d7">The PhD degree is discussed in terms of its relevance and potential pursuit at Baylor University.</data>
+      <data key="d8">academic pursuit,higher education</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Poucher" target="ICPC Go">
+      <data key="d6">7.0</data>
+      <data key="d7">Poucher may support the ICPC Go project, indicating interest in promoting programming among students.</data>
+      <data key="d8">educational initiative,support</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Poucher" target="ICBC Go">
+      <data key="d6">8.0</data>
+      <data key="d7">Poucher's support is essential for launching the ICBC Go app, which aims to create a global community and participatory learning environment.</data>
+      <data key="d8">app development,educational support</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="LLC" target="Michael Saylor">
+      <data key="d6">7.0</data>
+      <data key="d7">The LLC is mentioned in the context of making money and structuring services, where Michael Saylor's insights on efficiency could be applied.</data>
+      <data key="d8">business structure,financial efficiency</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="LLC" target="Service">
+      <data key="d6">6.0</data>
+      <data key="d7">The LLC is implied to provide services, thus establishing a direct relationship between the LLC structure and the types of services offered.</data>
+      <data key="d8">business structure,service provision</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Frederick" target="Waco">
+      <data key="d6">6.0</data>
+      <data key="d7">Frederick is based in Waco, creating a geographical connection that facilitates collaboration on projects.</data>
+      <data key="d8">geographical connection,teamwork</data>
+      <data key="d9">chunk-2e228d2d89b2e14d33e9f0152dd65baf</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Frederick" target="Wimped">
+      <data key="d6">7.0</data>
+      <data key="d7">Frederick's involvement with Wimped as a chief product officer ties into his work supporting sports media engagement.</data>
+      <data key="d8">product development,sports engagement</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Frederick" target="Independent Consulting">
+      <data key="d6">8.0</data>
+      <data key="d7">Frederick's role involves independent consulting to provide insights on enhancing educational programming tools and strategies.</data>
+      <data key="d8">consulting,educational strategy</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Dr. C Superfan" target="Sarah">
+      <data key="d6">6.0</data>
+      <data key="d7">Sarah worked on a film produced by Dr. C Superfan, highlighting a professional collaboration.</data>
+      <data key="d8">film production,professional relationship</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC Go" target="Mojang">
+      <data key="d6">8.0</data>
+      <data key="d7">The narrator suggests a partnership with Mojang for ICPC Go, emphasizing collaboration in game development.</data>
+      <data key="d8">collaboration,game development</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC Go" target="Leaderboard">
+      <data key="d6">7.0</data>
+      <data key="d7">ICPC Go could feature a leaderboard for participants, promoting engagement and competition.</data>
+      <data key="d8">competition,engagement</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC Go" target="Minecraft">
+      <data key="d6">9.0</data>
+      <data key="d7">Minecraft could be integrated into ICPC Go activities to enhance learning through gameplay.</data>
+      <data key="d8">educational tool,gamification</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC Go" target="ICPC Kids">
+      <data key="d6">9.0</data>
+      <data key="d7">ICPC Kids is related to ICPC Go as both initiatives aim to promote programming among students, with ICPC Kids targeting younger audiences.</data>
+      <data key="d8">programming education,youth engagement</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC Go" target="Peloton">
+      <data key="d6">6.0</data>
+      <data key="d7">Peloton is used as a comparison to highlight the competitive and engaging elements of ICPC Go.</data>
+      <data key="d8">educational engagement,fitness competition</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICPC Go" target="Discord">
+      <data key="d6">8.0</data>
+      <data key="d7">Discord could be utilized within ICPC Go for community interaction and competition tracking, enhancing user engagement.</data>
+      <data key="d8">communication,community engagement</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Leaderboard" target="Discord Channel">
+      <data key="d6">7.0</data>
+      <data key="d7">The Discord Channel is used to discuss and manage the Leaderboard, facilitating communication and competition among participants.</data>
+      <data key="d8">community engagement,competitive spirit</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="AI Training Platform" target="Mini AI Device">
+      <data key="d6">8.0</data>
+      <data key="d7">The Mini AI Device is a potential tool for the AI Training Platform that could help in training AI at a lower cost.</data>
+      <data key="d8">cost-effective solution,technology</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Business School" target="Dr. C Superfan's Feature Film">
+      <data key="d6">5.0</data>
+      <data key="d7">The Business School lacks features mentioned in the context of Dr. C Superfan's disorganized film production, indicating an area for improvement.</data>
+      <data key="d8">education,organizational challenges</data>
+      <data key="d9">chunk-ed3cf7828a9245de0eeabe8f9cd93936</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="class" target="Twitch Channel">
+      <data key="d6">8.0</data>
+      <data key="d7">The class could be streamed on a Twitch Channel to attract media attention and involve online students.</data>
+      <data key="d8">education,media</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="class" target="Fruit Ninja">
+      <data key="d6">9.0</data>
+      <data key="d7">Fruit Ninja is suggested as a competitive game to be played during class to enhance student engagement.</data>
+      <data key="d8">engagement,gamification</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="class" target="PS5">
+      <data key="d6">7.0</data>
+      <data key="d7">The PS5 is proposed as an interactive entertainment tool for the class, providing engaging competition among students.</data>
+      <data key="d8">competition,interactive learning</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="class" target="Lizzie">
+      <data key="d6">7.0</data>
+      <data key="d7">The work done with Lizzie informs the current educational project, suggesting a history of collaboration and innovation.</data>
+      <data key="d8">collaboration,educational evolution</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="class" target="Headphones">
+      <data key="d6">7.0</data>
+      <data key="d7">Headphones become a challenge in the class as they allow students to listen to their own music, impacting engagement.</data>
+      <data key="d8">classroom management,distraction</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="class" target="Earbuds">
+      <data key="d6">6.0</data>
+      <data key="d7">Earbuds are used by students and create a barrier to engagement in the shared classroom environment.</data>
+      <data key="d8">distraction,engagement</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="class" target="Graduate School Research">
+      <data key="d6">7.0</data>
+      <data key="d7">Graduate School Research can influence the design and implementation of the class activities.</data>
+      <data key="d8">educational development,research</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Fruit Ninja" target="Game">
+      <data key="d6">8.0</data>
+      <data key="d7">Fruit Ninja is suggested as a Game to foster competition and engagement among students in the class.</data>
+      <data key="d8">engagement,gamification</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Twitch Channel" target="Media Attention">
+      <data key="d6">8.0</data>
+      <data key="d7">Creating a Twitch Channel for class can help attract Media Attention, increasing interest in the educational initiative.</data>
+      <data key="d8">promotion,visibility</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICBC Go" target="Media Attention">
+      <data key="d6">9.0</data>
+      <data key="d7">The development of ICBC Go aims to gain Media Attention by promoting an innovative educational app.</data>
+      <data key="d8">innovation,promotion</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="ICBC Go" target="2026">
+      <data key="d6">8.0</data>
+      <data key="d7">The launch of ICBC Go is planned for 2026, marking a significant point in the educational initiative's timeline.</data>
+      <data key="d8">future planning,project timeline</data>
+      <data key="d9">chunk-ab4e005d0e6f7f112bb9ff97dfb03fd7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Taylor Watson" target="Women in ICPC">
+      <data key="d6">8.0</data>
+      <data key="d7">Taylor Watson discusses the representation of women in ICPC and expresses a desire to see more female participation and recognition.</data>
+      <data key="d8">diversity,representation</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Taylor Watson" target="Gamification">
+      <data key="d6">8.0</data>
+      <data key="d7">Taylor Watson believes that implementing gamification in computer programming can attract more women to the field.</data>
+      <data key="d8">engagement strategies,innovation</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Gamification" target="Computer Science Program">
+      <data key="d6">9.0</data>
+      <data key="d7">Gamification strategies are suggested as a way to increase female participation in the Computer Science Program by making it more engaging.</data>
+      <data key="d8">educational strategies,engagement</data>
+      <data key="d9">chunk-118042139b48a4b7e9c0606ab9ea452c</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Wimped" target="The Miranda Project">
+      <data key="d6">6.0</data>
+      <data key="d7">Wimped's model of centralizing media and engaging supporters could be applied to enhance the educational objectives of the Miranda Project.</data>
+      <data key="d8">educational enhancement,media engagement</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="The Miranda Project" target="Baylor University">
+      <data key="d6">8.0</data>
+      <data key="d7">The Miranda Project is being launched at Baylor University, focusing on educational engagement in coding and problem-solving activities.</data>
+      <data key="d8">collaboration,education initiative</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="The Miranda Project" target="Podcast">
+      <data key="d6">7.0</data>
+      <data key="d7">The podcast is proposed as a tool within the Miranda Project to analyze competitive problem-solving approaches and share insights.</data>
+      <data key="d8">content creation,educational tool</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Coding" target="Strategic Problem Solving">
+      <data key="d6">8.0</data>
+      <data key="d7">Strategic problem solving is an essential skill within coding, which is emphasized throughout competitive events and training.</data>
+      <data key="d8">coding training,skill development</data>
+      <data key="d9">chunk-99c189d0a640b05202e41f0c0e1744e7</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Noah Carter" target="Dr. Poucher">
+      <data key="d6">8.0</data>
+      <data key="d7">Noah Carter seeks guidance from Dr. Poucher regarding educational paths and project management in academia.</data>
+      <data key="d8">academic advice,mentorship</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Noah Carter" target="Lydia">
+      <data key="d6">6.0</data>
+      <data key="d7">Noah Carter and Lydia engage in discussing career aspirations, particularly in product management and technology.</data>
+      <data key="d8">career development,peer discussion</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="California" target="San Francisco">
+      <data key="d6">6.0</data>
+      <data key="d7">The person plans to travel to San Francisco as part of a trip to California, indicating a personal connection to the area.</data>
+      <data key="d8">geographic connection,travel plans</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="California" target="Los Angeles">
+      <data key="d6">6.0</data>
+      <data key="d7">Los Angeles is mentioned as a destination alongside San Francisco in the person's travel plans in California.</data>
+      <data key="d8">personal connections,travel itinerary</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Lydia" target="Veranda Project">
+      <data key="d6">7.0</data>
+      <data key="d7">Lydia provides guidance and mentorship regarding career decisions that may influence the development of the Veranda Project.</data>
+      <data key="d8">career guidance,mentorship</data>
+      <data key="d9">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Christian Limb" target="Tenure">
+      <data key="d6">5.0</data>
+      <data key="d7">Christian Limb's lifestyle reflects implications of financial success, which ties into discussions about achieving tenure and job security in academia.</data>
+      <data key="d8">academic career,financial success</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Cassie" target="Tenure">
+      <data key="d6">7.0</data>
+      <data key="d7">Cassie's experience with earning a PhD is juxtaposed with Noah Carter's aspirations for achieving tenure in academia.</data>
+      <data key="d8">academic achievement,comparative experience</data>
+      <data key="d9">chunk-003acc2ab4fc81db039ffb5601360a59</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Veranda Project" target="Texas">
+      <data key="d6">8.0</data>
+      <data key="d7">The Veranda Project is being established in Texas, leveraging local advantages such as tax benefits.</data>
+      <data key="d8">business development,local advantages</data>
+      <data key="d9">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Texas" target="Hybrid Land Cruiser FJ">
+      <data key="d6">5.0</data>
+      <data key="d7">The anticipated Land Cruiser FJ is discussed in the context of Texas, reflecting regional interests in automobile advancements.</data>
+      <data key="d8">automotive industry,regional interest</data>
+      <data key="d9">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="VPN" target="Onion Network">
+      <data key="d6">9.0</data>
+      <data key="d7">The VPN provides privacy features that are enhanced by utilizing an Onion Network for secure data routing.</data>
+      <data key="d8">data security,privacy technology</data>
+      <data key="d9">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Business LLC" target="Non-Profit">
+      <data key="d6">8.0</data>
+      <data key="d7">The discussion on choosing a Business LLC versus a Non-Profit reflects strategic considerations on business structure and tax implications.</data>
+      <data key="d8">business structure,tax strategy</data>
+      <data key="d9">chunk-886d1329104e4dcd85ebc77296d09294</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Bitcoin" target="Stocks">
+      <data key="d6">6.0</data>
+      <data key="d7">Bitcoin is mentioned as an alternative investment strategy amid the speaker's discussion about liquidating stocks.</data>
+      <data key="d8">asset management,investment strategies</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Bitcoin" target="Portfolio Management">
+      <data key="d6">5.0</data>
+      <data key="d7">Bitcoin is suggested as an alternative investment opportunity while discussing overall portfolio management strategies.</data>
+      <data key="d8">diversification,investment strategy</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Stocks" target="Uncle Mike">
+      <data key="d6">5.0</data>
+      <data key="d7">The speaker's Uncle Mike manages stocks for the speaker, leading to discussions about the future management of these investments.</data>
+      <data key="d8">family connections,portfolio management</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Stocks Portfolio" target="Tax">
+      <data key="d6">7.0</data>
+      <data key="d7">The management of a stocks portfolio involves considerations regarding taxes and financial implications.</data>
+      <data key="d8">financial management,taxation</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Stocks Portfolio" target="Investor">
+      <data key="d6">9.0</data>
+      <data key="d7">The investor's desire to liquidate their stocks portfolio relates to their perceptions of current stock performance and market conditions.</data>
+      <data key="d8">investor sentiment,portfolio management</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+    <edge source="Stocks Portfolio" target="Brokerage Account">
+      <data key="d6">10.0</data>
+      <data key="d7">A brokerage account is essential for managing and liquidating the stocks within the stocks portfolio.</data>
+      <data key="d8">asset liquidation,financial management</data>
+      <data key="d9">chunk-2f85d0fc79137c472576ddf4e53a7c33</data>
+      <data key="d10">unknown_source</data>
+      <data key="d11">1749771180</data>
+    </edge>
+  </graph>
+</graphml>
