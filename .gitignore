@@ -381,11 +381,5 @@ htmlcov/
 local/
 .local/
 
-# Large LightRAG buckets (too big for GitHub)
-# These need to be downloaded separately
-lightrag_working_dir/books/
-lightrag_working_dir/plays/
-
-# Keep only the scripts bucket (small enough) and structure
-!lightrag_working_dir/scripts/
-!lightrag_working_dir/README.md
+# LightRAG buckets - now tracked in git
+# All buckets are included: books, plays, scripts
