@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lizzy Alpha - Story Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .table-container {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .tab-active {
+            @apply bg-blue-500 text-white;
+        }
+        .tab-inactive {
+            @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-6">
+        <!-- Header -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">📖 Lizzy Alpha Story Editor</h1>
+            <p class="text-gray-600">Edit your story elements in a clean, modern interface</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="bg-white rounded-lg shadow-sm mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8 px-6">
+                    <button onclick="showTab('logline')" id="tab-logline" class="py-4 px-1 border-b-2 font-medium text-sm tab-active border-blue-500">
+                        📝 Logline
+                    </button>
+                    <button onclick="showTab('characters')" id="tab-characters" class="py-4 px-1 border-b-2 font-medium text-sm tab-inactive border-transparent">
+                        👥 Characters
+                    </button>
+                    <button onclick="showTab('outline')" id="tab-outline" class="py-4 px-1 border-b-2 font-medium text-sm tab-inactive border-transparent">
+                        📖 Story Outline
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Logline Tab -->
+            <div id="content-logline" class="p-6">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Story Logline</label>
+                    <textarea id="logline-text" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                              placeholder="Write your one-sentence story summary here..."></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+                    <textarea id="logline-notes" rows="2" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" 
+                              placeholder="Optional notes about your logline..."></textarea>
+                </div>
+                <button onclick="saveLogline()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md font-medium">
+                    Save Logline
+                </button>
+                <div id="logline-status" class="mt-2 text-sm"></div>
+            </div>
+
+            <!-- Characters Tab -->
+            <div id="content-characters" class="p-6 hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-medium text-gray-800">Characters</h2>
+                    <button onclick="addCharacter()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md font-medium">
+                        Add Character
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="w-full table-auto">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Romantic Challenge</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lovable Trait</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="characters-table" class="bg-white divide-y divide-gray-200">
+                            <!-- Characters will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Story Outline Tab -->
+            <div id="content-outline" class="p-6 hidden">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-medium text-gray-800">Story Outline (30 Scenes)</h2>
+                    <div class="text-sm text-gray-500">
+                        Act 1: Scenes 1-12 | Act 2: Scenes 13-24 | Act 3: Scenes 25-30
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table class="w-full table-auto">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Act</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Scene</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Purpose</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
+                                <th class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="outline-table" class="bg-white divide-y divide-gray-200">
+                            <!-- Scenes will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="bg-white rounded-lg shadow-sm p-4">
+            <div class="flex justify-between items-center">
+                <div id="status-info" class="text-sm text-gray-600">
+                    Ready to edit your story
+                </div>
+                <button onclick="window.close()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md font-medium">
+                    Close Editor
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentProject = null;
+        
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('[id^="content-"]').forEach(el => el.classList.add('hidden'));
+            // Show selected content
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+            
+            // Update tab styles
+            document.querySelectorAll('[id^="tab-"]').forEach(el => {
+                el.className = 'py-4 px-1 border-b-2 font-medium text-sm tab-inactive border-transparent';
+            });
+            document.getElementById(`tab-${tabName}`).className = 'py-4 px-1 border-b-2 font-medium text-sm tab-active border-blue-500';
+            
+            // Load data for the tab
+            if (tabName === 'characters') loadCharacters();
+            if (tabName === 'outline') loadOutline();
+            if (tabName === 'logline') loadLogline();
+        }
+
+        // Load data functions (these would connect to your Python backend)
+        function loadLogline() {
+            // This would fetch from your Python server
+            fetch('/api/logline')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('logline-text').value = data.logline || '';
+                    document.getElementById('logline-notes').value = data.notes || '';
+                })
+                .catch(err => console.log('Using demo mode'));
+        }
+
+        function loadCharacters() {
+            // Demo data - would fetch from Python server
+            const characters = [
+                {id: 1, name: 'Protagonist (EDIT NAME)', role: 'protagonist', romantic_challenge: 'What prevents them from opening their heart?', lovable_trait: 'What makes audiences fall in love with them?'},
+                {id: 2, name: 'Love Interest (EDIT NAME)', role: 'love_interest', romantic_challenge: 'What keeps them from committing?', lovable_trait: 'What draws the protagonist to them?'},
+                {id: 3, name: 'Best Friend (EDIT NAME)', role: 'supporting', romantic_challenge: '', lovable_trait: ''}
+            ];
+            
+            const tbody = document.getElementById('characters-table');
+            tbody.innerHTML = characters.map(char => `
+                <tr>
+                    <td class="px-4 py-4 whitespace-nowrap">
+                        <input type="text" value="${char.name}" class="w-full px-2 py-1 border rounded" onchange="updateCharacter(${char.id}, 'name', this.value)">
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap">
+                        <select class="w-full px-2 py-1 border rounded" onchange="updateCharacter(${char.id}, 'role', this.value)">
+                            <option value="protagonist" ${char.role === 'protagonist' ? 'selected' : ''}>Protagonist</option>
+                            <option value="love_interest" ${char.role === 'love_interest' ? 'selected' : ''}>Love Interest</option>
+                            <option value="supporting" ${char.role === 'supporting' ? 'selected' : ''}>Supporting</option>
+                            <option value="antagonist" ${char.role === 'antagonist' ? 'selected' : ''}>Antagonist</option>
+                        </select>
+                    </td>
+                    <td class="px-4 py-4">
+                        <textarea class="w-full px-2 py-1 border rounded text-sm" rows="2" onchange="updateCharacter(${char.id}, 'romantic_challenge', this.value)">${char.romantic_challenge}</textarea>
+                    </td>
+                    <td class="px-4 py-4">
+                        <textarea class="w-full px-2 py-1 border rounded text-sm" rows="2" onchange="updateCharacter(${char.id}, 'lovable_trait', this.value)">${char.lovable_trait}</textarea>
+                    </td>
+                    <td class="px-4 py-4 whitespace-nowrap">
+                        <button onclick="deleteCharacter(${char.id})" class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function loadOutline() {
+            // Demo data - would fetch from Python server  
+            const scenes = [];
+            for (let i = 1; i <= 30; i++) {
+                const act = i <= 12 ? 1 : i <= 24 ? 2 : 3;
+                scenes.push({
+                    act: act,
+                    scene: i,
+                    scene_title: `Scene ${i} Title`,
+                    scene_purpose: `Purpose for scene ${i}`,
+                    location: ''
+                });
+            }
+            
+            const tbody = document.getElementById('outline-table');
+            tbody.innerHTML = scenes.map(scene => `
+                <tr class="${scene.act === 1 ? 'bg-blue-50' : scene.act === 2 ? 'bg-green-50' : 'bg-yellow-50'}">
+                    <td class="px-3 py-3 whitespace-nowrap text-sm font-medium">${scene.act}</td>
+                    <td class="px-3 py-3 whitespace-nowrap text-sm">${scene.scene}</td>
+                    <td class="px-4 py-3">
+                        <input type="text" value="${scene.scene_title}" class="w-full px-2 py-1 border rounded text-sm" onchange="updateScene(${scene.scene}, 'scene_title', this.value)">
+                    </td>
+                    <td class="px-4 py-3">
+                        <textarea class="w-full px-2 py-1 border rounded text-sm" rows="2" onchange="updateScene(${scene.scene}, 'scene_purpose', this.value)">${scene.scene_purpose}</textarea>
+                    </td>
+                    <td class="px-4 py-3">
+                        <input type="text" value="${scene.location}" class="w-full px-2 py-1 border rounded text-sm" placeholder="Location" onchange="updateScene(${scene.scene}, 'location', this.value)">
+                    </td>
+                    <td class="px-3 py-3 whitespace-nowrap">
+                        <button onclick="editScene(${scene.scene})" class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-xs">
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Save functions (would connect to Python backend)
+        function saveLogline() {
+            const logline = document.getElementById('logline-text').value;
+            const notes = document.getElementById('logline-notes').value;
+            
+            // Would POST to Python server
+            console.log('Saving logline:', {logline, notes});
+            
+            document.getElementById('logline-status').innerHTML = '<span class="text-green-600">✅ Logline saved!</span>';
+            setTimeout(() => {
+                document.getElementById('logline-status').innerHTML = '';
+            }, 3000);
+        }
+
+        function updateCharacter(id, field, value) {
+            console.log(`Updating character ${id} ${field}:`, value);
+        }
+
+        function updateScene(scene, field, value) {
+            console.log(`Updating scene ${scene} ${field}:`, value);
+        }
+
+        function addCharacter() {
+            console.log('Adding new character');
+        }
+
+        function deleteCharacter(id) {
+            if (confirm('Delete this character?')) {
+                console.log('Deleting character:', id);
+                loadCharacters(); // Reload
+            }
+        }
+
+        function editScene(scene) {
+            console.log('Editing scene:', scene);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLogline();
+        });
+    </script>
+</body>
+</html>

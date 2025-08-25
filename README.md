@@ -34,7 +34,12 @@ cd lizzy_alpha
 
 2. Install required packages:
 ```bash
-pip install lightrag openai python-dotenv
+pip install -r requirements.txt
+```
+
+**Recommended:** For enhanced spreadsheet editing experience:
+```bash
+pip install visidata
 ```
 
 3. Set up your OpenAI API key:
@@ -63,12 +68,19 @@ python start.py
 ```bash
 python intake.py
 ```
-- Add character profiles with romantic comedy specific traits:
-  - Romantic challenges
-  - Lovable traits
-  - Comedic flaws
-- Define scene outlines with locations, purposes, and emotional beats
-- Set project metadata (genre, POV, tense)
+- **Simple & Focused**: Edit just the essentials - logline, characters, and 30-scene outline
+- **Spreadsheet Interface**: Uses VisiData for intuitive editing (when installed)
+- Write your one-sentence story logline
+- Customize character templates (Protagonist, Love Interest, Best Friend)
+- Edit the 30-scene professional structure with:
+  - Scene titles and purposes
+  - Key events and characters
+  - Emotional beats and plot threads
+
+**VisiData Features** (when installed):
+- Edit logline, characters, and scenes in clean spreadsheet interfaces
+- Navigate with arrow keys, edit with Enter
+- All changes automatically save to your project database
 
 ### 3. Generate Creative Ideas
 ```bash

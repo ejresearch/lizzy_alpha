@@ -2,3 +2,5 @@ lightrag
 python-dotenv
 openai
 numpy
+rich
+textual
