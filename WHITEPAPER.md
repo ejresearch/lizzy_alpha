@@ -1,8 +1,8 @@
 # LIZZY: A MODULAR FRAMEWORK FOR AI-ASSISTED LONG-FORM WRITING
 
-**Elle Jansick**  
-**4/4/2025**  
-**ellejansickresearch@gmail.com**
+**Elle Jansick and YT Research, LLC**  
+**8/25/2025**  
+**questfortheprimer@gmail.com**
 
 ## Abstract
 
